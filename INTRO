@@ -1,0 +1,16 @@
+qidtrace
+
+A project to learn some techniques of Perl coding, based on
+searching a log file for specific data.
+
+My first solution to this problem is described in another
+project - see this repository at github:
+  https://github.com/clp/sendmail_trace
+
+The original files for qidtrace were built by Jeff M., and
+provided on 2011_0727
+
+My task is to write the missing code inside this framework.
+
+I will commit the code files to the repository before making any
+changes to them.
