@@ -20,8 +20,15 @@ sub match_line {
     my $email = shift;
     my $line = shift;
     return('', '') unless $line;
-
-    return('foo', 'bar');
+    if ( $line =~ m/.*<(.*@.*)>.*/ ) {
+        $email = $1;
+        if ( $line =~ m/: ([a-zA-Z\d]{14}): / ){
+            my $qid = $1;
+            return($email, $qid);
+        }
+        return($email, '');
+    }
+    return('', '');
 }
 
 package Sendmail::QidTrace::Queue;
