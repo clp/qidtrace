@@ -19,16 +19,16 @@ our @EXPORT_OK = qw/match_line/;
 sub match_line {
     my $email = shift;
     my $line = shift;
+    my $qid;
     return('', '') unless $line;
     if ( $line =~ m/.*<(.*@.*)>.*/ ) {
         $email = $1;
-        if ( $line =~ m/: ([a-zA-Z\d]{14}): / ){
-            my $qid = $1;
-            return($email, $qid);
-        }
-        return($email, '');
     }
-    return('', '');
+    if ( $line =~ m/: ([a-zA-Z\d]{14}): / ){
+        $qid = $1;
+    }
+    return($email, $qid);
+    #TBR? return('', '');
 }
 
 package Sendmail::QidTrace::Queue;
