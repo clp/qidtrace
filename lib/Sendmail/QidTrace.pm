@@ -24,8 +24,14 @@ sub match_line {
     if ( $line =~ m/.*<(.*@.*)>.*/ ) {
         $email = $1;
     }
+    else {
+        $email = '';
+    }
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
         $qid = $1;
+    }
+    else {
+        $qid = '';
     }
     return($email, $qid);
 }
