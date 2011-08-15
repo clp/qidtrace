@@ -21,17 +21,12 @@ sub match_line {
     my $line = shift;
     my $qid;
     return('', '') unless $line;
-    if ( $line =~ m/.*<(.*@.*)>.*/ ) {
-        $email = $1;
-    }
-    else {
-        $email = '';
-    }
+    if ( $line !~ m/$email/ ) { $email = ''}
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
-        $qid = $1;
+      $qid = $1;
     }
     else {
-        $qid = '';
+      $qid = '';
     }
     return($email, $qid);
 }
@@ -64,6 +59,13 @@ sub new {
 #
 sub add_match {
     my ($self, $mo) = @_;
+    #TBD: Verify i/p is OK.
+      # If not, print error & exit or return.
+    # Add the hash ref to the save queue.
+    #
+    # Add the number of the line to save to the _seen hash.
+    my $key = "$mo->{num}"  ;
+    $self->{_seen}{$key} = 1;
 
 }
 
@@ -75,5 +77,23 @@ sub drain_queue {
     my ($self) = @_;
 
 }
+
+
+#
+# Accessors to control the queue.
+sub push_onto_trailing_array {
+    my $self = shift;
+    my $line = shift;
+    #TBD: How to specify the array here?
+    push @{ $self->{_trailing} }, $line;
+}
+
+sub shift_off_leading_array {
+    my $self = shift;
+    my $line = shift;
+    #TBD: How to specify the array here?
+    return shift @{ $self->{_leading} };
+}
+
 
 1;
