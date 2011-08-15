@@ -21,7 +21,7 @@ sub match_line {
     my $line = shift;
     my $qid;
     return('', '') unless $line;
-    if ( $line !~ m/$email/ ) { $email = ''}
+    if ( $line !~ m/<$email>/ ) { $email = ''}
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
       $qid = $1;
     }
