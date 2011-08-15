@@ -12,5 +12,11 @@ provided on 2011_0727
 
 My task is to write the missing code inside this framework.
 
-I will commit the code files to the repository before making any
+I committed the code files to the repository before making any
 changes to them.
+Then I made a branch called clp.master, and began my work 
+on the code in that branch.
+Use 'git diff' to see my work on this project, eg,
+  git diff master clp.master
+
+
