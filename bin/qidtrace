@@ -60,12 +60,9 @@ while (<>) {
                                   : substr($_, $output_start_column)),
                         num   => $. });
     }
-    else { # qid found, but no qid match found; add line to bottom of queue for later matching.
-      #TBD: Do not use private object vars in external programs;
-      # build accessors in the object & use them.
-      #OK push @{ $qt->{_leading} }, $_;
-      #
-      #TBD: Try the accessor:
+    elsif ( $match_qid ) { 
+      # qid found, but no qid match found; 
+      # add line to bottom of queue for later matching.
       $qt->push_onto_trailing_array( $_ );
     }
 }
