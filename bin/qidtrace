@@ -52,7 +52,7 @@ while (<>) {
     #
     ### clp's code below.
     #
-    if ($match_email || $match_qid) {
+    if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
