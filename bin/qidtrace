@@ -5,6 +5,8 @@ use warnings;
 
 use Getopt::Long;
 
+use Data::Dumper;
+
 use Sendmail::QidTrace qw/match_line/;
 
 our $VERSION = '0.01';
@@ -38,6 +40,7 @@ my $qt = new Sendmail::QidTrace::Queue({match        => $email_address,
 while (<>) {
     chomp;
     my ($match_email, $match_qid) = match_line($email_address, $_);
+    print "DBG: \$match_email, \$match_qid: ", $match_email, " ,  ", $match_qid, "\n";
     # if ($match_email || $match_qid) {
     #     $qt->add_match({match => $match_email,
     #                     qid   => $match_qid,
@@ -46,7 +49,28 @@ while (<>) {
     #                               : substr($_, $output_start_column)),
     #                     num   => $. });
     # }
+    #
+    ### clp's code below.
+    #
+    if ($match_email || $match_qid) {
+        $qt->add_match({match => $match_email,
+                        qid   => $match_qid,
+                        line  => ($output_length
+                                  ? substr($_, $output_start_column, $output_length)
+                                  : substr($_, $output_start_column)),
+                        num   => $. });
+    }
+    else { # qid found, but no qid match found; add line to bottom of queue for later matching.
+      #TBD: Do not use private object vars in external programs;
+      # build accessors in the object & use them.
+      #OK push @{ $qt->{_leading} }, $_;
+      #
+      #TBD: Try the accessor:
+      $qt->push_onto_trailing_array( $_ );
+    }
 }
+print "DBG: Dumper (\$qt):\n";
+print Dumper ($qt);
 # $qt->drain_queue();
 
 exit;
