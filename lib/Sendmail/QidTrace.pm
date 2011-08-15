@@ -81,38 +81,38 @@ sub drain_queue {
 
 #
 # Accessors to control the queue.
+sub push_onto_leading_array {
+    my $self = shift;
+    my $line = shift;
+    push @{ $self->{_leading} }, $line;
+}
 sub push_onto_trailing_array {
     my $self = shift;
     my $line = shift;
-    #TBD: How to specify the array here?
     push @{ $self->{_trailing} }, $line;
 }
 
 sub shift_off_leading_array {
     my $self = shift;
-    my $line = shift;
-    #TBD: How to specify the array here?
+    # my $line = shift;
     return shift @{ $self->{_leading} };
 }
 
 sub shift_off_trailing_array {
     my $self = shift;
-    my $line = shift;
-    #TBD: How to specify the array here?
+    # my $line = shift;
     return shift @{ $self->{_trailing} };
 }
 
 sub size_of_leading_array {
     my $self = shift;
-    my $line = shift;
-    #TBD: How to specify the array here?
+    # my $line = shift;
     return scalar @{ $self->{_leading} };
 }
 
 sub size_of_trailing_array {
     my $self = shift;
-    my $line = shift;
-    #TBD: How to specify the array here?
+    # my $line = shift;
     return scalar @{ $self->{_trailing} };
 }
 

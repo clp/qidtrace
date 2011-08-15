@@ -14,7 +14,7 @@ our $VERSION = '0.01';
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;
-my $window_size = 2;
+my $window_size = 3;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -65,11 +65,10 @@ while (<>) {
     elsif ( $match_qid ) { 
         # qid found, but no qid match found; 
         # add the current line to bottom of queue for later matching.
-        $qt->push_onto_trailing_array( $_ );
+        $qt->push_onto_leading_array( $_ );
         #
-        # Check the queue size - both arrays - and manage it if needed.
-        #? if ( keys(%{ $qt })  >= $window_size ) {
-        if ( $qt->size_of_leading_array  > $window_size ) {
+        # Check the queue size for both arrays, and manage queue if needed.
+        if ( $qt->size_of_leading_array  >= $window_size ) {
             my $line_from_queue = $qt->shift_off_leading_array();
             ($match_email, $match_qid) = match_line($email_address, $line_from_queue);
             if ( exists $qt->{$match_qid} ) {
@@ -81,12 +80,12 @@ while (<>) {
                                 num   => $. });
                 next;
             }
-            push_onto_trailing_array ($line_from_queue);
+            $qt->push_onto_trailing_array ($line_from_queue);
         }
-        if ( $qt->size_of_trailing_array  > $window_size ) {
+        if ( $qt->size_of_trailing_array  >= $window_size ) {
             my $line_from_queue = $qt->shift_off_trailing_array();
             #TBD: Check the line for matching qid.
-            print "DBG: after shift_off_trailing: \$line_from_queue: ", $line_from_queue, "\n";
+            print "DBG: After shift_off_trailing: \$line_from_queue: ", $line_from_queue, "\n";
         }
     }
     else { 
