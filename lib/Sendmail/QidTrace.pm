@@ -95,5 +95,26 @@ sub shift_off_leading_array {
     return shift @{ $self->{_leading} };
 }
 
+sub shift_off_trailing_array {
+    my $self = shift;
+    my $line = shift;
+    #TBD: How to specify the array here?
+    return shift @{ $self->{_trailing} };
+}
+
+sub size_of_leading_array {
+    my $self = shift;
+    my $line = shift;
+    #TBD: How to specify the array here?
+    return scalar @{ $self->{_leading} };
+}
+
+sub size_of_trailing_array {
+    my $self = shift;
+    my $line = shift;
+    #TBD: How to specify the array here?
+    return scalar @{ $self->{_trailing} };
+}
+
 
 1;
