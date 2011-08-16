@@ -1,0 +1,1 @@
+Jan  5 00:13:30 d.mx.example.net sendmail[22851]: jB7EhgPD029789: to=<u3@h4.com>, delay=17:29:41, xdelay=00:00:03, mailer=esmtp, pri=9932027, relay=relay_id [10.11.12.13], dsn=4.2.0, stat=Deferred: 450 <u3@h4.com>: User unknown in local recipient table 

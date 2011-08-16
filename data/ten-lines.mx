@@ -1,0 +1,10 @@
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8665]: jB88DNv1008657: to=<u1@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229263, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNPM032108 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.example.net sendmail[22851]: jB7EhgPD029789: to=<u3@h4.com>, delay=17:29:41, xdelay=00:00:03, mailer=esmtp, pri=9932027, relay=relay_id [10.11.12.13], dsn=4.2.0, stat=Deferred: 450 <u3@h4.com>: User unknown in local recipient table 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12001]: jB88D0Ng012001: Milter: to=<u5@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11868]: jB88DEuF011868: from=<u7@h8.com>, size=36091, class=0, nrcpts=1, msgid=<BCEIIJIOHHFPHGJOGPJJMEJHDJAA.u7@h8.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11889]: jB88DEUK011889: cm10.20.30.40.hkcable.com.hk [10.11.12.13] did not issue MAIL/EXPN/VRFY/ETRN during connection to MTA 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12354]: jB88DE2W012354: from=<u10@h11.net>, size=10431, class=0, nrcpts=1, msgid=<u12@h11.net>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.example.net mimedefang-multiplexor: Starting slave 2 (pid 8673) (10 running): Bringing slaves up to minSlaves (10) 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8667]: jB88DNFk008667: from=<u13@h2.net>, size=3666, class=-60, nrcpts=1, msgid=<u14@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8668]: jB88DN5P008668: from=<u13@h2.net>, size=2508, class=-60, nrcpts=1, msgid=<u16@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7916]: jB88DCqu007916: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 

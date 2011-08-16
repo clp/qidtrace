@@ -1,0 +1,13 @@
+Jan  5 00:14:16 c.mx.h2.net sm-mta[10209]: jB88E7aB010209: Milter: to=<u3607@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:14:16 b.mx.h2.net sm-mta[9900]: jB88EGhC009900: from=<u13@h2.net>, size=1275, class=-60, nrcpts=1, msgid=<u3608@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:14:16 a.mx.h2.net sm-mta[13333]: jB88E4QU013333: from=<u473@h2.net>, size=71424, class=0, nrcpts=1, msgid=<u3609@a.mx.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:14:16 d.mx.example.net sm-mta[14281]: jB88E3jX014281: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:14:16 d.mx.example.net sm-mta[14281]: jB88E3jX014281: from=<u3610@h3611.de>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:14:16 b.mx.h2.net sm-mta[9905]: jB88EGAa009905: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u3612@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:14:16 c.mx.example.net sm-mta[10209]: jB88E7aB010209: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:14:16 c.mx.example.net sm-mta[10209]: jB88E7aB010209: from=<u3613@h18.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:14:16 a.mx.example.net mimedefang.pl[30547]: jB88E4QU013333 bounced because of virus Worm.Mytob.HX 
+Jan  5 00:14:16 a.mx.example.net mimedefang.pl[30547]: filter: jB88E4QU013333:  bounce=1 
+Jan  5 00:14:16 a.mx.example.net mimedefang[13344]: jB88E4QU013333: Bouncing because filter instructed us to 
+Jan  5 00:14:16 a.mx.example.net sm-mta[13333]: jB88E4QU013333: Milter: data, reject=554 5.7.1 Virus Worm.Mytob.HX found in mail - rejected 
+Jan  5 00:14:16 a.mx.h2.net sm-mta[13333]: jB88E4QU013333: to=<u3614@h2.net>, delay=00:00:02, pri=101424, stat=Virus Worm.Mytob.HX found in mail - rejected 
