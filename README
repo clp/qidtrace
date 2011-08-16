@@ -11,7 +11,7 @@ The input data file is maillog.mx.
 The initial release provides an abbreviated 9999-line input file.
 
 Execute the tests using prove:
-  prove -vr t
+  prove -I lib -vr t
 
 The initial version comprises a framework, and the core methods
 are not included.  They are to be written as an exercise for the
