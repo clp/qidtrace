@@ -10,8 +10,9 @@ The program reads the input sendmail log file in one pass.
 The input data file is maillog.mx.
 The initial release provides an abbreviated 9999-line input file.
 
-Execute the tests using prove:
-  prove -I lib -vr t/
+Execute the tests using prove (specify the local lib if the module
+is not installed in the @INC path):
+  prove -I lib -vr t
 
 The initial version comprises a framework, and the core methods
 are not included.  They are to be written as an exercise for the
