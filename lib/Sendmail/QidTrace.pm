@@ -64,7 +64,10 @@ sub add_match {
     # Add the hash ref to the save queue.
     #
     # Add the number of the line to save to the _seen hash.
-    my $key = "$mo->{num}"  ;
+    my $key;
+    #OK.1 $key = "$mo->{num}"  ;
+    #OK.1 $self->{_seen}{$key} = 1;
+    $key = "$mo->{qid}"  ;
     $self->{_seen}{$key} = 1;
 
 }
