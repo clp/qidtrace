@@ -96,16 +96,16 @@ while (<>) {
     }
 } # End of while loop.
 
-print "DBG: Dumper (\$qt):\n";
-print Dumper ($qt);
+#DBG print "DBG: Dumper (\$qt):\n";
+#DBG print Dumper ($qt);
 
-=begin comment 
+# =begin comment 
 
 ###
 # $qt->drain_queue();
-while ( my $line = shift_off_trailing_array ) {
+while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
     print "DBG drain queue-read loop: \$line: ,$line,\n";
-#X if ($match_email || exists $qt->{$match_qid} ) {
+    my ($match_email, $match_qid) = match_line($email_address, $line);
     if ( exists $qt->{$match_qid} ) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
@@ -115,11 +115,15 @@ while ( my $line = shift_off_trailing_array ) {
                         num   => $. });
         next;
 }
+}
 
-=end comment 
+# =end comment 
 
-=cut
+# =cut
 
+
+print "DBG: Dumper (\$qt):\n";
+print Dumper ($qt);
 
 exit;
 
