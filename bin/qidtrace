@@ -59,8 +59,8 @@ while (<>) {
     }
     #OK.1 if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
       #TMP No need to test $match_qid again, now that we skip lines w/o qid.
-      #OK.1028  if ($match_email || exists $qt->{$match_qid} ) {
-    if ($match_email ) {
+      #TBD: Replace _seen w/ accessor.
+    if ($match_email || ( grep {m/$match_qid/}  %{ $qt->{_seen} } )) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -69,26 +69,15 @@ while (<>) {
                         num   => $. });
         next;
     }
-    #TBD: Look for qid match.
-    if ($match_qid ne '' ) {
-        if ( grep {m/$match_qid/}  %{ $qt->{_seen} } ) {
-            $qt->add_match({match => $match_email,
-                            qid   => $match_qid,
-                            line  => ($output_length
-                                      ? substr($_, $output_start_column, $output_length)
-                                      : substr($_, $output_start_column)),
-                            num   => $. });
-            #TBR? next;
-            next;
-        }
-    }
+
     if ( $match_qid ) {
         # qid found, but no qid match found; 
         # add the current line to bottom of queue for later matching.
         $qt->push_onto_leading_array( $_ );
         #
-        # Check the queue size for both arrays, and manage queue if needed.
+        # Check the size of both arrays, and manage queue if needed.
         if ( $qt->size_of_leading_array  >= $window_size ) {
+            #TBD: Don't re-process the line.
             my $line_from_queue = $qt->shift_off_leading_array();
             ($match_email, $match_qid) = match_line($email_address, $line_from_queue);
             if ( exists $qt->{$match_qid} ) {
