@@ -104,12 +104,13 @@ while (<>) {
 
 ###
 # $qt->drain_queue();
-while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
-    print "DBG drain queue-read loop: \$line: ,$line,\n";
+while ( my $_ = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
+    #DBG print "DBG drain queue-read loop: \$_: ,$_,\n";
+    #DBG print "DBG drain queue-read loop: \$_\n";
     #TBD: Do not re-process each line.
-    my ($match_email, $match_qid) = match_line($email_address, $line);
+    #TBD: Replace _seen w/ accessor.
+    my ($match_email, $match_qid) = match_line($email_address, $_);
     if ( grep {m/$match_qid/}  %{ $qt->{_seen} } ) {
-        local $_ = $line; #TBD: Avoid warning msg for uninitlzd $_
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -121,7 +122,7 @@ while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array
 }
 
 
-print "DBG: Dumper (\$qt):\n";
+print "DBG: Dumper (\$qt:keys of %_seen):\n";
 #DBG print Dumper ($qt);
 #TBD.not.working.yet  foreach my $k ( keys %{ $qt->shift_off_seen_hash() } ) {
 #TBD: Make accessor for %_seen in QidTrace.pm.
