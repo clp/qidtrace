@@ -41,7 +41,7 @@ my $qt = new Sendmail::QidTrace::Queue({match        => $email_address,
 while (<>) {
     chomp;
     my ($match_email, $match_qid) = match_line($email_address, $_);
-    print "DBG: \$match_email, \$match_qid: ", $match_email, " ,  ", $match_qid, "\n";
+    #DBG print "DBG: \$match_email, \$match_qid: ", $match_email, " ,  ", $match_qid, "\n";
     # if ($match_email || $match_qid) {
     #     $qt->add_match({match => $match_email,
     #                     qid   => $match_qid,
@@ -54,10 +54,12 @@ while (<>) {
     ### clp's code below.
     #
     if ( $match_qid eq '' ) { 
-      # No qid found.
+      # No qid found: skip to next line.
       next;
     }
-    if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
+    #OK.1 if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
+      #TMP No need to test $match_qid again, now that we skip lines w/o qid.
+    if ($match_email || exists $qt->{$match_qid} ) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -96,7 +98,28 @@ while (<>) {
 
 print "DBG: Dumper (\$qt):\n";
 print Dumper ($qt);
+
+=begin comment 
+
+###
 # $qt->drain_queue();
+while ( my $line = shift_off_trailing_array ) {
+    print "DBG drain queue-read loop: \$line: ,$line,\n";
+#X if ($match_email || exists $qt->{$match_qid} ) {
+    if ( exists $qt->{$match_qid} ) {
+        $qt->add_match({match => $match_email,
+                        qid   => $match_qid,
+                        line  => ($output_length
+                                  ? substr($_, $output_start_column, $output_length)
+                                  : substr($_, $output_start_column)),
+                        num   => $. });
+        next;
+}
+
+=end comment 
+
+=cut
+
 
 exit;
 
