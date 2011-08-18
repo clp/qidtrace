@@ -14,7 +14,7 @@ our $VERSION = '0.01';
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;
-my $window_size = 3;
+my $window_size = 5;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -71,7 +71,7 @@ while (<>) {
     }
 
     if ( $match_qid ) {
-        # qid found, but no qid match found; 
+        # qid found, but it does not match saved qid's; 
         # add the current line to bottom of queue for later matching.
         $qt->push_onto_leading_array( $_ );
         #
@@ -106,8 +106,10 @@ while (<>) {
 # $qt->drain_queue();
 while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
     print "DBG drain queue-read loop: \$line: ,$line,\n";
+    #TBD: Do not re-process each line.
     my ($match_email, $match_qid) = match_line($email_address, $line);
-    if ( exists $qt->{$match_qid} ) {
+    if ( grep {m/$match_qid/}  %{ $qt->{_seen} } ) {
+        local $_ = $line; #TBD: Avoid warning msg for uninitlzd $_
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
