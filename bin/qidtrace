@@ -59,7 +59,8 @@ while (<>) {
     }
     #OK.1 if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
       #TMP No need to test $match_qid again, now that we skip lines w/o qid.
-    if ($match_email || exists $qt->{$match_qid} ) {
+      #OK.1028  if ($match_email || exists $qt->{$match_qid} ) {
+    if ($match_email ) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -68,7 +69,20 @@ while (<>) {
                         num   => $. });
         next;
     }
-    elsif ( $match_qid ) { 
+    #TBD: Look for qid match.
+    if ($match_qid ne '' ) {
+        if ( grep {m/$match_qid/}  %{ $qt->{_seen} } ) {
+            $qt->add_match({match => $match_email,
+                            qid   => $match_qid,
+                            line  => ($output_length
+                                      ? substr($_, $output_start_column, $output_length)
+                                      : substr($_, $output_start_column)),
+                            num   => $. });
+            #TBR? next;
+            next;
+        }
+    }
+    if ( $match_qid ) {
         # qid found, but no qid match found; 
         # add the current line to bottom of queue for later matching.
         $qt->push_onto_leading_array( $_ );
@@ -99,8 +113,6 @@ while (<>) {
 #DBG print "DBG: Dumper (\$qt):\n";
 #DBG print Dumper ($qt);
 
-# =begin comment 
-
 ###
 # $qt->drain_queue();
 while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
@@ -116,10 +128,6 @@ while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array
         next;
 }
 }
-
-# =end comment 
-
-# =cut
 
 
 print "DBG: Dumper (\$qt):\n";

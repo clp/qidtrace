@@ -16,6 +16,10 @@ our @EXPORT_OK = qw/match_line/;
 #   the qid is extracted from several common log lines that have been found with qids
 # if either field is not found '' is returned in its place.
 
+### clp code below.
+# Return the email addr if it matches the desired email addr; else return ''.
+# Return $qid if it matches any qid that is already saved in the queue.
+#
 sub match_line {
     my $email = shift;
     my $line = shift;
@@ -24,12 +28,20 @@ sub match_line {
     if ( $line !~ m/<$email>/ ) { $email = ''}
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
       $qid = $1;
+      #TBD: Now look for a match between $qid and all qid's in the saved queue,
+      # and return it if found; else return ''.
+      # OR, should this code return $qid if any qid found,
+      # and the compare operation be done in the caller,
+      # qidtrace, which has the queue in $qt?
     }
     else {
       $qid = '';
     }
     return($email, $qid);
 }
+
+
+
 
 package Sendmail::QidTrace::Queue;
 
@@ -57,6 +69,7 @@ sub new {
 #  line  => the log line, sans newlines
 #  num   => the line number of the log line
 #
+### clp code below.
 sub add_match {
     my ($self, $mo) = @_;
     #TBD: Verify i/p is OK.
