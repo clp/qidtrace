@@ -67,7 +67,9 @@ sub add_match {
     my $key;
     #OK.1 $key = "$mo->{num}"  ;
     #OK.1 $self->{_seen}{$key} = 1;
-    $key = "$mo->{qid}"  ;
+    #OK.2 $key = "$mo->{qid}"  ;
+    #OK.2 $self->{_seen}{$key} = 1;
+    $key = "$mo->{line}"  ;
     $self->{_seen}{$key} = 1;
 
 }
@@ -119,5 +121,13 @@ sub size_of_trailing_array {
     return scalar @{ $self->{_trailing} };
 }
 
+#TBD: Fix or remove.
+sub shift_off_seen_hash {
+    my $self = shift;
+    #F return shift %{ $self->{_seen} };
+    #F return shift keys %{ $self->{_seen} };
+    #F return shift keys %{ $self->{_seen} };
+    return  $self;
+}
 
 1;

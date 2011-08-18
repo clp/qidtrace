@@ -123,7 +123,13 @@ while ( my $line = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array
 
 
 print "DBG: Dumper (\$qt):\n";
-print Dumper ($qt);
+#DBG print Dumper ($qt);
+#TBD.not.working.yet  foreach my $k ( keys %{ $qt->shift_off_seen_hash() } ) {
+#TBD: Make accessor for %_seen in QidTrace.pm.
+foreach my $k ( keys %{ $qt->{_seen} } ) {
+    # add_match() must use $mo->{line} as hash key, to get the line printed:
+    print Dumper ($k);
+}
 
 exit;
 
