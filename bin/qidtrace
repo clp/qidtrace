@@ -107,11 +107,9 @@ while (<>) {
 # $qt->drain_queue();
 while ( my $_ = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
     #DBG print "DBG drain queue-read loop: \$_: ,$_,\n";
-    #DBG print "DBG drain queue-read loop: \$_\n";
     #TBD: Do not re-process each line.
-    #TBD: Replace _seen w/ accessor.
     my ($match_email, $match_qid) = match_line($email_address, $_);
-    if ( grep {m/$match_qid/}  %{ $qt->{_seen} } ) {
+    if ( grep {m/$match_qid/}  $qt->get_seen_lines ) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -125,10 +123,9 @@ while ( my $_ = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) 
 
 print "DBG: Dumper (\$qt:keys of %_seen):\n";
 #DBG print Dumper ($qt);
-#TBD.not.working.yet  foreach my $k ( keys %{ $qt->shift_off_seen_hash() } ) {
-#TBD: Make accessor for %_seen in QidTrace.pm.
-foreach my $k ( keys %{ $qt->{_seen} } ) {
-    # add_match() must use $mo->{line} as hash key, to get the line printed:
+foreach my $k ( $qt->get_seen_lines ) {
+    # Note: Sendmail::QidTrace::Queue::add_match() must use $mo->{line} as hash key,
+    # to get the line printed:
     print Dumper ($k);
 }
 

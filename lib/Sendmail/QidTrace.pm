@@ -18,7 +18,7 @@ our @EXPORT_OK = qw/match_line/;
 
 ### clp code below.
 # Return the email addr if it matches the desired email addr; else return ''.
-# Return $qid if it matches any qid that is already saved in the queue.
+# TBD: Return $qid if it matches any qid that is already saved in the queue.
 #
 sub match_line {
     my $email = shift;
@@ -76,12 +76,8 @@ sub add_match {
       # If not, print error & exit or return.
     # Add the hash ref to the save queue.
     #
-    # Add the number of the line to save to the _seen hash.
+    # Add the line to save to the _seen hash.
     my $key;
-    #OK.1 $key = "$mo->{num}"  ;
-    #OK.1 $self->{_seen}{$key} = 1;
-    #OK.2 $key = "$mo->{qid}"  ;
-    #OK.2 $self->{_seen}{$key} = 1;
     $key = "$mo->{line}"  ;
     $self->{_seen}{$key} = 1;
 
@@ -97,6 +93,7 @@ sub drain_queue {
 }
 
 
+### clp code below.
 #
 # Accessors to control the queue.
 sub push_onto_leading_array {
@@ -112,35 +109,27 @@ sub push_onto_trailing_array {
 
 sub shift_off_leading_array {
     my $self = shift;
-    # my $line = shift;
     return shift @{ $self->{_leading} };
 }
 
 sub shift_off_trailing_array {
     my $self = shift;
-    # my $line = shift;
     return shift @{ $self->{_trailing} };
 }
 
 sub size_of_leading_array {
     my $self = shift;
-    # my $line = shift;
     return scalar @{ $self->{_leading} };
 }
 
 sub size_of_trailing_array {
     my $self = shift;
-    # my $line = shift;
     return scalar @{ $self->{_trailing} };
 }
 
-#TBD: Fix or remove.
 sub get_seen_lines {
     my $self = shift;
-    #F return shift %{ $self->{_seen} };
-    #F return shift keys %{ $self->{_seen} };
     return keys %{ $self->{_seen} };
-    #TBR return  $self;
 }
 
 1;
