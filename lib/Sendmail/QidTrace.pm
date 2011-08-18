@@ -135,12 +135,12 @@ sub size_of_trailing_array {
 }
 
 #TBD: Fix or remove.
-sub shift_off_seen_hash {
+sub get_seen_lines {
     my $self = shift;
     #F return shift %{ $self->{_seen} };
     #F return shift keys %{ $self->{_seen} };
-    #F return shift keys %{ $self->{_seen} };
-    return  $self;
+    return keys %{ $self->{_seen} };
+    #TBR return  $self;
 }
 
 1;

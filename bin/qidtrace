@@ -60,7 +60,8 @@ while (<>) {
     #OK.1 if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
       #TMP No need to test $match_qid again, now that we skip lines w/o qid.
       #TBD: Replace _seen w/ accessor.
-    if ($match_email || ( grep {m/$match_qid/}  %{ $qt->{_seen} } )) {
+    #OK if ($match_email || ( grep {m/$match_qid/}  %{ $qt->{_seen} } )) {
+    if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
@@ -94,7 +95,7 @@ while (<>) {
         if ( $qt->size_of_trailing_array  >= $window_size ) {
             my $line_from_queue = $qt->shift_off_trailing_array();
             #TBD: Check the line for matching qid.
-            print "DBG: After shift_off_trailing: \$line_from_queue: ", $line_from_queue, "\n";
+            #DBG print "DBG: After shift_off_trailing: \$line_from_queue: ", $line_from_queue, "\n";
         }
     }
 } # End of while loop.
@@ -118,7 +119,7 @@ while ( my $_ = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) 
                                   : substr($_, $output_start_column)),
                         num   => $. });
         next;
-}
+    }
 }
 
 
