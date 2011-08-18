@@ -53,6 +53,10 @@ while (<>) {
     #
     ### clp's code below.
     #
+    if ( $match_qid eq '' ) { 
+      # No qid found.
+      next;
+    }
     if ($match_email || ( $match_qid and exists $qt->{$match_qid} )) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
@@ -87,10 +91,6 @@ while (<>) {
             #TBD: Check the line for matching qid.
             print "DBG: After shift_off_trailing: \$line_from_queue: ", $line_from_queue, "\n";
         }
-    }
-    else { 
-      # No qid found.
-      next;
     }
 } # End of while loop.
 
