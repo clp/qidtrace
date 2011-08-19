@@ -45,13 +45,12 @@ while (<>) {
     $qt->push_onto_leading_array( $_ );
 
     if ( $qt->size_of_leading_array  >= $window_size ) {
+        # Fill the _leading array before checking for matches.
         my ($match_email, $match_qid) = match_line($email_address, $_);
         #DBG print "DBG: \$match_email, \$match_qid:  $match_email  ,   $match_qid\n";
         #
-        if ( $match_qid eq '' ) { 
-          # No qid found: skip to next line.
-          next;
-        }
+        next if ( $match_qid eq '' ); # No qid found: skip to next line.
+        #
         if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
