@@ -117,6 +117,16 @@ sub shift_off_trailing_array {
     return shift @{ $self->{_trailing} };
 }
 
+sub get_leading_array {
+    my $self = shift;
+    return @{ $self->{_leading} };
+}
+
+sub get_trailing_array {
+    my $self = shift;
+    return @{ $self->{_trailing} };
+}
+
 sub size_of_leading_array {
     my $self = shift;
     return scalar @{ $self->{_leading} };

@@ -16,7 +16,7 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 #TBD: use window_size smaller than data file size, or fix the read loop
 # to handle that situation.
 #ORG my $window_size = 100;
-my $window_size = 5;
+my $window_size = 10;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -44,10 +44,13 @@ while (<>) {
     chomp;
     $qt->push_onto_leading_array( $_ );
 
+    # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  >= $window_size ) {
-        # Fill the _leading array before checking for matches.
-        my ($match_email, $match_qid) = match_line($email_address, $_);
-        #DBG print "DBG: \$match_email, \$match_qid:  $match_email  ,   $match_qid\n";
+        #TBD.1847: This line breaks code, but it seems vital at this place;
+        # find & fix the problem (Is it $_ explicit vs implicit?):
+        my $ln = $qt->shift_off_leading_array();
+        my ($match_email, $match_qid) = match_line($email_address, $ln);
+        print "DBG: \$match_email, \$match_qid:  $match_email  ,   $match_qid\n";
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
@@ -55,8 +58,8 @@ while (<>) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
                             line  => ($output_length
-                                      ? substr($_, $output_start_column, $output_length)
-                                      : substr($_, $output_start_column)),
+                                      ? substr($ln, $output_start_column, $output_length)
+                                      : substr($ln, $output_start_column)),
                             num   => $. });
             next;
         }
@@ -69,23 +72,27 @@ while (<>) {
             # Check the size of both arrays, and manage queue if needed.
             #TBR? if ( $qt->size_of_leading_array  >= $window_size ) {
                 #TBD: Don't re-process the line.
-                $qt->shift_off_leading_array();
-                ($match_email, $match_qid) = match_line($email_address, $_);
-                if ( exists $qt->{$match_qid} ) {
+                #TBR? $_ = $qt->shift_off_leading_array();
+                #TBR? ($match_email, $match_qid) = match_line($email_address, $_);
+                #TBR? if ( exists $qt->{$match_qid} ) {
+                if ( grep {m/$match_qid/}  $qt->get_seen_lines ) {
                     $qt->add_match({match => $match_email,
                                     qid   => $match_qid,
                                     line  => ($output_length
-                                              ? substr($_, $output_start_column, $output_length)
-                                              : substr($_, $output_start_column)),
+                                              ? substr($ln, $output_start_column, $output_length)
+                                              : substr($ln, $output_start_column)),
                                     num   => $. });
                     next;
                 }
-                $qt->push_onto_trailing_array ($_);
+                #TBR? }
+                # Save to array if not added to queue.
+                $qt->push_onto_trailing_array ($ln);
             #TBR? }
             if ( $qt->size_of_trailing_array  >= $window_size ) {
-                $qt->shift_off_trailing_array();
+                #TBD.1847 : Diff results when explicitly using $_:
+                $ln = $qt->shift_off_trailing_array();
                 #TBD: Check the line for matching qid.
-                #DBG print "DBG: After shift_off_trailing: \$_: ", $_, "\n";
+                #DBG print "DBG: After shift_off_trailing: \$ln: ", $ln, "\n";
             }
         }
     }
@@ -96,28 +103,37 @@ while (<>) {
 
 ###
 # $qt->drain_queue();
-while ( my $_ = $qt->shift_off_trailing_array(), $qt->shift_off_leading_array ) {
-    #DBG print "DBG drain queue-read loop: \$_: ,$_,\n";
+my @lines_to_drain = ($qt->get_leading_array(), $qt->get_trailing_array );
+#DBG print "DBG drain queue-read loop: \@lines_to_drain: ,@lines_to_drain,\n";
+
+#ORG while ( $_ = ($qt->get_leading_array(), $qt->get_trailing_array ) ) {
+#F while ( $_ = <@lines_to_drain>  ) {
+#F while ( <@lines_to_drain>  ) {
+foreach  my $ltd ( @lines_to_drain ) {
+    #DBG print "DBG drain queue-read loop: \$ltd: ,$ltd,\n";
     #TBD: Do not re-process each line.
-    my ($match_email, $match_qid) = match_line($email_address, $_);
-    if ( grep {m/$match_qid/}  $qt->get_seen_lines ) {
+    my ($match_email, $match_qid) = match_line($email_address, $ltd);
+    if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
+      #F if ( grep {m/$match_qid/}  $qt->get_seen_lines ) {
         $qt->add_match({match => $match_email,
                         qid   => $match_qid,
                         line  => ($output_length
-                                  ? substr($_, $output_start_column, $output_length)
-                                  : substr($_, $output_start_column)),
+                                  ? substr($ltd, $output_start_column, $output_length)
+                                  : substr($ltd, $output_start_column)),
                         num   => $. });
         next;
+        #}
     }
 }
 
 
 print "DBG: Dumper (\$qt:keys of %_seen):\n";
 #DBG print Dumper ($qt);
-foreach my $k ( $qt->get_seen_lines ) {
+foreach my $k ( sort $qt->get_seen_lines ) {
     # Note: Sendmail::QidTrace::Queue::add_match() must use $mo->{line} as hash key,
-    # to get the line printed:
-    print Dumper ($k);
+    # to get the line printed.
+    # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
+    print $k, "\n";
 }
 
 exit;
