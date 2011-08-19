@@ -64,10 +64,10 @@ while (<>) {
         if ( $match_qid ) {
             # qid found, but it does not match any saved qid's.
             # Add the current line to bottom of queue for later matching.
-            $qt->push_onto_leading_array( $_ );
+            #TBR? $qt->push_onto_leading_array( $_ );
             #
             # Check the size of both arrays, and manage queue if needed.
-            if ( $qt->size_of_leading_array  >= $window_size ) {
+            #TBR? if ( $qt->size_of_leading_array  >= $window_size ) {
                 #TBD: Don't re-process the line.
                 $qt->shift_off_leading_array();
                 ($match_email, $match_qid) = match_line($email_address, $_);
@@ -81,7 +81,7 @@ while (<>) {
                     next;
                 }
                 $qt->push_onto_trailing_array ($_);
-            }
+            #TBR? }
             if ( $qt->size_of_trailing_array  >= $window_size ) {
                 $qt->shift_off_trailing_array();
                 #TBD: Check the line for matching qid.
