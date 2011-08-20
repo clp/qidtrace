@@ -16,7 +16,6 @@ our @EXPORT_OK = qw/match_line/;
 #   the qid is extracted from several common log lines that have been found with qids
 # if either field is not found '' is returned in its place.
 
-### clp code below.
 # Return the email addr if it matches the desired email addr; else return ''.
 # TBD: Return $qid if it matches any qid that is already saved in the queue.
 #
@@ -69,17 +68,16 @@ sub new {
 #  line  => the log line, sans newlines
 #  num   => the line number of the log line
 #
-### clp code below.
 sub add_match {
     my ($self, $mo) = @_;
     #TBD: Verify i/p is OK.
       # If not, print error & exit or return.
-    # Add the hash ref to the save queue.
     #
     # Add the line to save to the _seen hash.
-    my $key;
-    $key = "$mo->{line}"  ;
-    $self->{_seen}{$key} = 1;
+    # Store array of refs to lines for each key=qid.
+    my $key = "$mo->{qid}"  ;
+    my $value = "$mo->{line}"  ;
+    push @{ $self->{_seen}{$key} } , $value;
 
 }
 
@@ -89,11 +87,11 @@ sub add_match {
 #  to flush out the queue.
 sub drain_queue {
     my ($self) = @_;
+    #TBD
 
 }
 
 
-### clp code below.
 #
 # Accessors to control the queue.
 sub push_onto_leading_array {
@@ -140,6 +138,11 @@ sub size_of_trailing_array {
 sub get_seen_lines {
     my $self = shift;
     return keys %{ $self->{_seen} };
+}
+
+sub get_seen_hash {
+    my $self = shift;
+    return  $self->{_seen} ;
 }
 
 1;

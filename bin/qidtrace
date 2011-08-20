@@ -16,7 +16,8 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 # Note: use window_size smaller than data file size, or fix 
 # the read loop to handle that situation.
 #ORG my $window_size = 100;
-my $window_size = 1400;
+#MAX my $window_size = 1400;
+my $window_size = 8;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -88,6 +89,8 @@ while (<>) {
 my @lines_to_drain = ($qt->get_leading_array(), $qt->get_trailing_array );
 
 foreach  my $ltd ( @lines_to_drain ) {
+    #TBD: Using this combined array does not empty the two arrays & 
+    # might cause printing problems.
     #TBD: Do not re-process each line.
     my ($match_email, $match_qid) = match_line($email_address, $ltd);
     if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
@@ -103,14 +106,22 @@ foreach  my $ltd ( @lines_to_drain ) {
 
 
 #TBD: Print each group of lines w/ matched qid's together.
-#DBG print "DBG: Dumper (\$qt:keys of %_seen):\n";
+#TBD print "DBG: Dumper (\$qt:keys of %_seen):\n";
+#DBG print "DBG: Dumper \$qt:\n";
 #DBG print Dumper ($qt);
-foreach my $k ( sort $qt->get_seen_lines ) {
-    # Note: Sendmail::QidTrace::Queue::add_match() must use $mo->{line} as hash key,
-    # to get the line printed.
+
+# --------------------------------------------------------------
+print "\n*** Print try #1, Entire %_seen hash, grouped and sorted. ***\n";
+# --------------------------------------------------------------
+foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
     # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
-    print $k, "\n";
+    foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
+        print $_, "\n";
+    };
 }
+
+
+
 
 exit;
 
