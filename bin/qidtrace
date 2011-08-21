@@ -53,7 +53,7 @@ while (<>) {
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
         #OK.1 if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
-        my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
+        my @lines = ($qt->get_leading_array(). $qt->get_trailing_array );
         if ($match_email || ( grep {m/$match_qid/}  @lines )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
