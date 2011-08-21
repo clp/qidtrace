@@ -9,7 +9,7 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.01';
+our $VERSION = '0.10';
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
@@ -89,8 +89,6 @@ while (<>) {
 my @lines_to_drain = ($qt->get_leading_array(), $qt->get_trailing_array );
 
 foreach  my $ltd ( @lines_to_drain ) {
-    #TBD: Using this combined array does not empty the two arrays & 
-    # might cause printing problems.
     #TBD: Do not re-process each line.
     my ($match_email, $match_qid) = match_line($email_address, $ltd);
     if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_lines )) {
@@ -105,14 +103,7 @@ foreach  my $ltd ( @lines_to_drain ) {
 }
 
 
-#TBD: Print each group of lines w/ matched qid's together.
-#TBD print "DBG: Dumper (\$qt:keys of %_seen):\n";
-#DBG print "DBG: Dumper \$qt:\n";
-#DBG print Dumper ($qt);
 
-# --------------------------------------------------------------
-#DBG print "\n*** Print try #1, Entire %_seen hash, grouped and sorted. ***\n";
-# --------------------------------------------------------------
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
     # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
