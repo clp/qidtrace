@@ -88,7 +88,7 @@ while (<>) {
 
 
 # $qt->drain_queue();
-my @lines_to_drain = ($qt->get_leading_array(), $qt->get_trailing_array );
+my @lines_to_drain = ($qt->get_leading_array(). $qt->get_trailing_array );
 
 foreach  my $ltd ( @lines_to_drain ) {
     #TBD: Do not re-process each line.
@@ -105,13 +105,33 @@ foreach  my $ltd ( @lines_to_drain ) {
 }
 
 
-
+# Print all matching lines from the %_seen hash.
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
     # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
         print $_, "\n";
     };
 }
+
+=pod
+
+=head2 Print All Matching Lines
+
+Use two loops to print the collection of o/p lines, grouped 
+and sorted by qid.
+
+The outer loop dereferences the hash ref,
+  selects the keys (which are qid's),
+  sorts the list by qid,
+  then iterates over its block using each qid as the index value.
+
+The inner loop takes the qid as a key for the %_seen hash,
+  gets the hash value for that key (which is a ref to an array),
+  dereferences the array,
+  iterates over every member of that array,
+  and prints each line found in that array.
+
+=cut
 
 
 
