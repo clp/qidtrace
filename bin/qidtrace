@@ -17,7 +17,7 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 # the read loop to handle that situation.
 #ORG my $window_size = 100;
 #MAX my $window_size = 1400;
-my $window_size = 14;
+my $window_size = 1400;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -104,19 +104,6 @@ foreach  my $ltd ( @lines_to_drain ) {
     }
 }
 
-#Sun2011_0821_12:21  Modified print to include star-prefix for all but line 1.
-# Print all matching lines from the %_seen hash.
-foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
-    # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
-    print shift ( @{ ${ $qt->get_seen_hash }{$k} } ) , "\n";
-    foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        print "**** $_\n";
-    };
-}
-
-
-
-=begin ORG.OK
 
 # Print all matching lines from the %_seen hash.
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
@@ -125,11 +112,6 @@ foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
         print $_, "\n";
     };
 }
-
-=end ORG.OK
-
-=cut
-
 
 =pod
 
