@@ -1,4 +1,4 @@
-qidtrace  version 0.01
+qidtrace  version 0.10
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -17,4 +17,18 @@ is not installed in the @INC path):
 The initial version comprises a framework, and the core methods
 are not included.  They are to be written as an exercise for the
 student.
+
+
+
+Version 0.10, Sun2011_0821_10:21 
+
+This version operates properly and might find all matching
+lines; but it performs poorly.
+It handles the 9999-line file in a short time, but does not 
+process the larger file with more than 4M lines.
+
+Use this version to compare its o/p w/ a future version 
+using a different approach to find matching lines.  Verify
+that any future version finds all the matched lines that
+this version finds.
 
