@@ -135,7 +135,7 @@ sub size_of_trailing_array {
     return scalar @{ $self->{_trailing} };
 }
 
-sub get_seen_lines {
+sub get_seen_qids {
     my $self = shift;
     return keys %{ $self->{_seen} };
 }
