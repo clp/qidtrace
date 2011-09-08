@@ -1,0 +1,3 @@
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8234]: jB88DMfD008234: Milter: to=<u319@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+**** Jan  5 00:13:36 b.mx.example.net sm-mta[8234]: jB88DMfD008234: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+**** Jan  5 00:13:36 b.mx.example.net sm-mta[8234]: jB88DMfD008234: from=<u520@h521.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 

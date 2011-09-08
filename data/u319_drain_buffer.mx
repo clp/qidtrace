@@ -1,0 +1,470 @@
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8665]: jB88DNv1008657: to=<u1@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229263, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNPM032108 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.example.net sendmail[22851]: jB7EhgPD029789: to=<u3@h4.com>, delay=17:29:41, xdelay=00:00:03, mailer=esmtp, pri=9932027, relay=relay_id [10.11.12.13], dsn=4.2.0, stat=Deferred: 450 <u3@h4.com>: User unknown in local recipient table 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12001]: jB88D0Ng012001: Milter: to=<u5@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11868]: jB88DEuF011868: from=<u7@h8.com>, size=36091, class=0, nrcpts=1, msgid=<BCEIIJIOHHFPHGJOGPJJMEJHDJAA.u7@h8.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11889]: jB88DEUK011889: cm10.20.30.40.hkcable.com.hk [10.11.12.13] did not issue MAIL/EXPN/VRFY/ETRN during connection to MTA 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12354]: jB88DE2W012354: from=<u10@h11.net>, size=10431, class=0, nrcpts=1, msgid=<u12@h11.net>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.example.net mimedefang-multiplexor: Starting slave 2 (pid 8673) (10 running): Bringing slaves up to minSlaves (10) 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8667]: jB88DNFk008667: from=<u13@h2.net>, size=3666, class=-60, nrcpts=1, msgid=<u14@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8668]: jB88DN5P008668: from=<u13@h2.net>, size=2508, class=-60, nrcpts=1, msgid=<u16@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7916]: jB88DCqu007916: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7916]: jB88DCqu007916: from=<u17@h18.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:30 c.mx.example.net sm-mta[7568]: jB88CjBf007568: <u19@h20.com>... No such user here 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[11824]: jB88DCA2011824: <u21@h2.net>... No such user here 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7017]: jB88Calv007017: Milter: to=<u22@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12162]: jB88DN6Q012162: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u23@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12171]: jB88DEuF011868: to=<u24@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=156091, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNrb032130 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12747]: jB88DE2W012354: to=<u25@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=130431, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNa3032131 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12363]: jB88DELc012363: <u26@h27.com>... No such user here 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12354]: jB88DE2X012354: from=<u28@h11.net>, size=10433, class=0, nrcpts=1, msgid=<u12@h11.net>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8363]: jB88DEFY008363: <u29@h27.com>... No such user here 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8363]: jB88DEFY008363: from=<>, size=865, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11824]: jB88DCA2011824: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11824]: jB88DCA2011824: from=<u30@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8682]: jB88DNFk008667: to=<u32@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=231666, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNJD032134 Message accepted for delivery) 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8680]: jB88DN5P008668: to=<u33@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=230508, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNje007179 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.example.net sm-mta[4349]: jB88BMGd004349: Milter: to=<u34@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12363]: jB88DELc012363: from=<>, size=2565, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12174]: jB88DN6Q012162: to=<u35@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DNxE007183 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8272]: jB88DNVN008272: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u36@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7969]: jB88DEPJ007969: ruleset=check_mail, arg1=<u37@h38.uk>, relay=relay_id [10.11.12.13], reject=553 5.1.8 <u37@h38.uk>... Domain of sender address u37@h38.uk does not exist 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12758]: jB88DE2X012354: to=<u39@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=130433, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DN3a007199 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12367]: jB88DEKR012367: ruleset=check_mail, arg1=<u40@h41.uk>, relay=relay_id [10.11.12.13], reject=553 5.1.8 <u40@h41.uk>... Domain of sender address u40@h41.uk does not exist 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7928]: jB88DCKC007928: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7928]: jB88DCKC007928: from=<u42@h43.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12354]: jB88DE2Y012354: from=<u44@h11.net>, size=10420, class=0, nrcpts=1, msgid=<u45@h11.net>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12754]: jB88DNtp012754: from=<u13@h2.net>, size=2348, class=-60, nrcpts=1, msgid=<u46@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.example.net sm-mta[7957]: jB88DDaC007957: <u47@h20.com>... No such user here 
+Jan  5 00:13:30 a.mx.example.net sm-mta[11904]: jB88DEwq011904: <u48@h49.net>... No such user here 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12367]: jB88DEKR012367: from=<u40@h41.uk>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12406]: jB88DLR2012086: to=<u50@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=128402, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVVm008072 Message accepted for delivery) 
+Jan  5 00:13:30 a.mx.example.net sm-mta[10601]: jB88CSbj010601: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:30 a.mx.example.net sm-mta[10601]: jB88CSbj010601: from=<u51@h52.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12063]: jB88DKuV012063: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12063]: jB88DKuV012063: from=<u53@h54.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12984]: jB88DVWO012984: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u55@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8444]: jB88DUw4008437: to=<u56@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=229657, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVun032676 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.example.net sm-mta[5415]: jB88BqPr005415: Milter: to=<u57@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12409]: jB88DVTG012409: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u58@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12692]: jB88DLBl012692: Milter: to=<u59@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-sbl>, Ref: http://www.spamhaus.org/SBL/sbl.lasso?query=SBL27791 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8212]: jB88DLW4008212: from=<u60@h18.com>, size=1452, class=0, nrcpts=1, msgid=<u61@h62.com>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12692]: jB88DLBl012692: from=<u63@h64.com>, size=0, class=0, nrcpts=0, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8955]: jB88DVMY008955: from=<u13@h2.net>, size=1189, class=-60, nrcpts=1, msgid=<u65@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12993]: jB88DVWO012984: to=<u66@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVpe032692 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8059]: jB88DIfj008059: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8059]: jB88DIfj008059: from=<u67@h68.dk>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8155]: jB88DKsX008155: lost input channel from a_host to MTA after data 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8155]: jB88DKsX008155: from=<u69@h70.net>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:30 b.mx.example.net sm-mta[5985]: jB88CAZD005985: Milter: to=<u71@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12012]: jB88DIRl012012: <u72@h73.com>... No such user here 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12417]: jB88DVTG012409: to=<u74@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVIX032693 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u75@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8617]: jB88DLCr008617: <u76@h77.com>... No such user here 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12029]: jB88DJW0012029: Milter: to=<u78@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12096]: jB88DLZu012096: <u76@h77.com>... No such user here 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[11932]: jB88DFau011932: <u21@h2.net>... No such user here 
+Jan  5 00:13:30 b.mx.example.net sm-mta[4349]: jB88BMGe004349: Milter: to=<u79@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12661]: jB88DLbr012661: <u76@h77.com>... No such user here 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8958]: jB88DVO6008958: from=<u13@h2.net>, size=1278, class=-60, nrcpts=1, msgid=<u80@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8963]: jB88DVMY008955: to=<u81@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229189, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVZn032722 Message accepted for delivery) 
+Jan  5 00:13:30 c.mx.example.net sm-mta[7731]: jB88Cq7m007731: from=<u82@h83.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8115]: jB88DJcC008115: Milter: to=<u84@h85.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8451]: jB88DLW4008212: to=<u86@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=121452, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DV8s008114 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.example.net sm-mta[8222]: jB88DMt4008222: from=<u87@h88.com>, size=4176, class=0, nrcpts=1, msgid=<u89@h88.com>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 h93.net sm-mta[12023]: jB88DJCg012023: from=<u90@h91.com>, size=70624, class=0, nrcpts=1, msgid=<u92@h93.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8617]: jB88DLCr008617: from=<>, size=7227, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8971]: jB88DVO6008958: to=<u94@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229278, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVDE008155 Message accepted for delivery) 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12096]: jB88DLZu012096: from=<>, size=7211, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.example.net mimedefang.pl[29063]: jB88DJCg012023 bounced because of virus Worm.Mytob.IC 
+Jan  5 00:13:30 a.mx.example.net mimedefang.pl[29063]: filter: jB88DJCg012023:  bounce=1 
+Jan  5 00:13:30 a.mx.example.net mimedefang[12025]: jB88DJCg012023: Bouncing because filter instructed us to 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12023]: jB88DJCg012023: Milter: data, reject=554 5.7.1 Virus Worm.Mytob.IC found in mail - rejected 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12023]: jB88DJCg012023: to=<u95@h91.com>, delay=00:00:03, pri=100624, stat=Virus Worm.Mytob.IC found in mail - rejected 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12997]: jB88DV7b012997: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u96@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8972]: jB88DVUZ008972: from=<u13@h2.net>, size=1186, class=-60, nrcpts=1, msgid=<u97@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12661]: jB88DLbr012661: from=<>, size=7213, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8462]: jB88DMt4008222: to=<u98@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=124176, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVvt008201 Message accepted for delivery) 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8118]: jB88DKTH008118: Milter: to=<u99@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8421]: jB88DHVB008421: <u100@h101.net>... No such user here 
+Jan  5 00:13:30 c.mx.h2.net sm-mta[8977]: jB88DVUZ008972: to=<u102@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229186, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DViR032739 Message accepted for delivery) 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[13004]: jB88DV7b012997: to=<u103@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229195, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVUS032738 Message accepted for delivery) 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8038]: jB88D2M0008038: Milter: to=<u104@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:30 d.mx.example.net sm-mta[11593]: jB88Cnfp011593: Milter: to=<u105@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8463]: jB88DVtQ008463: from=<u13@h2.net>, size=1603, class=-60, nrcpts=1, msgid=<u55@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12013]: jB88D1Gd012013: from=<u106@h107.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:30 a.mx.example.net sm-mta[12020]: jB88DIDg012020: Milter: to=<u108@u108.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8635]: jB88DMjT008635: from=<u110@h111.org>, size=3969, class=-60, nrcpts=1, msgid=<u112@h113.at>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 c.mx.example.net sm-mta[8635]: jB88DMjT008635: Milter add: header: X-example-SB-IP-RBLs:  L2SPEWS 
+Jan  5 00:13:30 b.mx.h2.net sm-mta[8466]: jB88DVYC008466: from=<u13@h2.net>, size=6592, class=-60, nrcpts=1, msgid=<u114@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12427]: jB88DVcO012427: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u115@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 a.mx.h2.net sm-mta[12430]: jB88DVJ6012430: from=<u13@h2.net>, size=1814, class=-60, nrcpts=1, msgid=<u116@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[12276]: jB88DAA7012276: Milter: to=<u117@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:30 d.mx.h2.net sm-mta[13008]: jB88DV91013008: from=<u13@h2.net>, size=1266, class=-60, nrcpts=1, msgid=<u118@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:30 d.mx.example.net sm-mta[12847]: jB88DQlU012847: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 4.89:1134029611.72 seconds 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8128]: jB88DJv6008128: Milter: to=<u119@h120.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8128]: jB88DJv6008128: Milter: to=<u121@h120.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8128]: jB88DJv6008128: Milter: to=<u122@h120.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8474]: jB88DVtQ008463: to=<u123@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229603, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVYV032762 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8477]: jB88DVYC008466: to=<u124@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=234592, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVlJ008329 Message accepted for delivery) 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u125@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13016]: jB88DV91013008: to=<u126@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229266, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVtT008331 Message accepted for delivery) 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13012]: jB88DVji013012: from=<u13@h2.net>, size=1192, class=-60, nrcpts=1, msgid=<u127@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 a.mx.h2.net sm-mta[12437]: jB88DVcO012427: to=<u128@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVWP008330 Message accepted for delivery) 
+Jan  5 00:13:31 a.mx.h2.net sm-mta[12438]: jB88DVJ6012430: to=<u129@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229814, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVuZ032764 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.example.net sm-mta[5985]: jB88CAZD005985: Milter: to=<u130@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8981]: jB88DV1l008981: from=<u13@h2.net>, size=1577, class=-60, nrcpts=1, msgid=<u131@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 b.mx.example.net sm-mta[5415]: jB88BqPr005415: Milter: to=<u132@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8478]: jB88DV12008478: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u133@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8501]: jB88DJwp008501: Milter: to=<u134@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13019]: jB88DVji013012: to=<u135@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229192, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DV79008357 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8216]: jB88DM7f008216: <u136@h20.com>... No such user here 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12069]: jB88D3pY012069: <u137@h20.com>... No such user here 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8988]: jB88DV1l008981: to=<u138@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229577, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DVUT000318 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8343]: jB88DQvL008343: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 5.37:1134029611.96 seconds 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13020]: jB88DVBQ013020: from=<u13@h2.net>, size=1198, class=-60, nrcpts=1, msgid=<u139@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12441]: jB88DHVu012441: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12441]: jB88DHVu012441: from=<u140@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12020]: jB88DIDg012020: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12020]: jB88DIDg012020: from=<u141@h142.bg>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8980]: jB88DMjT008635: to=<u143@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=231969, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DV3k008328 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8486]: jB88DV12008478: to=<u144@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=229195, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DV8X008370 Message accepted for delivery) 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8989]: jB88DVhG008989: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u145@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[12558]: jB88DK27012558: Milter: to=<u146@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12387]: jB88DFX3012387: from=<u147@h148.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13029]: jB88DWvs013029: from=<u13@h2.net>, size=1269, class=-60, nrcpts=1, msgid=<u149@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13028]: jB88DVBQ013020: to=<u150@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=229198, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWbf000330 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8118]: jB88DKTH008118: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8118]: jB88DKTH008118: from=<u151@h152.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12029]: jB88DJW0012029: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12029]: jB88DJW0012029: from=<u153@h154.jp>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[8996]: jB88DVhG008989: to=<u155@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWZH008396 Message accepted for delivery) 
+Jan  5 00:13:31 c.mx.example.net sm-mta[7568]: jB88CjBg007568: <u156@h20.com>... No such user here 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13034]: jB88DWvs013029: to=<u157@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229269, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWkx000342 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8216]: jB88DM7f008216: from=<u158@h159.org>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u160@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13038]: jB88DWLw013038: from=<u13@h2.net>, size=1278, class=-60, nrcpts=1, msgid=<u161@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8624]: jB88DMJp008624: from=<u162@h163.com>, size=923, class=0, nrcpts=1, msgid=<u164@www.h163.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 a.mx.h2.net sm-mta[12440]: jB88DWXD012440: from=<u13@h2.net>, size=1426, class=-60, nrcpts=1, msgid=<u166@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8490]: jB88DWs2008490: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u167@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8645]: jB88DM3f008645: <u168@h49.net>... No such user here 
+Jan  5 00:13:31 b.mx.example.net sm-mta[5415]: jB88BqPr005415: Milter: to=<u169@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8115]: jB88DJcC008115: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8115]: jB88DJcC008115: from=<u170@h171.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13047]: jB88DWLw013038: to=<u172@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229278, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWVl000354 Message accepted for delivery) 
+Jan  5 00:13:31 d.mx.example.net sm-mta[11593]: jB88Cnfp011593: Milter: to=<u173@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u174@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 a.mx.h2.net sm-mta[12448]: jB88DWXD012440: to=<u175@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229426, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWjr000355 Message accepted for delivery) 
+Jan  5 00:13:31 b.mx.h2.net sm-mta[8495]: jB88DWs2008490: to=<u176@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWPV008409 Message accepted for delivery) 
+Jan  5 00:13:31 a.mx.example.net sm-mta[11814]: jB88DCFf011814: <u21@h177.net>... No such user here 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8645]: jB88DM3f008645: from=<>, size=3422, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8193]: jB88DLGA008193: <u178@h179.com>... No such user here 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[9001]: jB88DWex009001: from=<u13@h2.net>, size=1432, class=-60, nrcpts=1, msgid=<u180@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 b.mx.example.net sm-mta[5985]: jB88CAZD005985: Milter: to=<u181@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12072]: jB88D3mn012072: lost input channel from a_host to MTA after data 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12072]: jB88D3mn012072: from=<u182@h183.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8620]: jB88DM0m008620: Milter: to=<u184@h185.com>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:31 c.mx.h2.net sm-mta[9008]: jB88DWex009001: to=<u186@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229432, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWMt000378 Message accepted for delivery) 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12011]: jB88DILj012011: <u187@h188.com>... No such user here 
+Jan  5 00:13:31 b.mx.example.net sm-mta[5415]: jB88BqPr005415: from=<u189@h190.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 a.mx.example.net sm-mta[12150]: jB88DNoe012150: from=<u191@h192.org>, size=3368, class=-30, nrcpts=1, msgid=<u193@h194.dk>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 a.mx.example.net sm-mta[11821]: jB88DCcV011821: ruleset=check_mail, arg1=<u195@h196.com>, relay=relay_id [10.11.12.13], reject=451 4.1.8 Domain of sender address u195@h196.com does not resolve 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8266]: jB88DN7d008266: <u197@h27.com>... No such user here 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8355]: jB88DRts008355: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 5.19:1134029612.65 seconds 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12736]: jB88DNZx012736: from=<u198@h199.com>, size=4682, class=0, nrcpts=1, msgid=<u200@h199.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12736]: jB88DNZx012736: Milter add: header: X-example-SB-IP-RBLs:  L1SPEWS 
+Jan  5 00:13:31 d.mx.example.net sm-mta[12558]: jB88DK27012558: from=<u201@h202.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:31 b.mx.example.net sm-mta[4349]: jB88BMGe004349: Milter: to=<u203@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8620]: jB88DM0m008620: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 c.mx.example.net sm-mta[8620]: jB88DM0m008620: from=<u204@h205.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 d.mx.h2.net sm-mta[13058]: jB88DWxZ013058: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u206@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8266]: jB88DN7d008266: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:31 b.mx.example.net sm-mta[8266]: jB88DN7d008266: from=<u207@h208.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:31 c.mx.example.net sm-mta[3660]: jB88B4ZY003660: Milter: to=<u209@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13068]: jB88DNZx012736: to=<u210@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=124682, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DW9p008429 Message accepted for delivery) 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13071]: jB88DWxZ013058: to=<u211@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWaa000390 Message accepted for delivery) 
+Jan  5 00:13:32 c.mx.example.net sm-mta[8942]: jB88DWMC008942: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 0.00:1134029612.82 seconds 
+Jan  5 00:13:32 c.mx.example.net sm-mta[8421]: jB88DHVB008421: <u212@h101.net>... No such user here 
+Jan  5 00:13:32 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u213@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13072]: jB88DWrh013072: from=<u13@h2.net>, size=1580, class=-60, nrcpts=1, msgid=<u214@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 b.mx.example.net sm-mta[5985]: jB88CAZD005985: from=<u215@h216.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12458]: jB88DWvm012458: from=<u13@h2.net>, size=3124, class=-60, nrcpts=1, msgid=<u217@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8128]: jB88DJv6008128: lost input channel from a_host to MTA after data 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8128]: jB88DJv6008128: from=<u218@h219.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13080]: jB88DWrh013072: to=<u220@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229580, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXbE008441 Message accepted for delivery) 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13076]: jB88DWOw013076: from=<u13@h2.net>, size=1429, class=-60, nrcpts=1, msgid=<u221@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 d.mx.example.net sm-mta[11593]: jB88Cnfp011593: Milter: to=<u222@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:32 a.mx.example.net sm-mta[10779]: jB86DKfv010779: timeout waiting for input from a_host during message collect 
+Jan  5 00:13:32 a.mx.example.net sm-mta[10779]: jB86DKfv010779: from=<u223@h224.com>, size=540085, class=0, nrcpts=1, msgid=<u225@h226.TMCD-015>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 a.mx.example.net sm-mta[10779]: jB86DKfv010779: Milter (filter1): write(A) returned -1, expected 5: Broken pipe 
+Jan  5 00:13:32 a.mx.example.net sm-mta[10779]: jB86DKfv010779: Milter (filter1): to error state 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[10779]: jB86DKfv010779: to=<u227@h2.net>, delay=02:00:00, pri=570085, stat=timeout waiting for input during message collect 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12463]: jB88DWvm012458: to=<u228@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=231124, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DX0S008445 Message accepted for delivery) 
+Jan  5 00:13:32 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u229@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12011]: jB88DILj012011: from=<u230@h231.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13085]: jB88DWOw013076: to=<u232@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=229429, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXQI000402 Message accepted for delivery) 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9018]: jB88DX5w009018: from=<u13@h2.net>, size=2970, class=-60, nrcpts=1, msgid=<u233@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12305]: jB88DRmd012305: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 5.19:1134029613.14 seconds 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9021]: jB88DXiS009021: from=<u13@h2.net>, size=2354, class=-60, nrcpts=1, msgid=<u234@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8282]: jB88DOjS008282: from=<u235@h18.com>, size=7365, class=0, nrcpts=1, msgid=<u236@h237.gbl>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9029]: jB88DX5w009018: to=<u238@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=230970, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXM3008467 Message accepted for delivery) 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8193]: jB88DLGA008193: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8193]: jB88DLGA008193: from=<u239@h18.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13092]: jB88DXR7013092: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u240@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12454]: jB88DNoe012150: to=<u241@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=177368, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DWBd008428 Message accepted for delivery) 
+Jan  5 00:13:32 b.mx.h2.net sm-mta[8512]: jB88DXtv008512: from=<u13@h2.net>, size=1895, class=-60, nrcpts=1, msgid=<u242@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9033]: jB88DXiS009021: to=<u243@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=230354, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXYc008471 Message accepted for delivery) 
+Jan  5 00:13:32 d.mx.example.net sm-mta[12749]: jB88DNfP012749: from=<u244@h245.com>, size=3051, class=0, nrcpts=1, msgid=<u246@updates.h245.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12178]: jB88DNem012178: <u248@h49.net>... No such user here 
+Jan  5 00:13:32 a.mx.example.net sm-mta[11932]: jB88DFau011932: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:32 a.mx.example.net sm-mta[11932]: jB88DFau011932: from=<u249@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9034]: jB88DXJZ009034: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u250@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8255]: jB88DNd4008255: Milter: to=<u251@h49.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[11700]: jB88DHhX011700: Milter: to=<u252@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <dsbl-list>, Ref: http://dsbl.org/listing?10.11.12.13 
+Jan  5 00:13:32 d.mx.example.net sm-mta[13096]: jB88ClV6011532: to=<u253@h254.net>, delay=00:00:35, xdelay=00:00:00, mailer=esmtp, pri=427682, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXYN008472 Message accepted for delivery) 
+Jan  5 00:13:32 b.mx.h2.net sm-mta[8520]: jB88DOjS008282: to=<u255@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=127365, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXNh008487 Message accepted for delivery) 
+Jan  5 00:13:32 b.mx.h2.net sm-mta[8523]: jB88DXtv008512: to=<u256@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229895, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXWR008497 Message accepted for delivery) 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9037]: jB88DXE0009037: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u257@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13099]: jB88DXR7013092: to=<u258@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXMD008490 Message accepted for delivery) 
+Jan  5 00:13:32 a.mx.example.net sm-mta[11814]: jB88DCFf011814: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:32 a.mx.example.net sm-mta[11814]: jB88DCFf011814: from=<u259@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:32 d.mx.example.net sm-mta[12069]: jB88D3pY012069: <u260@h20.com>... No such user here 
+Jan  5 00:13:32 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u261@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13102]: jB88DNfP012749: to=<u262@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=123051, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXUh008499 Message accepted for delivery) 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12178]: jB88DNem012178: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after data 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12178]: jB88DNem012178: from=<>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9045]: jB88DXJZ009034: to=<u263@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXiq008503 Message accepted for delivery) 
+Jan  5 00:13:32 c.mx.h2.net sm-mta[9048]: jB88DXE0009037: to=<u264@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229195, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXi8000414 Message accepted for delivery) 
+Jan  5 00:13:32 c.mx.example.net sm-mta[8685]: jB88DNZF008685: Milter: to=<u265@h266.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo u265, please fix your system 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8255]: jB88DNd4008255: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8255]: jB88DNd4008255: from=<u267@h268.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 c.mx.example.net sm-mta[8685]: jB88DNZF008685: from=<u269@h270.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8510]: jB88DXb3008510: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 0.00:1134029613.57 seconds 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13103]: jB88DXSw013103: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u271@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12470]: jB88DXkG012470: from=<u13@h2.net>, size=4433, class=-60, nrcpts=1, msgid=<u272@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 b.mx.h2.net sm-mta[8530]: jB88DX0w008530: from=<u13@h2.net>, size=1198, class=-60, nrcpts=1, msgid=<u273@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:32 d.mx.h2.net sm-mta[13108]: jB88DXSw013103: to=<u274@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DX1M000426 Message accepted for delivery) 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12477]: jB88DXkG012470: to=<u275@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=232433, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXYL008575 Message accepted for delivery) 
+Jan  5 00:13:32 d.mx.example.net sm-mta[11593]: jB88Cnfp011593: from=<u276@h277.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:32 d.mx.example.net sm-mta[12753]: jB88DNkM012753: <u278@h49.net>... No such user here 
+Jan  5 00:13:32 b.mx.example.net sm-mta[8526]: jB88DXTO008526: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 0.00:1134029613.71 seconds 
+Jan  5 00:13:32 a.mx.example.net sm-mta[12092]: jB88DM56012092: from=<u279@h280.com>, size=869, class=0, nrcpts=1, msgid=<u281@h282.in>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:32 a.mx.h2.net sm-mta[12175]: jB88DNcQ012175: Milter: to=<u283@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8537]: jB88DX0w008530: to=<u284@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229198, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DXZM008585 Message accepted for delivery) 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12753]: jB88DNkM012753: from=<u285@h286.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 c.mx.example.net sm-mta[7568]: jB88CjBg007568: <u287@h20.com>... No such user here 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12175]: jB88DNcQ012175: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12175]: jB88DNcQ012175: from=<u288@h289.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12056]: jB88DJ1J012056: Milter: to=<u290@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u291@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12481]: jB88DXGm012481: from=<u13@h2.net>, size=3432, class=-60, nrcpts=1, msgid=<u292@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u293@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 b.mx.example.net sm-mta[7917]: jB88DBbC007917: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:33 b.mx.example.net sm-mta[7917]: jB88DBbC007917: from=<u294@h295.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9054]: jB88DXjr009054: from=<u13@h2.net>, size=1817, class=-60, nrcpts=1, msgid=<u296@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12175]: jB88D5qA012175: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12175]: jB88D5qA012175: from=<u297@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8541]: jB88DX3s008541: from=<u13@h2.net>, size=2345, class=-60, nrcpts=1, msgid=<u298@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.h2.net sm-mta[13119]: jB88DX5B013119: from=<u13@h2.net>, size=1266, class=-60, nrcpts=1, msgid=<u299@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12486]: jB88DXGm012481: to=<u300@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=231432, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYN3008599 Message accepted for delivery) 
+Jan  5 00:13:33 c.mx.example.net sm-mta[8421]: jB88DHVB008421: <u301@h101.net>... No such user here 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12189]: jB88DORP012189: <u302@h27.com>... No such user here 
+Jan  5 00:13:33 d.mx.h2.net sm-mta[13124]: jB88DX5B013119: to=<u303@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=229266, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYta008602 Message accepted for delivery) 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9061]: jB88DXjr009054: to=<u304@h2.net>, delay=00:00:01, xdelay=00:00:01, mailer=esmtp, pri=229817, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYer000438 Message accepted for delivery) 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8545]: jB88DXcq008545: from=<u13@h2.net>, size=1500, class=-60, nrcpts=1, msgid=<u305@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12487]: jB88DY3t012487: from=<u13@h2.net>, size=2579, class=-60, nrcpts=1, msgid=<u306@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12206]: jB88DOht012206: <u307@h49.net>... No such user here 
+Jan  5 00:13:33 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u308@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 a.mx.example.net sm-mta[11700]: jB88DHhX011700: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:33 a.mx.example.net sm-mta[11700]: jB88DHhX011700: from=<u309@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8549]: jB88DX3s008541: to=<u310@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=230345, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYl7008606 Message accepted for delivery) 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12771]: jB88DOIs012771: from=<u244@h311.com>, size=3100, class=0, nrcpts=1, msgid=<u312@updates.h311.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12189]: jB88DORP012189: from=<>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 b.mx.example.net sm-mta[4349]: jB88BMGe004349: Milter: to=<u314@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12206]: jB88DOht012206: from=<>, size=2757, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.h2.net sm-mta[13127]: jB88DOIs012771: to=<u262@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=123100, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DY5b000455 Message accepted for delivery) 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12492]: jB88DY3t012487: to=<u315@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=230579, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYUh000454 Message accepted for delivery) 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8552]: jB88DXcq008545: to=<u316@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229500, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYqO008635 Message accepted for delivery) 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9062]: jB88DY7l009062: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u317@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.example.net sm-mta[11690]: jB88D7le011690: <u252@h177.net>... No such user here 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9065]: jB88DYnJ009065: from=<u13@h2.net>, size=1201, class=-60, nrcpts=1, msgid=<u318@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8234]: jB88DMfD008234: Milter: to=<u319@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9070]: jB88DY7l009062: to=<u320@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYK0008647 Message accepted for delivery) 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12056]: jB88DJ1J012056: Milter: to=<u321@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 c.mx.h2.net sm-mta[9073]: jB88DYnJ009065: to=<u322@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229201, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYHO000480 Message accepted for delivery) 
+Jan  5 00:13:33 c.mx.example.net sm-mta[8038]: jB88D2M0008038: Milter: to=<u323@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:33 h93.net sm-mta[12195]: jB88DOhP012195: from=<u324@h325.ar>, size=6641, class=0, nrcpts=1, msgid=<u326@h93.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u327@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12498]: jB88DOhP012195: to=<u328@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=126641, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYMN000492 Message accepted for delivery) 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12145]: jB88DN6q012145: Milter: to=<u329@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8555]: jB88DYZW008555: from=<u13@h2.net>, size=1346, class=-60, nrcpts=1, msgid=<u330@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u331@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 b.mx.h2.net sm-mta[8560]: jB88DYZW008555: to=<u332@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229346, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYUx000502 Message accepted for delivery) 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12218]: jB88DPHW012218: Milter: to=<u333@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (RBL),  see http://mail-abuse.org/cgi-bin/lookup?10.11.12.13 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12502]: jB88DY03012502: from=<u13@h2.net>, size=1500, class=-60, nrcpts=1, msgid=<u334@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u335@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12508]: jB88DYRC012508: from=<u13@h2.net>, size=2973, class=-60, nrcpts=1, msgid=<u336@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12218]: jB88DPHW012218: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:33 a.mx.example.net sm-mta[12218]: jB88DPHW012218: from=<u337@h338.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:33 a.mx.h2.net sm-mta[12516]: jB88DY03012502: to=<u339@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229500, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DY4l008659 Message accepted for delivery) 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12056]: jB88DJ1J012056: from=<u340@h341.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12509]: jB88DY3r012509: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 0.00:1134029614.76 seconds 
+Jan  5 00:13:34 a.mx.h2.net sm-mta[12519]: jB88DYRC012508: to=<u342@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=230973, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DY1I008662 Message accepted for delivery) 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8564]: jB88DYbP008564: from=<u13@h2.net>, size=1895, class=-60, nrcpts=1, msgid=<u343@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12032]: jB88DJpY012032: cpe-10.20.30.40.rochester.res.rr.com [10.11.12.13] did not issue MAIL/EXPN/VRFY/ETRN during connection to MTA 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13132]: jB88DYi1013132: from=<u13@h2.net>, size=1500, class=-60, nrcpts=1, msgid=<u344@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8317]: jB88DPcv008317: Milter: to=<u345@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8711]: jB88DO3m008711: <u346@h49.net>... No such user here 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12069]: jB88D3pY012069: <u347@h20.com>... No such user here 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13137]: jB88DYi1013132: to=<u348@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229500, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYWX000518 Message accepted for delivery) 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12775]: jB88DPTI012775: <u346@h49.net>... No such user here 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8570]: jB88DYbP008564: to=<u349@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229895, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DYXF008683 Message accepted for delivery) 
+Jan  5 00:13:34 b.mx.example.net sm-mta[8287]: jB88DOsM008287: <u350@h351.com>... No such user here 
+Jan  5 00:13:34 b.mx.example.net sm-mta[8300]: jB88DP4v008300: <u352@h20.com>... No such user here 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12145]: jB88DN6q012145: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12145]: jB88DN6q012145: from=<u353@h354.de>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12060]: jB88DKhe012060: <u355@h27.com>... No such user here 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8578]: jB88DY3n008578: from=<u13@h2.net>, size=2049, class=-60, nrcpts=1, msgid=<u356@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u357@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8711]: jB88DO3m008711: from=<>, size=5686, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12774]: jB88DPiu012774: <u346@h49.net>... No such user here 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12943]: jB88DTlV012943: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 5.03:1134029615.00 seconds 
+Jan  5 00:13:34 b.mx.example.net sm-mta[8317]: jB88DPcv008317: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8317]: jB88DPcv008317: from=<u358@h2.net>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12211]: jB88DPNq012211: <u346@h49.net>... No such user here 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12775]: jB88DPTI012775: from=<>, size=5678, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13141]: jB88DY8M013141: from=<u13@h2.net>, size=1275, class=-60, nrcpts=1, msgid=<u359@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8585]: jB88DY3n008578: to=<u360@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=230049, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZ2g008695 Message accepted for delivery) 
+Jan  5 00:13:34 a.mx.h2.net sm-mta[12521]: jB88DZY7012521: from=<u13@h2.net>, size=1889, class=-60, nrcpts=1, msgid=<u361@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12209]: jB88DQdu012209: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 8.64:1134029615.09 seconds 
+Jan  5 00:13:34 d.mx.example.net sm-mta[13138]: jB88DYuG013138: from=<u13@h362.com>, size=684, class=0, nrcpts=1, msgid=<u363@h364.localhost>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8729]: jB88DPSU008729: <u365@h20.com>... No such user here 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13144]: jB88DZVa013144: from=<u13@h2.net>, size=1192, class=-60, nrcpts=1, msgid=<u366@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12819]: jB88DPx5012819: from=<u367@h368.com>, size=2123, class=0, nrcpts=1, msgid=<u369@h368.com>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u370@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 a.mx.h2.net sm-mta[12526]: jB88DZY7012521: to=<u371@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229889, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZa4000532 Message accepted for delivery) 
+Jan  5 00:13:34 b.mx.example.net sm-mta[8300]: jB88DP4v008300: from=<u372@h373.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8603]: jB88DKk7008603: <u374@h20.com>... No such user here 
+Jan  5 00:13:34 c.mx.h2.net sm-mta[9083]: jB88DZoh009083: from=<u13@h2.net>, size=1352, class=-60, nrcpts=1, msgid=<u375@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12774]: jB88DPiu012774: from=<>, size=5660, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12211]: jB88DPNq012211: from=<>, size=5686, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13150]: jB88DY8M013141: to=<u376@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229275, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZou008711 Message accepted for delivery) 
+Jan  5 00:13:34 d.mx.example.net sm-mta[13152]: jB88DYuG013138: to=<u13@h362.com>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=120684, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZ5D000538 Message accepted for delivery) 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8421]: jB88DHVB008421: <u377@h101.net>... No such user here 
+Jan  5 00:13:34 c.mx.h2.net sm-mta[9088]: jB88DZoh009083: to=<u378@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229352, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZAD000548 Message accepted for delivery) 
+Jan  5 00:13:34 b.mx.example.net sm-mta[8409]: jB88DVAV008409: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 3.87:1134029615.27 seconds 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13159]: jB88DZVa013144: to=<u379@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229192, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZ6Q008714 Message accepted for delivery) 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13161]: jB88DPx5012819: to=<u380@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=122123, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZZ8008715 Message accepted for delivery) 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8729]: jB88DPSU008729: from=<u381@h382.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[11593]: jB88Cnfq011593: Milter: to=<u383@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12276]: jB88DAA7012276: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12276]: jB88DAA7012276: from=<u384@h385.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:34 c.mx.example.net sm-mta[7731]: jB88Cq7n007731: <u386@h20.com>... No such user here 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8710]: jB88DPnY008710: Milter: to=<u387@h388.com>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8718]: jB88DPTL008718: from=<u389@h390.com>, size=5988, class=0, nrcpts=1, msgid=<u391@cattle.h390.com>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u393@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13170]: jB88DZib013170: from=<u13@h2.net>, size=1192, class=-60, nrcpts=1, msgid=<u394@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 c.mx.example.net sm-mta[9097]: jB88DPTL008718: to=<u395@h396.com>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=125988, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZBf000574 Message accepted for delivery) 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12381]: jB88DUwB012381: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 5.08:1134029615.52 seconds 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u397@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 c.mx.example.net sm-mta[7568]: jB88CjBg007568: <u398@h20.com>... No such user here 
+Jan  5 00:13:34 h93.net sm-mta[12223]: jB88DPOY012223: from=<u399@h18.com>, size=640, class=0, nrcpts=1, msgid=<u400@h93.net>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 a.mx.example.net sm-mta[12223]: jB88DPOY012223: Milter add: header: X-example-SB-Tests: ru 
+Jan  5 00:13:34 c.mx.h2.net sm-mta[9099]: jB88DZdx009099: from=<u13@h2.net>, size=1352, class=-60, nrcpts=1, msgid=<u401@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 c.mx.h2.net sm-mta[9100]: jB88DZsJ009100: from=<u13@h2.net>, size=1192, class=-60, nrcpts=1, msgid=<u402@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[13178]: jB88DZib013170: to=<u403@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229192, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZHO000586 Message accepted for delivery) 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8710]: jB88DPnY008710: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8710]: jB88DPnY008710: from=<u404@h405.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8675]: jB88DNgf008675: from=<u406@h407.com>, size=493, class=0, nrcpts=1, msgid=<KEAHMBOPLNLEBGGKMKDIOJJAMOAA.u406@h407.com>, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8675]: jB88DNgf008675: Milter add: header: X-example-SB-Tests: cn ID_Perm 
+Jan  5 00:13:34 c.mx.example.net sm-mta[8291]: jB88DChW008291: Milter: to=<u409@h410.com>, reject=550 5.7.1 Mail from a_host (10.11.12.13) declined: local access control list 
+Jan  5 00:13:34 a.mx.h2.net sm-mta[12541]: jB88DPOY012223: to=<u411@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=120640, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZkP008745 Message accepted for delivery) 
+Jan  5 00:13:34 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u412@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:34 a.mx.h2.net sm-mta[12059]: jB88DK6n012059: <u413@h2.net>... No such user here 
+Jan  5 00:13:34 b.mx.example.net sm-mta[4349]: jB88BMGe004349: Milter: to=<u414@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:34 b.mx.h2.net sm-mta[8592]: jB88DZpm008592: from=<u13@h2.net>, size=1972, class=-60, nrcpts=1, msgid=<u415@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:34 d.mx.h2.net sm-mta[12818]: jB88DPkM012818: Milter: to=<u416@h2.net>, reject=550 5.7.1 Mail from a_host (10.11.12.13) declined: local access control list 
+Jan  5 00:13:34 d.mx.example.net sm-mta[12802]: jB88DPuA012802: <u417@h49.net>... No such user here 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12544]: jB88DZSp012544: from=<u13@h2.net>, size=1272, class=-60, nrcpts=1, msgid=<u418@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12253]: jB88DQjt012253: <u419@h420.com>... No such user here 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9115]: jB88DZsJ009100: to=<u421@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229192, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZDZ008757 Message accepted for delivery) 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9118]: jB88DNgf008675: to=<u422@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=120493, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZ7Z008759 Message accepted for delivery) 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9116]: jB88DZdx009099: to=<u423@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229352, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZTX008758 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12143]: jB88DOb1012143: Milter: to=<u424@u424consulting.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13180]: jB88DZdU013180: from=<u13@h2.net>, size=1272, class=-60, nrcpts=1, msgid=<u425@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[11560]: jB88D1qr011560: ruleset=check_mail, arg1=<u198@h426.kr>, relay=relay_id reject=451 4.1.8 Domain of sender address u198@h426.kr does not resolve 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12232]: jB88DPWW012232: Milter: to=<u427@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-xbl>, Ref: http://www.spamhaus.org/query/bl?ip=10.11.12.13 
+Jan  5 00:13:35 b.mx.h2.net sm-mta[8597]: jB88DZpm008592: to=<u428@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229972, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZTH000600 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12060]: jB88DKhe012060: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12060]: jB88DKhe012060: from=<u429@h208.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12549]: jB88DZSp012544: to=<u430@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229272, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZd6008774 Message accepted for delivery) 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13185]: jB88DZdU013180: to=<u431@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229272, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DZfC008794 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12232]: jB88DPWW012232: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12232]: jB88DPWW012232: from=<u432@h433.sk>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8215]: jB88DMxx008215: <u434@h435.com>... No such user here 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12818]: jB88DPkM012818: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12818]: jB88DPkM012818: from=<u436@h437.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12802]: jB88DPuA012802: from=<u438@h439.ru>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12835]: jB88DQf5012835: ruleset=check_mail, arg1=<u440@h441.com>, relay=relay_id [10.11.12.13], reject=553 5.1.8 <u440@h441.com>... Domain of sender address u440@h441.com does not exist 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12210]: jB88DP4c012210: Milter: to=<u442@h443.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:35 d.mx.example.net sm-mta[11593]: jB88Cnfq011593: Milter: to=<u444@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 a.mx.example.net sm-mta[11768]: jB88DAFN011768: <u445@h446.net>... No such user here 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u447@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12554]: jB88DaCD012554: from=<u13@h2.net>, size=1266, class=-60, nrcpts=1, msgid=<u448@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[4875]: jB88BYmq004875: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:35 c.mx.example.net sm-mta[4875]: jB88BYmq004875: from=<u449@h450.net>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12835]: jB88DQf5012835: from=<u440@h441.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12559]: jB88DaCD012554: to=<u451@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229266, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88Da3I008817 Message accepted for delivery) 
+Jan  5 00:13:35 c.mx.example.net sm-mta[8768]: jB88DQOe008768: from=<u452@h453.info>, size=3682, class=0, nrcpts=1, msgid=<u454@lion.h453.info>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12166]: jB88DOnE012166: Milter: to=<u456@h457.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:35 b.mx.h2.net sm-mta[8350]: jB88DRA4008350: Milter: to=<u458@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-sbl>, Ref: http://www.spamhaus.org/SBL/sbl.lasso?query=SBL27791 
+Jan  5 00:13:35 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u459@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8288]: jB88DOkb008288: <u460@h461.com>... No such user here 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8350]: jB88DRA4008350: from=<u462@h463.com>, size=0, class=0, nrcpts=0, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 b.mx.h2.net sm-mta[8604]: jB88Daqo008604: from=<u13@h2.net>, size=12516, class=-60, nrcpts=1, msgid=<u464@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12256]: jB88DQvj012256: from=<u465@h466.org>, size=12716, class=0, nrcpts=1, msgid=<u467@h466.org>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[9140]: jB88DQOe008768: to=<u468@h469.com>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=123682, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DasM000616 Message accepted for delivery) 
+Jan  5 00:13:35 c.mx.example.net sm-mta[3660]: jB88B4ZY003660: Milter: to=<u470@h6.com>, reject=550 5.7.1 Recipient declines email from a_host <spamcop-bl>, Ref: Blocked - see http://www.spamcop.net/bl.shtml?10.11.12.13 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12069]: jB88D3pY012069: <u471@h20.com>... No such user here 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9135]: jB88Dacv009135: from=<u13@h2.net>, size=1740, class=-60, nrcpts=1, msgid=<u472@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12210]: jB88DP4c012210: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12210]: jB88DP4c012210: from=<u473@h443.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 d.mx.example.net sm-mta[9019]: jB88BYoG009019: Milter: to=<u474@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8288]: jB88DOkb008288: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8288]: jB88DOkb008288: from=<u475@h476.at>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[8666]: jB88DNOn008666: from=<u477@h478.com>, size=1169, class=0, nrcpts=1, msgid=<u479@h478.com>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:35 b.mx.h2.net sm-mta[8610]: jB88Daqo008604: to=<u480@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=240516, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88Da94000623 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12278]: jB88DRL7012278: Milter: to=<u481@h2.net>, reject=550 5.7.1 Recipient declines email from a_host <spamhaus-sbl>, Ref: http://www.spamhaus.org/SBL/sbl.lasso?query=SBL11507 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9144]: jB88Dacv009135: to=<u482@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229740, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaXg000630 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12059]: jB88DK6n012059: from=<u483@h202.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12278]: jB88DRL7012278: from=<u484@h485.com>, size=0, class=0, nrcpts=0, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[8501]: jB88DJwp008501: from=<u486@h487.biz>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8346]: jB88DQ0o008346: Milter: to=<u488@h489.com>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13202]: jB88Dan0013202: from=<u13@h2.net>, size=1651, class=-60, nrcpts=1, msgid=<u490@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 h494.net sm-mta[12838]: jB88DQRj012838: from=<u491@h492.com>, size=49630, class=0, nrcpts=1, msgid=<u493@h494.net>, bodytype=8BITMIME, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[8421]: jB88DHVB008421: <u495@h101.net>... No such user here 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8159]: jB88DKXF008159: <u496@h20.com>... No such user here 
+Jan  5 00:13:35 a.mx.h2.net sm-mta[12563]: jB88DQvj012256: to=<u497@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=132716, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaGK008829 Message accepted for delivery) 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12860]: jB88DRSb012860: from=<u498@h368.com>, size=2150, class=0, nrcpts=1, msgid=<u499@h368.com>, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12520]: jB88DZEk012520: rejecting commands from a_host [10.11.12.13] due to pre-greeting close at 0.99:1134029616.49 seconds 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9150]: jB88Dahs009150: from=<u13@h2.net>, size=1817, class=-60, nrcpts=1, msgid=<u500@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 c.mx.example.net sm-mta[8788]: jB88DRZO008788: from=<u501@h502.com>, size=19199, class=0, nrcpts=1, msgid=<u503@h504.tsprod47>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13210]: jB88Dan0013202: to=<u505@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229651, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaUC000654 Message accepted for delivery) 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13213]: jB88DRSb012860: to=<u506@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=122150, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaRW008841 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[11690]: jB88D7le011690: lost input channel from a_host to MTA after rcpt 
+Jan  5 00:13:35 a.mx.example.net sm-mta[11690]: jB88D7le011690: from=<u507@h31.net>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13214]: jB88Da29013214: from=<u13@h2.net>, size=1343, class=-60, nrcpts=1, msgid=<u508@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8346]: jB88DQ0o008346: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+Jan  5 00:13:35 b.mx.example.net sm-mta[8346]: jB88DQ0o008346: from=<u509@h18.com>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:35 d.mx.example.net sm-mta[12001]: jB88D0Nh012001: Milter: to=<u510@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9155]: jB88Dahs009150: to=<u511@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229817, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaPP000664 Message accepted for delivery) 
+Jan  5 00:13:35 a.mx.example.net sm-mta[12287]: jB88DRg1012287: <u512@h27.com>... No such user here 
+Jan  5 00:13:35 c.mx.h2.net sm-mta[9159]: jB88DRZO008788: to=<u513@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=139199, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaI9000672 Message accepted for delivery) 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13224]: jB88Da29013214: to=<u514@h2.net>, delay=00:00:00, xdelay=00:00:00, mailer=esmtp, pri=229343, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88Daao008854 Message accepted for delivery) 
+Jan  5 00:13:35 d.mx.h2.net sm-mta[13222]: jB88DQRj012838: to=<u515@h2.net>, delay=00:00:01, xdelay=00:00:00, mailer=esmtp, pri=169630, relay=relay_id [10.11.12.13], dsn=2.0.0, stat=Sent (jB88DaBD008853 Message accepted for delivery) 
+Jan  5 00:13:35 b.mx.example.net sm-mta[5985]: jB88CAZE005985: Milter: to=<u516@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:35 d.mx.example.net sm-mta[11593]: jB88Cnfq011593: Milter: to=<u517@h6.com>, reject=550 5.7.1 Recipient declines mail from a_host bogus helo info, please fix your system 
+Jan  5 00:13:36 c.mx.h2.net sm-mta[9160]: jB88Dat5009160: from=<u13@h2.net>, size=1195, class=-60, nrcpts=1, msgid=<u518@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:36 a.mx.h2.net sm-mta[12572]: jB88Dar5012572: from=<u13@h2.net>, size=3811, class=-60, nrcpts=1, msgid=<u519@eth0.can.spam.h2.net>, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+Jan  5 00:13:36 b.mx.example.net sm-mta[8234]: jB88DMfD008234: lost input channel from a_host [10.11.12.13] (may be forged) to MTA after rcpt 
+Jan  5 00:13:36 b.mx.example.net sm-mta[8234]: jB88DMfD008234: from=<u520@h521.com>, size=0, class=0, nrcpts=0, proto=ESMTP, daemon=MTA, relay=relay_id [10.11.12.13] (may be forged) 
+Jan  5 00:13:36 c.mx.example.net sm-mta[8771]: jB88DQln008771: <u522@h20.com>... No such user here 
