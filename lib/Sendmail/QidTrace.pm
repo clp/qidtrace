@@ -97,7 +97,7 @@ sub drain_queue {
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
-    
+
     foreach  my $ltd ( @lines_to_drain ) {
         #TBD: Do not re-process each line?
           # But They were not already processed if buffer size > i/p file size.
@@ -112,7 +112,6 @@ sub drain_queue {
             next;
         }
     }
-    #TBR? return $self;
 }
 
 
