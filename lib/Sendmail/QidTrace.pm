@@ -27,7 +27,7 @@ sub match_line {
     if ( $line !~ m/<$email>/ ) { $email = ''}
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
       $qid = $1;
-      #TBD: Now look for a match between $qid and all qid's in the saved queue,
+      #TBD-Maybe: Look for a match between $qid and all qid's in the saved queue,
       # and return it if found; else return ''.
       # OR, should this code return $qid if any qid found,
       # and the compare operation be done in the caller,

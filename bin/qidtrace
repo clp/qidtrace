@@ -52,7 +52,7 @@ while (<>) {
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
-        #OK.1 if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
+        #OK.1 if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) { #}
         #F my @lines = ($qt->get_leading_array(). $qt->get_trailing_array );
         my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
         #F.logic.err: if ($match_email || ( grep {m/$match_qid/}  @lines )) {
@@ -99,7 +99,7 @@ my @lines_to_drain;
 push @lines_to_drain, $qt->get_leading_array, $qt->get_trailing_array;
 
 foreach  my $ltd ( @lines_to_drain ) {
-    #TBD: Do not re-process each line.
+    #TBD: Do not re-process each line?
     my ($match_email, $match_qid) = match_line($email_address, $ltd);
     #F  if ($match_email || ( grep {m/$match_qid/}  @lines_to_drain )) {
       # Logic err: Don't check each line against the array holding those same lines!
