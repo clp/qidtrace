@@ -4,8 +4,8 @@ use Test::More tests => 1;
 
 my $project_dir = "/home/clpoda/p/qidtrace/";
 my $program_under_test = "perl -I lib " . $project_dir . "bin/qidtrace -m u319\@h2.net ";
-my $infile = 'data/u319_drain_buffer.mx' ;
-my $test_output_filename = "u319_drain_buffer.out";
+my $infile = 'data/u319_drain_queue.mx' ;
+my $test_output_filename = "u319_drain_queue.out";
 my $outdir = "tmp/";
 
 my $test_out = `$program_under_test $infile` or die "Cannot run $program_under_test: [$!]";
