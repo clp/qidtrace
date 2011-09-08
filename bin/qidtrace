@@ -52,12 +52,8 @@ while (<>) {
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
-        #OK.1 if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) { #}
-        #F my @lines = ($qt->get_leading_array(). $qt->get_trailing_array );
         my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
-        #F.logic.err: if ($match_email || ( grep {m/$match_qid/}  @lines )) {
-          # Do not check against @lines. That will find matches of qid's
-          # that are not in the %_seen hash.
+        #TBD: Chg from get_seen_qids to @lines for performance?
         if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
@@ -91,55 +87,18 @@ while (<>) {
 } # End of while loop.
 
 
-
 $qt->drain_queue();
 
-#TBR? #F my @lines_to_drain = ($qt->get_leading_array(). $qt->get_trailing_array );
-#TBR? #TBD: Chg to @lines?:
-#TBR? my @lines_to_drain;
-#TBR? push @lines_to_drain, $qt->get_leading_array, $qt->get_trailing_array;
-#TBR? 
-#TBR? foreach  my $ltd ( @lines_to_drain ) {
-#TBR?     #TBD: Do not re-process each line?
-#TBR?     my ($match_email, $match_qid) = match_line($email_address, $ltd);
-#TBR?     #F  if ($match_email || ( grep {m/$match_qid/}  @lines_to_drain )) {
-#TBR?       # Logic err: Don't check each line against the array holding those same lines!
-#TBR?     if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
-#TBR?         $qt->add_match({match => $match_email,
-#TBR?                         qid   => $match_qid,
-#TBR?                         line  => ($output_length
-#TBR?                                   ? substr($ltd, $output_start_column, $output_length)
-#TBR?                                   : substr($ltd, $output_start_column)),
-#TBR?                         num   => $. });
-#TBR?         next;
-#TBR?     }
-#TBR? }
 
-#Sun2011_0821_12:21  Modified print to include star-prefix for all but line 1.
 # Print all matching lines from the %_seen hash.
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
-    # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
+    #TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     print shift ( @{ ${ $qt->get_seen_hash }{$k} } ) , "\n";
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
         print "**** $_\n";
     };
 }
 
-
-
-=begin ORG.OK
-
-# Print all matching lines from the %_seen hash.
-foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
-    # TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
-    foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        print $_, "\n";
-    };
-}
-
-=end ORG.OK
-
-=cut
 
 
 =pod

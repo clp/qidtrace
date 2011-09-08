@@ -88,7 +88,6 @@ sub add_match {
 sub drain_queue {
     my ($self) = @_;
     #TBD
-    my @lines_to_drain;
     my $email_address = '';  #TBD: Insert bogus value here?  Only checking qid's now?
         #TBD: IF buffer size > i/p file, we must check email addrs now-they weren't chkd earlier.
         # This is an unusual case, that probably only occurs during testing, not production.
@@ -96,6 +95,7 @@ sub drain_queue {
     my $output_start_column = 0;
     my $output_length       = 0;  # default to the whole line
 
+    my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
     
     foreach  my $ltd ( @lines_to_drain ) {
@@ -112,7 +112,7 @@ sub drain_queue {
             next;
         }
     }
-    return $self;
+    #TBR? return $self;
 }
 
 
