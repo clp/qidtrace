@@ -53,7 +53,7 @@ while (<>) {
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
         my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
-        #TBD: Chg from get_seen_qids to @lines for performance?
+        #TBD: Chg from get_seen_qids to @lines for better performance?
         if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
@@ -87,7 +87,7 @@ while (<>) {
 } # End of while loop.
 
 
-$qt->drain_queue();
+$qt->drain_queue($output_start_column, $output_length);
 
 
 # Print all matching lines from the %_seen hash.

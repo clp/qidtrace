@@ -86,21 +86,16 @@ sub add_match {
 #  should be called after the end of the input stream
 #  to flush out the queue.
 sub drain_queue {
-    my ($self) = @_;
-    #
-    #TBF: send in these values from caller; or eliminate this kluge?
-    my $output_start_column = 0;
-    my $output_length       = 0;  # default to the whole line
+    my ($self) = shift;
+    my $output_start_column = shift;
+    my $output_length       = shift;  # default to the whole line
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
 
     foreach  my $ltd ( @lines_to_drain ) {
-        #TBD: Do not re-process each line?
-        # Note: Check for matching email address is required
-        # for the case when i/p file size < buffer size,
-        # which might happen when testing with small data sets.
-        # For $email_address I use $self->{match}.
+        #TBD: How else to call match_line?
+        # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
         if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) {
             $self->add_match({match => $match_email,
