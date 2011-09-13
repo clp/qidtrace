@@ -87,13 +87,8 @@ sub add_match {
 #  to flush out the queue.
 sub drain_queue {
     my ($self) = @_;
-    #TBD
-    #TBD  my $email_address = '';  #TBD: Insert bogus value here?  Only checking qid's now?
-        #TBD: IF buffer size > i/p file, we must check email addrs now-they weren't chkd earlier.
-        # This is an unusual case, that probably only occurs during testing, not production.
-    #TMP  my $email_address ;
     #
-    #TBD: Fix: send in these values from caller; or eliminate.
+    #TBF: send in these values from caller; or eliminate this kluge?
     my $output_start_column = 0;
     my $output_length       = 0;  # default to the whole line
 
