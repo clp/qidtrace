@@ -88,9 +88,11 @@ sub add_match {
 sub drain_queue {
     my ($self) = @_;
     #TBD
-    my $email_address = '';  #TBD: Insert bogus value here?  Only checking qid's now?
+    #TBD  my $email_address = '';  #TBD: Insert bogus value here?  Only checking qid's now?
         #TBD: IF buffer size > i/p file, we must check email addrs now-they weren't chkd earlier.
         # This is an unusual case, that probably only occurs during testing, not production.
+    #TMP  my $email_address ;
+    #
     #TBD: Fix: send in these values from caller; or eliminate.
     my $output_start_column = 0;
     my $output_length       = 0;  # default to the whole line
@@ -100,8 +102,11 @@ sub drain_queue {
 
     foreach  my $ltd ( @lines_to_drain ) {
         #TBD: Do not re-process each line?
-          # But They were not already processed if buffer size > i/p file size.
-        my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($email_address, $ltd);
+        # Note: Check for matching email address is required
+        # for the case when i/p file size < buffer size,
+        # which might happen when testing with small data sets.
+        # For $email_address I use $self->{match}.
+        my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
         if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) {
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
