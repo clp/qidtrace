@@ -2,7 +2,7 @@
 
 use Test::More tests => 1;
 
-my $project_dir = "/home/clpoda/p/qidtrace/";
+my $project_dir = "~/p/qidtrace/";
 my $program_under_test = "perl -I lib " . $project_dir . "bin/qidtrace -m u319\@h2.net ";
 my $infile = 'data/u319_drain_queue.mx' ;
 my $test_output_filename = "u319_drain_queue.out";
@@ -16,5 +16,5 @@ print { $outfile } $test_out;
 # Compare two files on disk: reference o/p to program under test o/p.
 my $ref_out = "refout/$test_output_filename";
 my $diff_out = `diff -s  "$outdir/$test_output_filename" $ref_out`;
-like( $diff_out, qr{Files.*are.identical.*}, "Compare reference o/p to program o/p for 4 volumes.");
+like( $diff_out, qr{Files.*are.identical.*}, "Matching lines found by drain_queue().");
 
