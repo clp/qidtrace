@@ -13,11 +13,7 @@ our $VERSION = '0.10';
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
-# Note: use window_size smaller than data file size, or fix 
-# the read loop to handle that situation.
-#ORG my $window_size = 100;
-#MAX my $window_size = 1400;
-my $window_size = 100;
+my $window_size = 100;  #use 1400 to get all matches;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
@@ -51,13 +47,12 @@ while (<>) {
     $qt->push_onto_leading_array( $_ );
 
     # Fill the _leading array before checking for matches.
-    if ( $qt->size_of_leading_array  >= $window_size ) {
+    if ( $qt->size_of_leading_array  > $window_size ) {
         my $line = $qt->shift_off_leading_array();
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
-        #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
         if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
@@ -65,16 +60,11 @@ while (<>) {
                                       ? substr($line, $output_start_column, $output_length)
                                       : substr($line, $output_start_column)),
                             num   => $. });
-            #TBD: Maybe just push latest qid onto the array would be better
-            #  than using $qt?  Or is it bad to maintain two separate lists
-            #  of similar data?
-            #TBD: Remove redundant entries in array.
-            #OK.1 @saved_qids = $qt->get_seen_qids;
             push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
             next;
         }
         #
-        # Save to trailing array if not added to seen hash.
+        # Save object to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array ($line);
         if ( $qt->size_of_trailing_array  >= $window_size ) {
             $line = $qt->shift_off_trailing_array();
@@ -84,7 +74,7 @@ while (<>) {
 } # End of while loop.
 
 
-$qt->drain_queue($output_start_column, $output_length);
+$qt->drain_queue($output_start_column, $output_length, \@saved_qids, \%seen_qids);
 
 
 # Print all matching lines from the %_seen hash.

@@ -89,6 +89,10 @@ sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
+    my $rsqa                = shift;
+    my $rsqh                = shift;
+    my @saved_qids          = @$rsqa;
+    my %seen_qids           = %$rsqh;
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
@@ -97,14 +101,17 @@ sub drain_queue {
         #TBD: How else to call match_line?
         # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
-        if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) {
+        #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) {
+        if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
                               line  => ($output_length
                                         ? substr($ltd, $output_start_column, $output_length)
                                         : substr($ltd, $output_start_column)),
                               num   => $. });
+            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
             next;
+ 
         }
     }
 }
