@@ -52,8 +52,7 @@ while (<>) {
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
         #
-        my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
-        #TBD: Chg from get_seen_qids to @lines for better performance?
+        #TBR my @lines = ($qt->get_leading_array(), $qt->get_trailing_array );
         if ($match_email || ( grep {m/$match_qid/}  $qt->get_seen_qids )) {
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
@@ -64,25 +63,26 @@ while (<>) {
             next;
         }
         #
-        if ( $match_qid ) {
-            # qid found, but it does not match any saved qid's.
-            #TBD: Chg to @lines?:
-            if ( grep {m/$match_qid/}  $qt->get_seen_qids ) {
-                $qt->add_match({match => $match_email,
-                                qid   => $match_qid,
-                                line  => ($output_length
-                                          ? substr($ln, $output_start_column, $output_length)
-                                          : substr($ln, $output_start_column)),
-                                num   => $. });
-                next;
-            }
-            # Save to array if not added to queue.
+        #TBR: The previous if() checked the qid, don't do it again.
+        #TBR: if ( $match_qid ) {
+            #TBR: # qid found, but it does not match any saved qid's.
+            #TBR: #TBD: Chg to @lines?:
+            #TBR: if ( grep {m/$match_qid/}  $qt->get_seen_qids ) {
+                #TBR: $qt->add_match({match => $match_email,
+                                #TBR: qid   => $match_qid,
+                                #TBR: line  => ($output_length
+                                          #TBR: ? substr($ln, $output_start_column, $output_length)
+                                          #TBR: : substr($ln, $output_start_column)),
+                                #TBR: num   => $. });
+                #TBR: next;
+            #TBR: }
+        #TBR: }
+            # Save to trailing array if not added to seen hash.
             $qt->push_onto_trailing_array ($ln);
             if ( $qt->size_of_trailing_array  >= $window_size ) {
                 $ln = $qt->shift_off_trailing_array();
                 #TBD: Maybe check the line for matching qid before tossing.
             }
-        }
     }
 } # End of while loop.
 
