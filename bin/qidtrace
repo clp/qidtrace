@@ -48,11 +48,16 @@ my $line;
 while (<>) {
     chomp;
     $qt->push_onto_leading_array( $_ );
-      #TBD: Include newlines in the array?
+    #TBR? $line = $qt->shift_off_leading_array();
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
         $line = $qt->shift_off_leading_array();
+            ###############################################################
+            #TBD.1: Assign $line here, or before this if() clause,
+            #  so trailing array gets proper $line?
+            #  But t/u319* fails when I tried moving it.  Check this logic asap.
+            ###############################################################
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
@@ -60,7 +65,7 @@ while (<>) {
         #
         #ORG.1  if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) { #}
         if ($match_email) {
-            print  $line, "\n";
+            #TBR? print  $line, "\n";
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
                             line  => ($output_length
@@ -71,15 +76,26 @@ while (<>) {
             push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
             #
             # Check for matching qid's in the buffer.
-            foreach my $line ( $qt->get_leading_array, $qt->get_trailing_array ) { 
-                push @matching_lines, $line  if (defined $line && $line =~ /$match_qid/);
+            foreach my $ln ( $qt->get_leading_array, $qt->get_trailing_array ) { 
+                #TBR? push @matching_lines, $ln  if (defined $ln && $ln =~ /$match_qid/);
+                if (defined $ln && $ln =~ /$match_qid/) {
+                    my ($match_email, $match_qid) = match_line($email_address, $ln);
+                    $qt->add_match({match => $match_email,
+                                    qid   => $match_qid,
+                                    line  => ($output_length
+                                              ? substr($ln, $output_start_column, $output_length)
+                                              : substr($ln, $output_start_column)),
+                                    num   => $. });
+                }
                 #TBD: Delete line from buffer.
             }
-            print "**** $_\n"  foreach ( @matching_lines );
-            @matching_lines = ();
+            #TBR? print "**** $_\n"  foreach ( @matching_lines );
+            #TBR? @matching_lines = ();
             next;
         };
-    } # End if (leading_array test)
+    ###############################################################################
+    #TBR?  } # End if (leading_array test)  # Move to after the save to @_trailing?
+    ###############################################################################
         #
         # Save object to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array ($line);
@@ -87,6 +103,7 @@ while (<>) {
             $line = $qt->shift_off_trailing_array();
             #TBD: Maybe check the line for matching qid before tossing.
         }
+    } # End if (leading_array test)
 } # End of while loop.
 
 

@@ -94,6 +94,7 @@ sub drain_queue {
     my @saved_qids          = @$rsqa;
     my %seen_qids           = %$rsqh;
 
+    my @matching_lines;
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
 
@@ -101,6 +102,9 @@ sub drain_queue {
         #TBD: How else to call match_line?
         # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
+
+=begin test
+
         #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) { #}
         if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
             $self->add_match({match => $match_email,
@@ -115,6 +119,50 @@ sub drain_queue {
               # This line not needed here?
 
         }
+
+=end test
+
+=cut
+
+        #
+        #ORG.1  if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) { #}
+        if ($match_email) {
+            #TBR? print  $line, "\n";
+            $self->add_match({match => $match_email,
+                              qid   => $match_qid,
+                              line  => ($output_length
+                                        ? substr($ltd, $output_start_column, $output_length)
+                                        : substr($ltd, $output_start_column)),
+                              num   => $. });
+            #
+            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
+            #
+            #TBR? # Check for matching qid's in the buffer.
+            #TBR? foreach my $line ( $self->get_leading_array, $self->get_trailing_array ) { 
+            #TBR? push @matching_lines, $line  if (defined $line && $line =~ /$match_qid/);
+            #TBR? #TBD: Delete line from buffer.
+            #TBR? }
+                        #
+            # Check for matching qid's in the buffer.
+            foreach my $ln ( $self->get_leading_array, $self->get_trailing_array ) { 
+                #TBR? push @matching_lines, $ln  if (defined $ln && $ln =~ /$match_qid/);
+                if (defined $ln && $ln =~ /$match_qid/) {
+                    my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
+                    $self->add_match({match => $match_email,
+                                    qid   => $match_qid,
+                                    line  => ($output_length
+                                              ? substr($ln, $output_start_column, $output_length)
+                                              : substr($ln, $output_start_column)),
+                                    num   => $. });
+                }
+                #TBD: Delete line from buffer.
+            }
+ 
+            #TBR? print "**** $_\n"  foreach ( @matching_lines );
+            #TBR? @matching_lines = ();
+            next;
+        };
+        
     }
     # return $self;
 } # End sub drain_queue().
