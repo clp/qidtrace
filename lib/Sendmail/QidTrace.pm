@@ -101,7 +101,7 @@ sub drain_queue {
         #TBD: How else to call match_line?
         # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
-        #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) {
+        #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) { #}
         if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
@@ -109,12 +109,15 @@ sub drain_queue {
                                         ? substr($ltd, $output_start_column, $output_length)
                                         : substr($ltd, $output_start_column)),
                               num   => $. });
-            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
-            next;
- 
+            #TBR? push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
+              # This line not needed here?
+            #TBR: next;
+              # This line not needed here?
+
         }
     }
-}
+    # return $self;
+} # End sub drain_queue().
 
 
 #

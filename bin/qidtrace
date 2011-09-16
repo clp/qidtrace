@@ -92,7 +92,7 @@ while (<>) {
 
 $qt->drain_queue($output_start_column, $output_length, \@saved_qids, \%seen_qids);
 
-=begin printOK
+#TBR =begin printOK
 
 # Print all matching lines from the %_seen hash.
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
@@ -104,10 +104,10 @@ foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
 }
 
 
-=end printOK
+#TBR =end printOK
 
 
-=cut
+#TBR =cut
 
 
 
