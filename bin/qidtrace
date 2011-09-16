@@ -9,10 +9,11 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.10';
+our $VERSION = '0.20';  #TBD: Design change Thu2011_0915
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
+#ORG my $window_size = 100;  #use 1400 to get all matches;
 my $window_size = 100;  #use 1400 to get all matches;
 my $email_address;
 my $emit_line_numbers = 0;
@@ -41,28 +42,44 @@ my $qt = new Sendmail::QidTrace::Queue({match        => $email_address,
 #TBD: Must this be global var?
 my @saved_qids = ();
 my %seen_qids  = ();
+my @matching_lines = ();
+my $line;
 
 while (<>) {
     chomp;
     $qt->push_onto_leading_array( $_ );
+      #TBD: Include newlines in the array?
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
-        my $line = $qt->shift_off_leading_array();
+        $line = $qt->shift_off_leading_array();
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
+          #TBD: Does this skip lines w/ addr & no qid?  Maybe move it down or rm?
         #
-        if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
+        #ORG.1  if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) { #}
+        if ($match_email) {
+            print  $line, "\n";
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
                             line  => ($output_length
                                       ? substr($line, $output_start_column, $output_length)
                                       : substr($line, $output_start_column)),
                             num   => $. });
-            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
+            #
+            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
+            #
+            # Check for matching qid's in the buffer.
+            foreach my $line ( $qt->get_leading_array, $qt->get_trailing_array ) { 
+                push @matching_lines, $line  if (defined $line && $line =~ /$match_qid/);
+                #TBD: Delete line from buffer.
+            }
+            print "**** $_\n"  foreach ( @matching_lines );
+            @matching_lines = ();
             next;
-        }
+        };
+    } # End if (leading_array test)
         #
         # Save object to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array ($line);
@@ -70,12 +87,12 @@ while (<>) {
             $line = $qt->shift_off_trailing_array();
             #TBD: Maybe check the line for matching qid before tossing.
         }
-    }
 } # End of while loop.
 
 
 $qt->drain_queue($output_start_column, $output_length, \@saved_qids, \%seen_qids);
 
+=begin printOK
 
 # Print all matching lines from the %_seen hash.
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
@@ -85,6 +102,12 @@ foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
         print "**** $_\n";
     };
 }
+
+
+=end printOK
+
+
+=cut
 
 
 
