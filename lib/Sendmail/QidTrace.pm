@@ -91,7 +91,6 @@ sub drain_queue {
     my @saved_qids          = @$rsqa;
     my %seen_qids           = %$rsqh;
 
-    my @matching_lines;
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
 
@@ -111,9 +110,10 @@ sub drain_queue {
             push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
             #
             # Check for matching qid's in the buffer.
-            foreach my $ln ( $self->get_leading_array, $self->get_trailing_array ) { 
-                #TBR? push @matching_lines, $ln  if (defined $ln && $ln =~ /$match_qid/);
-                if (defined $ln && $ln =~ /$match_qid/) {
+            foreach my $ln ( @lines_to_drain ) { 
+                #ORG.dupes  if (defined $ln && $ln =~ /$match_qid/) {
+                #DUPES  if (defined $ln && $ln =~ /$match_qid/ && $ln ne /$ltd/) {
+                if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) {
                 #NOTFIX if (defined $ln && $ln =~ /$match_qid/  &&  @{$self->{_seen}{$match_qid}} !~ /$ln/ ) { #}
                       #TBD: This last clause: 
                       #  @{$self->{_seen}{$match_qid}}[0]
