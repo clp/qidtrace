@@ -27,11 +27,6 @@ sub match_line {
     if ( $line !~ m/<$email>/ ) { $email = ''}
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
       $qid = $1;
-      #TBD-Maybe: Look for a match between $qid and all qid's in the saved queue,
-      # and return it if found; else return ''.
-      # OR, should this code return $qid if any qid found,
-      # and the compare operation be done in the caller,
-      # qidtrace, which has the queue in $qt?
     }
     else {
       $qid = '';
@@ -78,7 +73,9 @@ sub add_match {
     my $key = "$mo->{qid}"  ;
     my $value = "$mo->{line}"  ;
     push @{ $self->{_seen}{$key} } , $value;
-
+    #TBD: Maybe push @{ $self->{_seen}{$key} } , $mo;
+      # to have all 4 values avbl when needed, instead of just line.
+    #DBG push @{ $self->{_seen}{num} } , $mo->{num};
 }
 
 #
@@ -103,31 +100,7 @@ sub drain_queue {
         # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
 
-=begin test
-
-        #OK.ORG if ($match_email || ( grep {m/$match_qid/}  $self->get_seen_qids )) { #}
-        if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) {
-            $self->add_match({match => $match_email,
-                              qid   => $match_qid,
-                              line  => ($output_length
-                                        ? substr($ltd, $output_start_column, $output_length)
-                                        : substr($ltd, $output_start_column)),
-                              num   => $. });
-            #TBR? push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ );
-              # This line not needed here?
-            #TBR: next;
-              # This line not needed here?
-
-        }
-
-=end test
-
-=cut
-
-        #
-        #ORG.1  if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) { #}
         if ($match_email) {
-            #TBR? print  $line, "\n";
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
                               line  => ($output_length
@@ -137,34 +110,30 @@ sub drain_queue {
             #
             push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
             #
-            #TBR? # Check for matching qid's in the buffer.
-            #TBR? foreach my $line ( $self->get_leading_array, $self->get_trailing_array ) { 
-            #TBR? push @matching_lines, $line  if (defined $line && $line =~ /$match_qid/);
-            #TBR? #TBD: Delete line from buffer.
-            #TBR? }
-                        #
             # Check for matching qid's in the buffer.
             foreach my $ln ( $self->get_leading_array, $self->get_trailing_array ) { 
                 #TBR? push @matching_lines, $ln  if (defined $ln && $ln =~ /$match_qid/);
                 if (defined $ln && $ln =~ /$match_qid/) {
+                #NOTFIX if (defined $ln && $ln =~ /$match_qid/  &&  @{$self->{_seen}{$match_qid}} !~ /$ln/ ) { #}
+                      #TBD: This last clause: 
+                      #  @{$self->{_seen}{$match_qid}}[0]
+                      # probably must be
+                      #iterated over each possible member of the array of lines
+                      #in that HoHoA structure; most arrays will only have one
+                      #line, but some could have more.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
                     $self->add_match({match => $match_email,
-                                    qid   => $match_qid,
-                                    line  => ($output_length
-                                              ? substr($ln, $output_start_column, $output_length)
-                                              : substr($ln, $output_start_column)),
-                                    num   => $. });
+                                      qid   => $match_qid,
+                                      line  => ($output_length
+                                                ? substr($ln, $output_start_column, $output_length)
+                                                : substr($ln, $output_start_column)),
+                                      num   => $. });
+                    #TBD: Delete line from buffer.
                 }
-                #TBD: Delete line from buffer.
             }
- 
-            #TBR? print "**** $_\n"  foreach ( @matching_lines );
-            #TBR? @matching_lines = ();
-            next;
+            next;  # TBR?
         };
-        
     }
-    # return $self;
 } # End sub drain_queue().
 
 
