@@ -91,13 +91,15 @@ while (<>) {
             }
             #TBR? print "**** $_\n"  foreach ( @matching_lines );
             #TBR? @matching_lines = ();
+            # Save line to trailing array if added to %_seen hash.
+            $qt->push_onto_trailing_array ($line);
             next;
         };
     ###############################################################################
     #TBR?  } # End if (leading_array test)  # Move to after the save to @_trailing?
     ###############################################################################
         #
-        # Save object to trailing array if not added to %_seen hash.
+        # Save line to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array ($line);
         if ( $qt->size_of_trailing_array  >= $window_size ) {
             $line = $qt->shift_off_trailing_array();
