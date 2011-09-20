@@ -84,14 +84,15 @@ sub add_match {
 # drain the window of all remaining matches.
 #  should be called after the end of the input stream
 #  to flush out the queue.
-sub drain_queue_1037 {
+#TMP sub drain_queue_1037 {
+sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
-    my $rsqa                = shift;
-    my $rsqh                = shift;
-    my @saved_qids          = @$rsqa;
-    my %seen_qids           = %$rsqh;
+    #TBR my $rsqa                = shift;
+    #TBR my $rsqh                = shift;
+    #TBR my @saved_qids          = @$rsqa;
+    #TBR my %seen_qids           = %$rsqh;
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
@@ -128,7 +129,7 @@ sub drain_queue_1037 {
                     # if it has the matching email addr and a matching qid.
                     # Add this line to the o/p only when it is shifted off the 
                     # leading array to check its email addr.
-                    next if ($match_email eq $self->{email});
+                    next if ($match_email eq $self->{match});
 
                     $self->add_match({match => $match_email,
                                       qid   => $match_qid,
@@ -150,7 +151,7 @@ sub drain_queue_1037 {
 # drain the window of all remaining matches.
 #  should be called after the end of the input stream
 #  to flush out the queue.
-sub drain_queue {
+sub drain_queue_1115 {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
