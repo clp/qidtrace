@@ -75,7 +75,7 @@ while (<>) {
                 if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
-                    # Skip this line to avoid adding a duplicate line in o/p,
+                    # Skip current line to avoid adding a duplicate line in o/p,
                     # if it has the matching email addr and a matching qid.
                     # Add this line to the o/p only when it is shifted off the 
                     # leading array to check its email addr.

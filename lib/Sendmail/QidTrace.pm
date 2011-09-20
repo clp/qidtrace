@@ -123,6 +123,13 @@ sub drain_queue_1037 {
                   #TBD: This eliminates dupes that match $match_email;
                   #  it does not eliminate dupes that only match $match_qid.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
+
+                    # Skip current line to avoid adding a duplicate line in o/p,
+                    # if it has the matching email addr and a matching qid.
+                    # Add this line to the o/p only when it is shifted off the 
+                    # leading array to check its email addr.
+                    next if ($match_email eq $self->{email});
+
                     $self->add_match({match => $match_email,
                                       qid   => $match_qid,
                                       line  => ($output_length
