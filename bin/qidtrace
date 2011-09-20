@@ -9,7 +9,7 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.20';  #TBD: Design change Thu2011_0915
+our $VERSION = '0.30';  #TBD: Design change Thu2011_0920
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any

@@ -32,3 +32,23 @@ using a different approach to find matching lines.  Verify
 that any future version finds all the matched lines that
 this version finds.
 
+
+Version 0.20, Thu2011_0915
+
+This version operates properly but does not find all matching
+lines (mostly fixed in later updates of this version by
+changing code in drain_queue()).  It performs very well, by
+checking only lines in the buffer for matching qid's, instead
+of checking all saved qid's for a match.  It handles the
+4M-line input file in less than 2 minutes.
+
+It prints o/p data groups when found, not at end of program.
+
+
+Version 0.30, Thu2011_0920
+
+Operates quickly & finds matches, but can add some duplicate
+lines on o/p.
+
+It prints o/p data groups only at end of program.
+
