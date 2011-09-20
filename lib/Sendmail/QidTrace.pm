@@ -154,10 +154,10 @@ sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
-    my $rsqa                = shift;
-    my $rsqh                = shift;
-    my @saved_qids          = @$rsqa;
-    my %seen_qids           = %$rsqh;
+    #TBR my $rsqa                = shift;
+    #TBR my $rsqh                = shift;
+    #TBR my @saved_qids          = @$rsqa;
+    #TBR my %seen_qids           = %$rsqh;
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;

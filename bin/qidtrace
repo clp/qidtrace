@@ -38,11 +38,7 @@ unless ($email_address) {
 my $qt = new Sendmail::QidTrace::Queue({match        => $email_address,
                                         window_size  => $window_size,
                                         line_numbers => $emit_line_numbers});
-#TBD: Maybe initlz from $qt->get_seen_qids; ?
 #TBD: Must this be global var?
-my @saved_qids = ();
-my %seen_qids  = ();
-my @matching_lines = ();
 my $line;
 
 while (<>) {
@@ -56,10 +52,9 @@ while (<>) {
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
           #TBD: Does this skip lines w/ addr & no qid?  Maybe move it down or rm?
+          # Are there such lines?
         #
-        #ORG.1  if ($match_email || ( grep {m/$match_qid/}  @saved_qids )) { #}
         if ($match_email) {
-            #TBR? print  $line, "\n";
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
                             line  => ($output_length
@@ -67,11 +62,8 @@ while (<>) {
                                       : substr($line, $output_start_column)),
                             num   => $. });
             #
-            push (@saved_qids, $match_qid) unless ( $seen_qids{$match_qid}++ ); #TBR?
-            #
             # Check for matching qid's in the buffer.
             foreach my $ln ( $qt->get_leading_array, $qt->get_trailing_array ) { 
-                #TBR? push @matching_lines, $ln  if (defined $ln && $ln =~ /$match_qid/);
                 if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
@@ -90,11 +82,6 @@ while (<>) {
                     #TBD: Delete line from buffer, or mark it as saved so ignore it to avoid duplicates.
                 }
             }
-            #TBR? print "**** $_\n"  foreach ( @matching_lines );
-            #TBR? @matching_lines = ();
-            #
-            #TBR? # Save line to trailing array if added to %_seen hash.
-            #TBR? $qt->push_onto_trailing_array ($line);
             next;
         }  # End (if ($match_email)
         #
@@ -108,7 +95,7 @@ while (<>) {
 } # End of while loop.
 
 
-$qt->drain_queue($output_start_column, $output_length, \@saved_qids, \%seen_qids);
+$qt->drain_queue($output_start_column, $output_length);
 
 #TBR =begin printOK
 
