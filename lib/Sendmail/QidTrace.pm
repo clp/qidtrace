@@ -84,7 +84,7 @@ sub add_match {
 # drain the window of all remaining matches.
 #  should be called after the end of the input stream
 #  to flush out the queue.
-sub drain_queue{
+sub drain_queue_1037 {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
@@ -102,7 +102,13 @@ sub drain_queue{
         # $self->{match} is the desired $email_address.
         my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
 
-        # Add line w/ matching email addr to the "seen" hash.
+        #TBD: How to avoid adding a line already in the %_seen hash?
+          # Simple soln: Use a bigger window size, to ensure that all matching lines
+          # in the buffer are in the @_leading array, & do not save seen lines
+          # in the @_trailing array.
+        #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
+        #
+        # Add line from buffer w/ matching email addr to the "seen" hash.
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
                               line  => ($output_length
@@ -113,6 +119,7 @@ sub drain_queue{
             # Check for matching qid's in the buffer.
             foreach my $ln ( @lines_to_drain ) { 
                 if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
+                #OK.dupes  if (defined $ln && ($ln =~ /$match_qid/) ) { #}
                   #TBD: This eliminates dupes that match $match_email;
                   #  it does not eliminate dupes that only match $match_qid.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
@@ -136,7 +143,7 @@ sub drain_queue{
 # drain the window of all remaining matches.
 #  should be called after the end of the input stream
 #  to flush out the queue.
-sub drain_queue_1115 {
+sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
@@ -159,6 +166,7 @@ sub drain_queue_1115 {
             # Check for matching qid's in the buffer.
             foreach my $ln ( @lines_to_drain ) { 
                 if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { 
+                #F  if (defined $ln && ($ln =~ /$match_qid/)  ) { 
                     print "__DRAIN.2__: ", $ln, "\n";
                 }
             }
