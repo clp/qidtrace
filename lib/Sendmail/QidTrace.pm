@@ -94,9 +94,9 @@ sub drain_queue {
           # Simple soln: Use a bigger window size, to ensure that all matching lines
           # in the buffer are in the @_leading array, & do not save seen lines
           # in the @_trailing array.
-             #  Oops, that won't work.  If a line w/ a qid is in buffer before
-             #  the line w/ the email addr, that preceding line will always be
-             #  in the @_trailing when the line w/ email addr is shifted off @_leading.
+             #  Oops, that won't work.  If a line w/ a matching qid is in buffer before
+             #  the line w/ the email addr w/ that qid, that preceding line will always be
+             #  in @_trailing when the line w/ email addr is shifted off @_leading.
              #
         #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
         #
