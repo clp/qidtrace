@@ -1,4 +1,4 @@
-qidtrace  version 0.10
+qidtrace  version 0.31
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -47,7 +47,7 @@ It prints o/p data groups when found, not at end of program.
 
 Version 0.30, Thu2011_0920
 
-Operates quickly & finds matches, but can add some duplicate
+Operates quickly & finds matches, but might add some duplicate
 lines on o/p.
 
 It prints o/p data groups only at end of program.
