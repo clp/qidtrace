@@ -100,11 +100,20 @@ $qt->drain_queue($output_start_column, $output_length);
 #TBR =begin printOK
 
 # Print all matching lines from the %_seen hash.
+#DBG print "LineNumber; qid; EmailAddr:\n";
+#DBG print "===========================\n";
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
     #TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
-    print shift ( @{ ${ $qt->get_seen_hash }{$k} } ) , "\n";
+    my $h = shift ( @{ ${ $qt->get_seen_hash }{$k} } ) ;
+    #DBG print "${$h}{num}; ";
+    #DBG print "${$h}{qid}; ";
+    #DBG print "${$h}{match}:\n";
+    print "${$h}{line}\n";
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        print "**** $_\n";
+        #DBG print "**** ${$_}{num}; ";
+        #DBG print "${$_}{qid}; ";
+        #DBG print "${$_}{match}:\n";
+        print "**** ${$_}{line}\n";
     };
 }
 

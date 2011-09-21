@@ -71,7 +71,8 @@ sub add_match {
     # Add the line to save to the _seen hash.
     # Store array of refs to lines for each key=qid.
     my $key = "$mo->{qid}"  ;
-    my $value = "$mo->{line}"  ;
+    #OK.ORG my $value = "$mo->{line}"  ;
+    my $value = $mo;
     push @{ $self->{_seen}{$key} } , $value;
     #TBD: Maybe push @{ $self->{_seen}{$key} } , $mo;
       # to have all 4 values avbl when needed, instead of just line.
