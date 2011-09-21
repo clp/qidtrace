@@ -14,7 +14,7 @@ our $VERSION = '0.30';  #TBD: Design change Thu2011_0920
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;  #use 1400 to get all matches;
-my $window_size = 178;  #use 1400 (or 2800?) to get all matches;
+my $window_size = 1400;  #use 1400 (or 2800?) to get all matches;
 my $email_address;
 my $emit_line_numbers = 0;
 my $output_start_column = 0;
