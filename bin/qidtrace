@@ -13,10 +13,10 @@ our $VERSION = '0.31';  #TBD: Design change Thu2011_0920
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
-#ORG my $window_size = 100;  #use 1400 to get all matches;
-my $window_size = 1400;  #use 1400 (or 2800?) to get all matches;
+#ORG my $window_size = 100;  #use 1400 to get all matches; Use 100 to debug.
+my $window_size = 10;  #use 1400 (or 2800?) to get all matches;
 my $email_address;
-my $emit_line_numbers = 0;
+my $emit_line_numbers = 1;
 my $output_start_column = 0;
 my $output_length       = 0;  # default to the whole line
 
@@ -44,10 +44,12 @@ my $line;
 while (<>) {
     chomp;
     $qt->push_onto_leading_array( $_ );
+    #DBG print "DBG.while: \$.: ,$.,\n";
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
         $line = $qt->shift_off_leading_array();
+        #DBG print "DBG.window_filled: \$.: ,$.,\n";
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
@@ -55,6 +57,7 @@ while (<>) {
           # Are there such lines?
         #
         if ($match_email) {
+            print "DBG.email_match_found: \$.: ,$.,\n";
             $qt->add_match({match => $match_email,
                             qid   => $match_qid,
                             line  => ($output_length
@@ -105,12 +108,12 @@ $qt->drain_queue($output_start_column, $output_length);
 foreach  my $k ( sort keys  %{ $qt->get_seen_hash } ) {
     #TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     my $h = shift ( @{ ${ $qt->get_seen_hash }{$k} } ) ;
-    #DBG print "${$h}{num}; ";
-    #DBG print "${$h}{qid}; ";
+    print "${$h}{num}; ";
+    print "${$h}{qid}; ";
     #DBG print "${$h}{match}:\n";
     print "${$h}{line}\n";
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        #DBG print "**** ${$_}{num}; ";
+        print "**** ${$_}{num}; ";
         #DBG print "${$_}{qid}; ";
         #DBG print "${$_}{match}:\n";
         print "**** ${$_}{line}\n";
