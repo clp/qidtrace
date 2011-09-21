@@ -71,21 +71,11 @@ sub add_match {
     # Add the line to save to the _seen hash.
     # Store array of refs to lines for each key=qid.
     my $key = "$mo->{qid}"  ;
-    #OK.ORG my $value = "$mo->{line}"  ;
     my $value = $mo;
     push @{ $self->{_seen}{$key} } , $value;
-    #TBD: Maybe push @{ $self->{_seen}{$key} } , $mo;
-      # to have all 4 values avbl when needed, instead of just line.
-    #DBG push @{ $self->{_seen}{num} } , $mo->{num};
 }
 
 
-#
-#TBD: Rev Sun2011_0918_10:37 : grep for all matching addrs first; then check for matching qid's.
-# drain the window of all remaining matches.
-#  should be called after the end of the input stream
-#  to flush out the queue.
-#TMP sub drain_queue_1037 {
 sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
@@ -111,6 +101,7 @@ sub drain_queue {
         #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
         #
         # Add line from buffer w/ matching email addr to the "seen" hash.
+        #TBD: How to get the correct value into 'num', when inside drain_queue()?
             $self->add_match({match => $match_email,
                               qid   => $match_qid,
                               line  => ($output_length
@@ -125,8 +116,8 @@ sub drain_queue {
                   #  it does not eliminate dupes that only match $match_qid.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
 
-                    # Skip current line to avoid adding a duplicate line in o/p,
-                    # if it has the matching email addr and a matching qid.
+                    # If current line has the matching email addr and a matching qid,
+                    # skip it to avoid adding a duplicate line in o/p.
                     # Add this line to the o/p only when it is shifted off the 
                     # leading array to check its email addr.
                     next if ($match_email eq $self->{match});
@@ -147,45 +138,7 @@ sub drain_queue {
 
 
 #
-#TBD: Rev Sun2011_0918_11:15  : grep for all matching addrs first; then check for matching qid's; print group when found, to debug problem of invalid data being saved as a match.
-# drain the window of all remaining matches.
-#  should be called after the end of the input stream
-#  to flush out the queue.
-sub drain_queue_1115 {
-    my ($self) = shift;
-    my $output_start_column = shift;
-    my $output_length       = shift;  # default to the whole line
-    #TBR my $rsqa                = shift;
-    #TBR my $rsqh                = shift;
-    #TBR my @saved_qids          = @$rsqa;
-    #TBR my %seen_qids           = %$rsqh;
-
-    my @lines_to_drain;
-    push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
-    my @lines_with_addr = grep { /$self->{match}/ } @lines_to_drain;
-
-    foreach  my $ltd ( @lines_with_addr ) {
-        #TBD: How else to call match_line?
-        # $self->{match} is the desired $email_address.
-        my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
-
-            # Print the line w/ matching email addr.
-            print "__DRAIN.1__: ", $ltd, "\n";
-            # Check for matching qid's in the buffer.
-            foreach my $ln ( @lines_to_drain ) { 
-                if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { 
-                #F  if (defined $ln && ($ln =~ /$match_qid/)  ) { 
-                    print "__DRAIN.2__: ", $ln, "\n";
-                }
-            }
-            #TMP next;  # TBR?
-    }
-} # End sub drain_queue_1115().
-
-
-
-#
-# Accessors to control the queue.
+# Accessors to get & set the queue.
 sub push_onto_leading_array {
     my $self = shift;
     my $line = shift;
