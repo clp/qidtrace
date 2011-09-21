@@ -89,10 +89,6 @@ sub drain_queue {
     my ($self) = shift;
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
-    #TBR my $rsqa                = shift;
-    #TBR my $rsqh                = shift;
-    #TBR my @saved_qids          = @$rsqa;
-    #TBR my %seen_qids           = %$rsqh;
 
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
@@ -107,6 +103,10 @@ sub drain_queue {
           # Simple soln: Use a bigger window size, to ensure that all matching lines
           # in the buffer are in the @_leading array, & do not save seen lines
           # in the @_trailing array.
+             #  Oops, that won't work.  If a line w/ a qid is in buffer before
+             #  the line w/ the email addr, that preceding line will always be
+             #  in the @_trailing when the line w/ email addr is shifted off @_leading.
+             #
         #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
         #
         # Add line from buffer w/ matching email addr to the "seen" hash.
@@ -119,8 +119,7 @@ sub drain_queue {
             #
             # Check for matching qid's in the buffer.
             foreach my $ln ( @lines_to_drain ) { 
-                if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
-                #OK.dupes  if (defined $ln && ($ln =~ /$match_qid/) ) { #}
+                if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) {
                   #TBD: This eliminates dupes that match $match_email;
                   #  it does not eliminate dupes that only match $match_qid.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
