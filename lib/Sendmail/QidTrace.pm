@@ -41,7 +41,7 @@ package Sendmail::QidTrace::Queue;
 
 use strict;
 
-my $DEBUG = 1;
+my $DEBUG = 0;
 
 sub new {
     my $invocant = shift;
@@ -83,23 +83,20 @@ sub drain_queue {
     my $output_start_column = shift;
     my $output_length       = shift;  # default to the whole line
 
-    my @lines_to_drain;
-    #OK.ORG push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
-    push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
     my %lh;
-    my $lref;
-    foreach $lref ( @lines_to_drain ) {
-        %lh = %$lref;
+    my $ltdref;
+    my @lines_to_drain;
+    push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
+    foreach $ltdref ( @lines_to_drain ) {
+        %lh = %$ltdref;
         my $ln   = $lh{line};
         my $lnum = $lh{num};
         #
         # Check for desired email addr in the current line.
         if ( $ln =~ m/$self->{match}/ ) {
-            #TBD
             #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
             #
             # Add line from buffer w/ matching email addr to the "seen" hash.
-            #TBD: How to get the correct value into 'num', when inside drain_queue()?
             my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
             print "DBG.drain_email_match_found: \$lnum: ,$lnum,\n" if ($DEBUG);
             $self->add_match({match => $match_email,
@@ -109,20 +106,20 @@ sub drain_queue {
                                         : substr($ln, $output_start_column)),
                               num   => $lnum });
             #
-            # Check for matching qid's in the buffer.
-            foreach my $ltdref ( @lines_to_drain ) {
-                %lh = %$ltdref;
+            # Check for lines w/ matching qid's in the buffer.
+            foreach my $ltd_from_buf ( @lines_to_drain ) {
+                %lh = %$ltd_from_buf;
                 my $ln_from_buf   = $lh{line};
                 my $lnum_from_buf = $lh{num};
                 #
                 if (defined $ln_from_buf && ($ln_from_buf =~ /$match_qid/) && ($ln_from_buf ne $ln) ) {
-                  #TBD: This eliminates dupes that match $match_email;
-                  #  it does not eliminate dupes that only match $match_qid.
+                  #TBD: The last clause eliminates dupes of $match_email;
+                  #  but it does not eliminate dupes that only match $match_qid.
                     my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln_from_buf);
 
                     # If current line has the matching email addr and a matching qid,
                     # skip it to avoid adding a duplicate line in o/p.
-                    # Add this line to the o/p only when it is shifted off the 
+                    # Only add this line to the o/p when it is shifted off the
                     # leading array to check its email addr.
                     next if ($match_email eq $self->{match});
 
@@ -135,12 +132,10 @@ sub drain_queue {
                                       num   => $lnum_from_buf });
                     #TBD: Delete line from buffer.
                 }
-            }
+            }  # End foreach $ltd_from_buf.
             next;  # TBR?
         }
-        #
-        #
-    }  # End foreach $lref.
+    }  # End foreach $ltdref.
 } # End sub drain_queue_rev1037().
 
 
@@ -197,65 +192,5 @@ sub get_seen_hash {
     my $self = shift;
     return  $self->{_seen} ;
 }
-
-=begin removed
-
-    #
-    my @lines_with_addr = grep { /$self->{match}/ } @lines_to_drain;
-
-    foreach  my $ltd ( @lines_with_addr ) {
-        #TBD: How else to call match_line?
-        # $self->{match} is the desired $email_address.
-        my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ltd);
-
-        #TBD: How to avoid adding a line already in the %_seen hash?
-          # Simple soln: Use a bigger window size, to ensure that all matching lines
-          # in the buffer are in the @_leading array, & do not save seen lines
-          # in the @_trailing array.
-             #  Oops, that won't work.  If a line w/ a matching qid is in buffer before
-             #  the line w/ the email addr w/ that qid, that preceding line will always be
-             #  in @_trailing when the line w/ email addr is shifted off @_leading.
-             #
-        #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
-        #
-        # Add line from buffer w/ matching email addr to the "seen" hash.
-        #TBD: How to get the correct value into 'num', when inside drain_queue()?
-            $self->add_match({match => $match_email,
-                              qid   => $match_qid,
-                              line  => ($output_length
-                                        ? substr($ltd, $output_start_column, $output_length)
-                                        : substr($ltd, $output_start_column)),
-                              num   => $. });
-            #
-            # Check for matching qid's in the buffer.
-            foreach my $ln ( @lines_to_drain ) { 
-                if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) {
-                  #TBD: This eliminates dupes that match $match_email;
-                  #  it does not eliminate dupes that only match $match_qid.
-                    my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
-
-                    # If current line has the matching email addr and a matching qid,
-                    # skip it to avoid adding a duplicate line in o/p.
-                    # Add this line to the o/p only when it is shifted off the 
-                    # leading array to check its email addr.
-                    next if ($match_email eq $self->{match});
-
-                    $self->add_match({match => $match_email,
-                                      qid   => $match_qid,
-                                      line  => ($output_length
-                                                ? substr($ln, $output_start_column, $output_length)
-                                                : substr($ln, $output_start_column)),
-                                      num   => $. });
-                    #TBD: Delete line from buffer.
-                }
-            }
-            next;  # TBR?
-    }
-
-=end removed
-
-
-=cut
-
 
 1;
