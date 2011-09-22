@@ -9,7 +9,7 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.31';  #TBD: Design change Thu2011_0920
+our $VERSION = '0.32';
 
 my $DEBUG = 0;  # Set to 1 to enable debug stmts.
                 # Set to 0 to run tests & for normal operation.
@@ -47,32 +47,21 @@ my %each_line;
 
 while (<>) {
     chomp;
-#TBD: Should this be global var?
-my $line;
-my $num;
-
+    my $line;
+    my $num;
     my $lref;
     my %lh;
-    #TBR? $each_line{num}  = $.;
-    #TBR? $each_line{line} = $_;
-    #F $qt->push_onto_leading_array( \%each_line );
     $qt->push_onto_leading_array( {num  => $.,
                                    line => $_} );
     #DBG print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
-        #OK.ORG  $line = $qt->shift_off_leading_array();
-        # Deref the hash & get value for key 'line':
-        #TBF  $line = ${ $qt->shift_off_leading_array() }{line} ;
-        #TBR  ($line, $num) = ${ $qt->shift_off_leading_array() };
-        #TBR? $num  = ${ $qt->shift_off_leading_array() }{num} ;
-        my $leadref  =  $qt->shift_off_leading_array() ;
-                my %leadh   = %$leadref;
-                #TBR my $ln   = $leadh{line};
-                my $line   = $leadh{line};
-                #TBR my $lnum = $leadh{num};
-                my $num = $leadh{num};
+        # Deref the hash & get value for keys 'line' & 'num'.
+        my $leadref = $qt->shift_off_leading_array() ;
+        my %leadh   = %$leadref;
+        my $line    = $leadh{line};
+        my $num     = $leadh{num};
 
         #DBG print "DBG.window_filled: \$num: ,$num,\n" if ($DEBUG);
         my ($match_email, $match_qid) = match_line($email_address, $line);
@@ -95,8 +84,8 @@ my $num;
                 %lh   = %$lref;
                 my $ln   = $lh{line};
                 my $lnum = $lh{num};
-                #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
-                #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
+                #TBD: #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
+                #TBD: #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
                 if (defined $ln && ($ln =~ /$match_qid/) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
@@ -113,31 +102,23 @@ my $num;
                                               ? substr($ln, $output_start_column, $output_length)
                                               : substr($ln, $output_start_column)),
                                     num   => $lnum });
-                    #TBD: Delete line from buffer, or mark it as saved so ignore it to avoid duplicates.
+                    #TBD: Delete line from buffer, or mark it as saved to ignore it to avoid duplicates.
                 }
             }  # End foreach $lref.
             next;  # Read next i/p line after finding a matching email.
-                   # Do not push it onto @_trailing.
+                   # Do not push current line onto @_trailing.
         }  # End (if ($match_email)
         #
         # Save line to trailing array if not added to %_seen hash.
         #OK.ORG  $qt->push_onto_trailing_array ($line);
         #
-        #
-        #
-        ###
-        ###TBD Wed2011_0921_18:55 : Chg from \%lh to anon hash ref?
-        ### Avoid REUSED ADDR in HASH at %_trailing.
-        #
         $qt->push_onto_trailing_array ( {num  => $num,
                                          line => $line} );
         if ( $qt->size_of_trailing_array  >= $window_size ) {
-            #OK.ORG $line = $qt->shift_off_trailing_array();
             $line = ${ $qt->shift_off_trailing_array() }{line} ;
             #TBD: Maybe check the line for matching qid before tossing.
         }
-    } # End if (leading_array test)
-    #TBR? %each_line = ();
+    } # End if (leading_array > window_size )
 } # End of while loop.
 
 
