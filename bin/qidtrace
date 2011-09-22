@@ -18,7 +18,7 @@ my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;  #use 1400 to get all matches; Use 100 to debug.
 my $window_size = 1400;  #use 1400 (or 2800?) to get all matches;
-$window_size    = 10 if ($DEBUG) ;
+$window_size    = 100 if ($DEBUG) ;
 
 my $email_address;
 my $emit_line_numbers = 1;
@@ -47,7 +47,7 @@ my %each_line;
 
 while (<>) {
     chomp;
-#TBD: Must this be global var?
+#TBD: Should this be global var?
 my $line;
 my $num;
 
@@ -80,9 +80,14 @@ my $num;
                             num   => $num });
             #
             # Check for matching qid's in the buffer.
-            foreach my $ln ( $qt->get_leading_array, $qt->get_trailing_array ) { 
+            foreach my $lref ( $qt->get_leading_array, $qt->get_trailing_array ) { 
                 #TBD: Fix this section to use %each_line.
-                if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){
+                my %lh   = %$lref;
+                my $ln   = $lh{line};
+                my $lnum = $lh{num};
+                #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){
+                #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){
+                if (defined $ln && ($ln =~ /$match_qid/) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
                     # Skip current line to avoid adding a duplicate line in o/p,
@@ -96,7 +101,7 @@ my $num;
                                     line  => ($output_length
                                               ? substr($ln, $output_start_column, $output_length)
                                               : substr($ln, $output_start_column)),
-                                    num   => $num });
+                                    num   => $lnum });
                     #TBD: Delete line from buffer, or mark it as saved so ignore it to avoid duplicates.
                 }
             }
@@ -104,9 +109,11 @@ my $num;
         }  # End (if ($match_email)
         #
         # Save line to trailing array if not added to %_seen hash.
-        $qt->push_onto_trailing_array ($line);
+        #OK.ORG  $qt->push_onto_trailing_array ($line);
+        $qt->push_onto_trailing_array (\%each_line);
         if ( $qt->size_of_trailing_array  >= $window_size ) {
-            $line = $qt->shift_off_trailing_array();
+            #OK.ORG $line = $qt->shift_off_trailing_array();
+            $line = ${ $qt->shift_off_trailing_array() }{line} ;
             #TBD: Maybe check the line for matching qid before tossing.
         }
     } # End if (leading_array test)
