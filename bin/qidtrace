@@ -18,7 +18,7 @@ my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;  #use 1400 to get all matches; Use 100 to debug.
 my $window_size = 1400;  #use 1400 (or 2800?) to get all matches;
-$window_size    = 10 if ($DEBUG) ;
+$window_size    = 40 if ($DEBUG) ;
 
 my $email_address;
 my $emit_line_numbers = 1;
@@ -58,7 +58,7 @@ my $num;
     #F $qt->push_onto_leading_array( \%each_line );
     $qt->push_onto_leading_array( {num  => $.,
                                    line => $_} );
-    print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
+    #DBG print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
@@ -74,7 +74,7 @@ my $num;
                 #TBR my $lnum = $leadh{num};
                 my $num = $leadh{num};
 
-        print "DBG.window_filled: \$num: ,$num,\n" if ($DEBUG);
+        #DBG print "DBG.window_filled: \$num: ,$num,\n" if ($DEBUG);
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
@@ -92,7 +92,6 @@ my $num;
             #
             # Check for matching qid's in the buffer.
             foreach $lref ( $qt->get_leading_array, $qt->get_trailing_array ) {
-                #TBD: Fix this section to use %each_line.
                 %lh   = %$lref;
                 my $ln   = $lh{line};
                 my $lnum = $lh{num};
