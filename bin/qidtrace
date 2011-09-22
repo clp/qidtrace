@@ -18,7 +18,7 @@ my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 #ORG my $window_size = 100;  #use 1400 to get all matches; Use 100 to debug.
 my $window_size = 1400;  #use 1400 (or 2800?) to get all matches;
-$window_size    = 100 if ($DEBUG) ;
+$window_size    = 10 if ($DEBUG) ;
 
 my $email_address;
 my $emit_line_numbers = 1;
@@ -51,19 +51,30 @@ while (<>) {
 my $line;
 my $num;
 
-    $each_line{num}  = $.;
-    $each_line{line} = $_;
-    $qt->push_onto_leading_array( \%each_line );
-    #DBG print "DBG.while: \$.: ,$.,\n";
+    my $lref;
+    my %lh;
+    #TBR? $each_line{num}  = $.;
+    #TBR? $each_line{line} = $_;
+    #F $qt->push_onto_leading_array( \%each_line );
+    $qt->push_onto_leading_array( {num  => $.,
+                                   line => $_} );
+    print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
 
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array  > $window_size ) {
         #OK.ORG  $line = $qt->shift_off_leading_array();
         # Deref the hash & get value for key 'line':
-        $line = ${ $qt->shift_off_leading_array() }{line} ;
-        $num  = ${ $qt->shift_off_leading_array() }{num} ;
+        #TBF  $line = ${ $qt->shift_off_leading_array() }{line} ;
+        #TBR  ($line, $num) = ${ $qt->shift_off_leading_array() };
+        #TBR? $num  = ${ $qt->shift_off_leading_array() }{num} ;
+        my $leadref  =  $qt->shift_off_leading_array() ;
+                my %leadh   = %$leadref;
+                #TBR my $ln   = $leadh{line};
+                my $line   = $leadh{line};
+                #TBR my $lnum = $leadh{num};
+                my $num = $leadh{num};
 
-        #DBG print "DBG.window_filled: \$num: ,$num,\n";
+        print "DBG.window_filled: \$num: ,$num,\n" if ($DEBUG);
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
@@ -80,13 +91,13 @@ my $num;
                             num   => $num });
             #
             # Check for matching qid's in the buffer.
-            foreach my $lref ( $qt->get_leading_array, $qt->get_trailing_array ) { 
+            foreach $lref ( $qt->get_leading_array, $qt->get_trailing_array ) {
                 #TBD: Fix this section to use %each_line.
-                my %lh   = %$lref;
+                %lh   = %$lref;
                 my $ln   = $lh{line};
                 my $lnum = $lh{num};
-                #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){
-                #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){
+                #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
+                #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
                 if (defined $ln && ($ln =~ /$match_qid/) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
@@ -96,6 +107,7 @@ my $num;
                     # leading array to check its email addr.
                     next if ($match_email eq $email_address);
 
+                    print "DBG.buffer_match_found: \$num: ,$num,\n" if ($DEBUG);
                     $qt->add_match({match => $match_email,
                                     qid   => $match_qid,
                                     line  => ($output_length
@@ -104,19 +116,29 @@ my $num;
                                     num   => $lnum });
                     #TBD: Delete line from buffer, or mark it as saved so ignore it to avoid duplicates.
                 }
-            }
-            next;
+            }  # End foreach $lref.
+            next;  # Read next i/p line after finding a matching email.
+                   # Do not push it onto @_trailing.
         }  # End (if ($match_email)
         #
         # Save line to trailing array if not added to %_seen hash.
         #OK.ORG  $qt->push_onto_trailing_array ($line);
-        $qt->push_onto_trailing_array (\%each_line);
+        #
+        #
+        #
+        ###
+        ###TBD Wed2011_0921_18:55 : Chg from \%lh to anon hash ref?
+        ### Avoid REUSED ADDR in HASH at %_trailing.
+        #
+        $qt->push_onto_trailing_array ( {num  => $num,
+                                         line => $line} );
         if ( $qt->size_of_trailing_array  >= $window_size ) {
             #OK.ORG $line = $qt->shift_off_trailing_array();
             $line = ${ $qt->shift_off_trailing_array() }{line} ;
             #TBD: Maybe check the line for matching qid before tossing.
         }
     } # End if (leading_array test)
+    #TBR? %each_line = ();
 } # End of while loop.
 
 
