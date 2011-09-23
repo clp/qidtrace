@@ -21,21 +21,18 @@ our @EXPORT_OK = qw/match_line/;
 #
 sub match_line {
     my $email = shift;
-    my $line = shift;
+    my $line  = shift;
     my $qid;
-    return('', '') unless $line;
-    if ( $line !~ m/<$email>/ ) { $email = ''}
-    if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ){
-      $qid = $1;
+    return ( '', '' ) unless $line;
+    if ( $line !~ m/<$email>/ ) { $email = '' }
+    if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ) {
+        $qid = $1;
     }
     else {
-      $qid = '';
+        $qid = '';
     }
-    return($email, $qid);
+    return ( $email, $qid );
 }
-
-
-
 
 package Sendmail::QidTrace::Queue;
 
@@ -45,14 +42,15 @@ my $DEBUG = 0;
 
 sub new {
     my $invocant = shift;
-    my $class    = ref($invocant) || $invocant;
+    my $class = ref($invocant) || $invocant;
 
-    my $queue = { _leading  => [],  # winsize matching lines before
-                  _trailing => [],  #                        and after
-                  _seen     => {},  # track which lines we have already emitted
+    my $queue = {
+        _leading  => [],    # winsize matching lines before
+        _trailing => [],    #                        and after
+        _seen     => {},    # track which lines we have already emitted
     };
     my $args = shift || {};
-    while (my ($k, $v) = each(%$args)) {
+    while ( my ( $k, $v ) = each(%$args) ) {
         $queue->{$k} = $v;
     }
     return bless $queue, $class;
@@ -66,79 +64,104 @@ sub new {
 #  num   => the line number of the log line
 #
 sub add_match {
-    my ($self, $mo) = @_;
+    my ( $self, $mo ) = @_;
+
     #TBD: Verify i/p is OK.
-      # If not, print error & exit or return.
+    # If not, print error & exit or return.
     #
     # Add the line to save to the _seen hash.
     # Store array of refs to lines for each key=qid.
-    my $key = "$mo->{qid}"  ;
+    my $key   = "$mo->{qid}";
     my $value = $mo;
-    push @{ $self->{_seen}{$key} } , $value;
+    push @{ $self->{_seen}{$key} }, $value;
 }
 
-
 sub drain_queue {
-    my ($self) = shift;
+    my ($self)              = shift;
     my $output_start_column = shift;
-    my $output_length       = shift;  # default to the whole line
+    my $output_length       = shift;    # default to the whole line
 
     my %lh;
     my $ltdref;
     my @lines_to_drain;
     push @lines_to_drain, $self->get_leading_array, $self->get_trailing_array;
-    foreach $ltdref ( @lines_to_drain ) {
+    foreach $ltdref (@lines_to_drain) {
         %lh = %$ltdref;
         my $ln   = $lh{line};
         my $lnum = $lh{num};
-        #
+
         # Check for desired email addr in the current line.
         if ( $ln =~ m/$self->{match}/ ) {
-            #TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
-            #
-            # Add line from buffer w/ matching email addr to the "seen" hash.
-            my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln);
-            print "DBG.drain_email_match_found: \$lnum: ,$lnum,\n" if ($DEBUG);
-            $self->add_match({match => $match_email,
-                              qid   => $match_qid,
-                              line  => ($output_length
-                                        ? substr($ln, $output_start_column, $output_length)
-                                        : substr($ln, $output_start_column)),
-                              num   => $lnum });
-            #
+
+            ##TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
+            ##
+            ## Add line from buffer w/ matching email addr to the "seen" hash.
+            my ( $match_email, $match_qid )
+                = Sendmail::QidTrace::match_line( $self->{match}, $ln );
+            print "DBG.drain_email_match_found: \$lnum: ,$lnum,\n"
+                if ($DEBUG);
+            $self->add_match(
+                {   match => $match_email,
+                    qid   => $match_qid,
+                    line  => (
+                        $output_length
+                        ? substr( $ln, $output_start_column, $output_length )
+                        : substr( $ln, $output_start_column )
+                    ),
+                    num => $lnum
+                }
+            );
+
             # Check for lines w/ matching qid's in the buffer.
-            foreach my $ltd_from_buf ( @lines_to_drain ) {
+            foreach my $ltd_from_buf (@lines_to_drain) {
                 %lh = %$ltd_from_buf;
                 my $ln_from_buf   = $lh{line};
                 my $lnum_from_buf = $lh{num};
-                #
-                if (defined $ln_from_buf && ($ln_from_buf =~ /$match_qid/) && ($ln_from_buf ne $ln) ) {
-                  #TBD: The last clause eliminates dupes of $match_email;
-                  #  but it does not eliminate dupes that only match $match_qid.
-                    my ($match_email, $match_qid) = Sendmail::QidTrace::match_line($self->{match}, $ln_from_buf);
 
-                    # If current line has the matching email addr and a matching qid,
-                    # skip it to avoid adding a duplicate line in o/p.
-                    # Only add this line to the o/p when it is shifted off the
-                    # leading array to check its email addr.
-                    next if ($match_email eq $self->{match});
+                if (   defined $ln_from_buf
+                    && ( $ln_from_buf =~ /$match_qid/ )
+                    && ( $ln_from_buf ne $ln ) )
+                {
 
-                    print "DBG.drain_buffer_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n" if ($DEBUG);
-                    $self->add_match({match => $match_email,
-                                      qid   => $match_qid,
-                                      line  => ($output_length
-                                                ? substr($ln_from_buf, $output_start_column, $output_length)
-                                                : substr($ln_from_buf, $output_start_column)),
-                                      num   => $lnum_from_buf });
+                    ##TBD: The last clause eliminates dupes of $match_email;
+                    ##  but it does not eliminate dupes that only match $match_qid.
+                    my ( $match_email, $match_qid )
+                        = Sendmail::QidTrace::match_line( $self->{match},
+                        $ln_from_buf );
+
+                    ## If current line has the matching email addr and a matching qid,
+                    ## skip it to avoid adding a duplicate line in o/p.
+                    ## Only add this line to the o/p when it is shifted off the
+                    ## leading array to check its email addr.
+                    next if ( $match_email eq $self->{match} );
+
+                    print
+                        "DBG.drain_buffer_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
+                        if ($DEBUG);
+                    $self->add_match(
+                        {   match => $match_email,
+                            qid   => $match_qid,
+                            line  => (
+                                $output_length
+                                ? substr(
+                                    $ln_from_buf, $output_start_column,
+                                    $output_length
+                                    )
+                                : substr(
+                                    $ln_from_buf, $output_start_column
+                                )
+                            ),
+                            num => $lnum_from_buf
+                        }
+                    );
+
                     #TBD: Delete line from buffer.
                 }
-            }  # End foreach $ltd_from_buf.
-            next;  # TBR?
+            }        # End foreach $ltd_from_buf.
+            next;    # TBR?
         }
-    }  # End foreach $ltdref.
-} # End sub drain_queue_rev1037().
-
-
+    }    # End foreach $ltdref.
+}    # End sub drain_queue_rev1037().
 
 #
 # Accessors to get & set the queue.
@@ -147,6 +170,7 @@ sub push_onto_leading_array {
     my $line = shift;
     push @{ $self->{_leading} }, $line;
 }
+
 sub push_onto_trailing_array {
     my $self = shift;
     my $line = shift;
@@ -190,7 +214,7 @@ sub get_seen_qids {
 
 sub get_seen_hash {
     my $self = shift;
-    return  $self->{_seen} ;
+    return $self->{_seen};
 }
 
 1;
