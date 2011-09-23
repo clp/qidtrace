@@ -17,12 +17,11 @@ my $DEBUG = 0;    # Set to 1 to enable debug stmts.
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 
-#ORG my $window_size = 100;  #use 1400 to get all matches; Use 100 to debug.
 my $window_size = 1400;    #use 1400 (or 2800?) to get all matches;
 $window_size = 40 if ($DEBUG);
 
 my $email_address;
-my $emit_line_numbers   = 1;
+my $emit_line_numbers   = 0;
 my $output_start_column = 0;
 my $output_length       = 0;    # default to the whole line
 
@@ -160,32 +159,30 @@ while (<>) {
 
 $qt->drain_queue( $output_start_column, $output_length );
 
-#TBR =begin printOK
 
 # Print all matching lines from the %_seen hash.
-#DBG print "LineNumber; qid; EmailAddr:\n";
-#DBG print "===========================\n";
 foreach my $k ( sort keys %{ $qt->get_seen_hash } ) {
 
     #TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     my $h = shift( @{ ${ $qt->get_seen_hash }{$k} } );
-    print "${$h}{num}; " if ($DEBUG);
+    #DBG print "${$h}{num}; " if ($DEBUG);
+    print "${$h}{num}; " if ($emit_line_numbers);
 
     #DBG print "${$h}{qid} if ($DEBUG); ";
     #DBG print "${$h}{match}:\n" if ($DEBUG);
+
     print "${$h}{line}\n";
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        print "**** ${$_}{num}" if ($DEBUG);
+        #DBG print "**** ${$_}{num}" if ($DEBUG);
+        print "**** ";
+        print "${$_}{num}; " if ($emit_line_numbers);
 
         #DBG print "${$_}{qid}; " if ($DEBUG);
         #DBG print "${$_}{match}:\n" if ($DEBUG);
-        print "**** ${$_}{line}\n";
+        print "${$_}{line}\n";
     }
 }
 
-#TBR =end printOK
-
-#TBR =cut
 
 =pod
 
