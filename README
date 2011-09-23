@@ -1,4 +1,4 @@
-qidtrace  version 0.10
+qidtrace  version 0.32
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -45,10 +45,26 @@ of checking all saved qid's for a match.  It handles the
 It prints o/p data groups when found, not at end of program.
 
 
-Version 0.30, Thu2011_0920
+Version 0.30, Tue2011_0920
 
 Operates quickly & finds matches, but can add some duplicate
 lines on o/p.
 
 It prints o/p data groups only at end of program.
+
+
+Version 0.31, Tue2011_0920
+
+Store a hash reference when a match is found.  This structure
+includes the matching line, its email address and qid, and its
+line number.  Part of the program uses this new structure.
+
+
+Version 0.32, Tue2011_0920
+
+Update drain_queue() to use the data structure added in v 0.31.
+
+
+
+
 
