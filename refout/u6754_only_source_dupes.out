@@ -1,0 +1,10 @@
+6952; Jan  5 00:15:04 b.mx.h2.net sm-mta[11055]: jB88ErIB011055: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 6987; Jan  5 00:15:04 b.mx.h2.net sm-mta[11055]: jB88ErIB011055: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 7035; Jan  5 00:15:05 b.mx.h2.net sm-mta[11055]: jB88ErIB011055: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 7069; Jan  5 00:15:05 b.mx.example.net sm-mta[11055]: jB88ErIB011055: lost input channel from a_host [10.11.12.13] to MTA after rcpt 
+**** 7070; Jan  5 00:15:05 b.mx.example.net sm-mta[11055]: jB88ErIB011055: from=<u6792@h6793.br>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id [10.11.12.13] 
+8250; Jan  5 00:15:19 c.mx.h2.net sm-mta[12307]: jB88F8fD012307: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 8284; Jan  5 00:15:19 c.mx.h2.net sm-mta[12307]: jB88F8fD012307: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 8335; Jan  5 00:15:19 c.mx.h2.net sm-mta[12307]: jB88F8fD012307: Milter: to=<u6754@h2.net>, reject=550 5.7.1 Recipient declines mail from a_host (DUL), see http://www.mail-abuse.com/cgi-bin/lookup?ip_address=10.11.12.13 
+**** 8363; Jan  5 00:15:20 c.mx.example.net sm-mta[12307]: jB88F8fD012307: lost input channel from a_host to MTA after rcpt 
+**** 8364; Jan  5 00:15:20 c.mx.example.net sm-mta[12307]: jB88F8fD012307: from=<u6792@h6793.br>, size=0, class=0, nrcpts=0, proto=SMTP, daemon=MTA, relay=relay_id 
