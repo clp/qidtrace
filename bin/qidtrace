@@ -67,9 +67,9 @@ while (<>) {
         my ($match_email, $match_qid) = match_line($email_address, $line);
         #
         next if ( $match_qid eq '' ); # No qid found: skip to next line.
-          #TBD: Does this skip lines w/ addr & no qid?  Maybe move it down or rm?
-          # Are there such lines?
-        #
+          ##TBD: Does this skip lines w/ addr & no qid?  Maybe move it down or rm?
+          ## Are there such lines?
+
         if ($match_email) {
             print "DBG.email_match_found: \$num: ,$num,\n" if ($DEBUG);
             $qt->add_match({match => $match_email,
@@ -78,14 +78,14 @@ while (<>) {
                                       ? substr($line, $output_start_column, $output_length)
                                       : substr($line, $output_start_column)),
                             num   => $num });
-            #
+
             # Check for matching qid's in the buffer.
             foreach $lref ( $qt->get_leading_array, $qt->get_trailing_array ) {
                 %lh   = %$lref;
                 my $ln   = $lh{line};
                 my $lnum = $lh{num};
-                #TBD: #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
-                #TBD: #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
+                ##TBD: #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
+                ##TBD: #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
                 if (defined $ln && ($ln =~ /$match_qid/) ){
                     my ($match_email, $match_qid) = match_line($email_address, $ln);
 
@@ -102,7 +102,7 @@ while (<>) {
                                               ? substr($ln, $output_start_column, $output_length)
                                               : substr($ln, $output_start_column)),
                                     num   => $lnum });
-                    #TBD: Delete line from buffer, or mark it as saved to ignore it to avoid duplicates.
+                    ##TBD: Delete line from buffer, or mark it as saved to ignore it to avoid duplicates.
                 }
             }  # End foreach $lref.
             next;  # Read next i/p line after finding a matching email.
@@ -116,7 +116,7 @@ while (<>) {
                                          line => $line} );
         if ( $qt->size_of_trailing_array  >= $window_size ) {
             $line = ${ $qt->shift_off_trailing_array() }{line} ;
-            #TBD: Maybe check the line for matching qid before tossing.
+            ##TBD: Maybe check the line for matching qid before tossing.
         }
     } # End if (leading_array > window_size )
 } # End of while loop.
