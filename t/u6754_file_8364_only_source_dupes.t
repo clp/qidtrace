@@ -3,7 +3,8 @@
 use Test::More tests => 1;
 
 my $project_dir = "~/p/qidtrace/";
-my $program_under_test = "perl -I lib " . $project_dir . "bin/qidtrace -m u6754\@h2.net ";
+# Note: This test shows line numbers in the o/p.
+my $program_under_test = "perl -I lib " . $project_dir . "bin/qidtrace -n -m u6754\@h2.net ";
 my $infile = 'data/8364-lines.mx' ;
 my $test_output_filename = "u6754_only_source_dupes.out";
 my $outdir = "tmp/";

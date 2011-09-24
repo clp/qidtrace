@@ -19,6 +19,7 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 
 my $window_size = 1400;    #use 1400 (or 2800?) to get all matches;
 $window_size = 40 if ($DEBUG);
+#TMP $window_size = 40;
 
 my $email_address;
 my $emit_line_numbers   = 0;

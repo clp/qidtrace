@@ -38,7 +38,7 @@ package Sendmail::QidTrace::Queue;
 
 use strict;
 
-my $DEBUG = 0;
+my $DEBUG = 1;
 
 sub new {
     my $invocant = shift;
@@ -81,6 +81,7 @@ sub drain_queue {
     my $output_start_column = shift;
     my $output_length       = shift;    # default to the whole line
 
+    my @emitted;  # Store line numbers of matching lines.
     my %lh;
     my $ltdref;
     my @lines_to_drain;
@@ -98,7 +99,7 @@ sub drain_queue {
             ## Add line from buffer w/ matching email addr to the "seen" hash.
             my ( $match_email, $match_qid )
                 = Sendmail::QidTrace::match_line( $self->{match}, $ln );
-            print "DBG.drain_email_match_found: \$lnum: ,$lnum,\n"
+            print "DBG.drain__email_match_found: \$lnum: ,$lnum,\n"
                 if ($DEBUG);
             $self->add_match(
                 {   match => $match_email,
@@ -111,6 +112,7 @@ sub drain_queue {
                     num => $lnum
                 }
             );
+            push @emitted, $lnum;
 
             # Check for lines w/ matching qid's in the buffer.
             foreach my $ltd_from_buf (@lines_to_drain) {
@@ -120,7 +122,8 @@ sub drain_queue {
 
                 if (   defined $ln_from_buf
                     && ( $ln_from_buf =~ /$match_qid/ )
-                    && ( $ln_from_buf ne $ln ) )
+                    && ( $ln_from_buf ne $ln )
+                    && ( ! grep (/$lnum_from_buf/, @emitted ) ))
                 {
 
                     ##TBD: The last clause eliminates dupes of $match_email;
@@ -136,7 +139,7 @@ sub drain_queue {
                     next if ( $match_email eq $self->{match} );
 
                     print
-                        "DBG.drain_buffer_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
+                        "DBG.drain__qid_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
                         if ($DEBUG);
                     $self->add_match(
                         {   match => $match_email,
@@ -154,6 +157,7 @@ sub drain_queue {
                             num => $lnum_from_buf
                         }
                     );
+                    push @emitted, $lnum_from_buf;
 
                     #TBD: Delete line from buffer.
                 }
