@@ -54,7 +54,8 @@ my $qt = new Sendmail::QidTrace::Queue(
         line_numbers => $emit_line_numbers
     }
 );
-my %each_line;
+#TBR my %each_line;
+my @emitted;  # Store line numbers of matching lines.
 
 while (<>) {
     chomp;
@@ -88,7 +89,7 @@ while (<>) {
         ## Are there such lines?
 
         if ($match_email) {
-            print "DBG.email_match_found: \$num: ,$num,\n" if ($DEBUG);
+            #DBG print "DBG.email_match_found: \$num: ,$num,\n" if ($DEBUG);
             $qt->add_match(
                 {   match => $match_email,
                     qid   => $match_qid,
@@ -101,41 +102,46 @@ while (<>) {
                     num => $num
                 }
             );
+            push @emitted, $num;
 
             # Check for matching qid's in the buffer.
             foreach $lref ( $qt->get_leading_array, $qt->get_trailing_array )
             {
                 %lh = %$lref;
-                my $ln   = $lh{line};
-                my $lnum = $lh{num};
+                my $ln_from_buf   = $lh{line};
+                my $lnum_from_buf = $lh{num};
                 ##TBD: #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
                 ##TBD: #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
-                if ( defined $ln && ( $ln =~ /$match_qid/ ) ) {
+                if (     defined $ln_from_buf 
+                    && ( $ln_from_buf =~ /$match_qid/ )
+                    && ( ! grep (/$lnum_from_buf/, @emitted ) ) ) {
                     my ( $match_email, $match_qid )
-                        = match_line( $email_address, $ln );
+                        = match_line( $email_address, $ln_from_buf );
 
-                  # Skip current line to avoid adding a duplicate line in o/p,
-                  # if it has the matching email addr and a matching qid.
-                  # Add this line to the o/p only when it is shifted off the
-                  # leading array to check its email addr.
+                    ## Skip current line to avoid adding a duplicate line in o/p,
+                    ## if it has the matching email addr and a matching qid.
+                    ## Only add this line to the o/p when it is shifted off the
+                    ## leading array to check its email addr.
                     next if ( $match_email eq $email_address );
 
-                    print "DBG.buffer_match_found: \$num: ,$num,\n"
-                        if ($DEBUG);
+                    ##DBG print "DBG.buffer_match_found: \$num: ,$num,\n"
+                        ##DBG if ($DEBUG);
                     $qt->add_match(
                         {   match => $match_email,
                             qid   => $match_qid,
                             line  => (
                                 $output_length
                                 ? substr(
-                                    $ln, $output_start_column,
+                                    $ln_from_buf, $output_start_column,
                                     $output_length
                                     )
-                                : substr( $ln, $output_start_column )
+                                : substr( $ln_from_buf, $output_start_column )
                             ),
-                            num => $lnum
+                            num => $lnum_from_buf
                         }
                     );
+                    push @emitted, $lnum_from_buf;
+
                     ##TBD: Delete line from buffer, or mark it as saved to ignore it to avoid duplicates.
                 }
             }        # End foreach $lref.
@@ -158,7 +164,7 @@ while (<>) {
     }    # End if (leading_array > window_size )
 }    # End of while loop.
 
-$qt->drain_queue( $output_start_column, $output_length );
+$qt->drain_queue( $output_start_column, $output_length, \@emitted );
 
 
 # Print all matching lines from the %_seen hash.

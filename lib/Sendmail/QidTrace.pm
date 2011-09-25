@@ -38,7 +38,7 @@ package Sendmail::QidTrace::Queue;
 
 use strict;
 
-my $DEBUG = 1;
+my $DEBUG = 0;
 
 sub new {
     my $invocant = shift;
@@ -80,8 +80,10 @@ sub drain_queue {
     my ($self)              = shift;
     my $output_start_column = shift;
     my $output_length       = shift;    # default to the whole line
+    my $er                  = shift;
+    my @emitted             = @$er;
 
-    my @emitted;  # Store line numbers of matching lines.
+    #TBR my @emitted;  # Store line numbers of matching lines.
     my %lh;
     my $ltdref;
     my @lines_to_drain;
@@ -99,8 +101,8 @@ sub drain_queue {
             ## Add line from buffer w/ matching email addr to the "seen" hash.
             my ( $match_email, $match_qid )
                 = Sendmail::QidTrace::match_line( $self->{match}, $ln );
-            print "DBG.drain__email_match_found: \$lnum: ,$lnum,\n"
-                if ($DEBUG);
+            #DBG print "DBG.drain__email_match_found: \$lnum: ,$lnum,\n"
+                #DBG if ($DEBUG);
             $self->add_match(
                 {   match => $match_email,
                     qid   => $match_qid,
@@ -138,9 +140,9 @@ sub drain_queue {
                     ## leading array to check its email addr.
                     next if ( $match_email eq $self->{match} );
 
-                    print
-                        "DBG.drain__qid_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
-                        if ($DEBUG);
+                    #DBG print
+                        #DBG "DBG.drain__qid_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
+                        #DBG if ($DEBUG);
                     $self->add_match(
                         {   match => $match_email,
                             qid   => $match_qid,
