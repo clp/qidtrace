@@ -1,4 +1,4 @@
-qidtrace  version 0.32
+qidtrace  version 0.33
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -64,6 +64,14 @@ Version 0.32, Tue2011_0920
 
 Update drain_queue() to use the data structure added in v 0.31.
 
+
+Version 0.33, Sat2011_0924
+
+Handle the '-n' cmd line option, to display line numbers.
+
+Prevent duplicate o/p lines made by the program.  Some i/p 
+lines are duplicated in the i/p file, and those are displayed
+if the email address or qid matches the desired values.
 
 
 
