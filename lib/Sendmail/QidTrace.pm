@@ -99,8 +99,9 @@ sub drain_queue {
             ## Add line from buffer w/ matching email addr to the "seen" hash.
             my ( $match_email, $match_qid )
                 = Sendmail::QidTrace::match_line( $self->{match}, $ln );
+
             #DBG print "DBG.drain__email_match_found: \$lnum: ,$lnum,\n"
-                #DBG if ($DEBUG);
+            #DBG if ($DEBUG);
             $self->add_match(
                 {   match => $match_email,
                     qid   => $match_qid,
@@ -125,7 +126,7 @@ sub drain_queue {
                 if (   defined $ln_from_buf
                     && ( $ln_from_buf =~ /$match_qid/ )
                     && ( $ln_from_buf ne $ln )
-                    && ( ! grep (/$lnum_from_buf/, @emitted ) ))
+                    && ( !grep ( /$lnum_from_buf/, @emitted ) ) )
                 {
 
                     my ( $match_email, $match_qid )
@@ -138,9 +139,9 @@ sub drain_queue {
                     ## leading array to check its email addr.
                     next if ( $match_email eq $self->{match} );
 
-                    #DBG print
-                        #DBG "DBG.drain__qid_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
-                        #DBG if ($DEBUG);
+                    ##DBG print
+                    ##DBG "DBG.drain__qid_match_found: \$lnum_from_buf: ,$lnum_from_buf,\n"
+                    ##DBG if ($DEBUG);
                     $self->add_match(
                         {   match => $match_email,
                             qid   => $match_qid,
@@ -159,12 +160,12 @@ sub drain_queue {
                     );
                     push @emitted, $lnum_from_buf;
                 }
-            } # End inner loop: check for qid's in buffer.
+            }    # End inner loop: check for qid's in buffer.
 
             next;
         }
-    } # End outer loop: check for matches in buffer.
-} # End sub drain_queue.
+    }    # End outer loop: check for matches in buffer.
+}    # End sub drain_queue.
 
 #
 # Accessors to get & set the queue.

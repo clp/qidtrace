@@ -17,8 +17,9 @@ my $DEBUG = 0;    # Set to 1 to enable debug stmts.
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 
-my $window_size = 1400;    #use 1400 (or 2800?) to get all matches;
+my $window_size = 1400; #use 1400 (or 2800?) to get all matches;
 $window_size = 40 if ($DEBUG);
+
 #TMP $window_size = 40;
 
 my $email_address;
@@ -54,7 +55,7 @@ my $qt = new Sendmail::QidTrace::Queue(
         line_numbers => $emit_line_numbers
     }
 );
-my @emitted;  # Store line numbers of matching lines.
+my @emitted;    # Store line numbers of matching lines.
 
 while (<>) {
     chomp;
@@ -85,6 +86,7 @@ while (<>) {
         ## Are there such lines?
 
         if ($match_email) {
+
             #DBG print "DBG.email_match_found: \$num: ,$num,\n" if ($DEBUG);
             $qt->add_match(
                 {   match => $match_email,
@@ -101,14 +103,16 @@ while (<>) {
             push @emitted, $num;
 
             # Check for matching qid's in the buffer.
-            foreach my $lref ( $qt->get_leading_array, $qt->get_trailing_array )
+            foreach
+                my $lref ( $qt->get_leading_array, $qt->get_trailing_array )
             {
-                my %lh = %$lref;
+                my %lh            = %$lref;
                 my $ln_from_buf   = $lh{line};
                 my $lnum_from_buf = $lh{num};
-                if (     defined $ln_from_buf 
+                if (   defined $ln_from_buf
                     && ( $ln_from_buf =~ /$match_qid/ )
-                    && ( ! grep (/$lnum_from_buf/, @emitted ) ) ) {
+                    && ( !grep ( /$lnum_from_buf/, @emitted ) ) )
+                {
                     my ( $match_email, $match_qid )
                         = match_line( $email_address, $ln_from_buf );
 
@@ -119,7 +123,7 @@ while (<>) {
                     next if ( $match_email eq $email_address );
 
                     ##DBG print "DBG.buffer_match_found: \$num: ,$num,\n"
-                        ##DBG if ($DEBUG);
+                    ##DBG if ($DEBUG);
                     $qt->add_match(
                         {   match => $match_email,
                             qid   => $match_qid,
@@ -129,18 +133,20 @@ while (<>) {
                                     $ln_from_buf, $output_start_column,
                                     $output_length
                                     )
-                                : substr( $ln_from_buf, $output_start_column )
+                                : substr(
+                                    $ln_from_buf, $output_start_column
+                                )
                             ),
                             num => $lnum_from_buf
                         }
                     );
                     push @emitted, $lnum_from_buf;
                 }
-            } # End inner loop: check entire buffer for matching qid's.
+            }    # End inner loop: check entire buffer for matching qid's.
 
-            next; # Read next i/p line after finding a matching email.
-                  # Do not push current line onto @_trailing.
-        } # End loop: check for matching email address.
+            next;    # Read next i/p line after finding a matching email.
+                     # Do not push current line onto @_trailing.
+        }    # End loop: check for matching email address.
 
         # Save line to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array(
@@ -157,7 +163,6 @@ while (<>) {
 
 $qt->drain_queue( $output_start_column, $output_length, \@emitted );
 
-
 # Print all matching lines from the %_seen hash.
 foreach my $k ( sort keys %{ $qt->get_seen_hash } ) {
 
@@ -173,7 +178,6 @@ foreach my $k ( sort keys %{ $qt->get_seen_hash } ) {
     }
 }
 
-
 =pod
 
 =head2 Print All Matching Lines
@@ -185,13 +189,13 @@ The outer loop dereferences the hash ref,
   selects the keys (which are qid's),
   sorts the list by qid,
   then iterates over its block using each qid as the index value.
-  The first entry is extracted from the HoAoH & printed.
+  The first entry is extracted from the AoH & printed.
 
 The inner loop takes the qid as a key for the %_seen hash,
   gets the hash value for that key (which is a ref to an array),
   dereferences the array,
   iterates over every member of that array,
-  dereferences the value, which is a hash,
+  dereferences the entry, which is a hash ref,
   extracts the values for line number and line,
   and prints those two values.
 
