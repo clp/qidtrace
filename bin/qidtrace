@@ -9,7 +9,7 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.32';
+our $VERSION = '0.33';
 
 my $DEBUG = 0;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
@@ -54,15 +54,12 @@ my $qt = new Sendmail::QidTrace::Queue(
         line_numbers => $emit_line_numbers
     }
 );
-#TBR my %each_line;
 my @emitted;  # Store line numbers of matching lines.
 
 while (<>) {
     chomp;
     my $line;
     my $num;
-    my $lref;
-    my %lh;
     $qt->push_onto_leading_array(
         {   num  => $.,
             line => $_
@@ -74,7 +71,7 @@ while (<>) {
     # Fill the _leading array before checking for matches.
     if ( $qt->size_of_leading_array > $window_size ) {
 
-        # Deref the hash & get value for keys 'line' & 'num'.
+        # Deref to get the hash & get value for keys 'line' & 'num'.
         my $leadref = $qt->shift_off_leading_array();
         my %leadh   = %$leadref;
         my $line    = $leadh{line};
@@ -83,7 +80,6 @@ while (<>) {
         #DBG print "DBG.window_filled: \$num: ,$num,\n" if ($DEBUG);
         my ( $match_email, $match_qid ) = match_line( $email_address, $line );
 
-        #
         next if ( $match_qid eq '' );    # No qid found: skip to next line.
         ##TBD: Does this skip lines w/ addr & no qid?  Maybe move it down or rm?
         ## Are there such lines?
@@ -105,13 +101,11 @@ while (<>) {
             push @emitted, $num;
 
             # Check for matching qid's in the buffer.
-            foreach $lref ( $qt->get_leading_array, $qt->get_trailing_array )
+            foreach my $lref ( $qt->get_leading_array, $qt->get_trailing_array )
             {
-                %lh = %$lref;
+                my %lh = %$lref;
                 my $ln_from_buf   = $lh{line};
                 my $lnum_from_buf = $lh{num};
-                ##TBD: #OK.ORG  if (defined $ln && ($ln =~ /$match_qid/) && ($ln !~ $line) ){ #}
-                ##TBD: #OK.? if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $line) ){ #}
                 if (     defined $ln_from_buf 
                     && ( $ln_from_buf =~ /$match_qid/ )
                     && ( ! grep (/$lnum_from_buf/, @emitted ) ) ) {
@@ -141,17 +135,14 @@ while (<>) {
                         }
                     );
                     push @emitted, $lnum_from_buf;
-
-                    ##TBD: Delete line from buffer, or mark it as saved to ignore it to avoid duplicates.
                 }
-            }        # End foreach $lref.
-            next;    # Read next i/p line after finding a matching email.
-                     # Do not push current line onto @_trailing.
-        }    # End (if ($match_email)
-             #
-             # Save line to trailing array if not added to %_seen hash.
-             #OK.ORG  $qt->push_onto_trailing_array ($line);
-             #
+            } # End inner loop: check entire buffer for matching qid's.
+
+            next; # Read next i/p line after finding a matching email.
+                  # Do not push current line onto @_trailing.
+        } # End loop: check for matching email address.
+
+        # Save line to trailing array if not added to %_seen hash.
         $qt->push_onto_trailing_array(
             {   num  => $num,
                 line => $line
@@ -172,20 +163,12 @@ foreach my $k ( sort keys %{ $qt->get_seen_hash } ) {
 
     #TBF: Specifying cmd line param '-s' can affect the sorted o/p.  Fix this.
     my $h = shift( @{ ${ $qt->get_seen_hash }{$k} } );
-    #DBG print "${$h}{num}; " if ($DEBUG);
     print "${$h}{num}; " if ($emit_line_numbers);
-
-    #DBG print "${$h}{qid} if ($DEBUG); ";
-    #DBG print "${$h}{match}:\n" if ($DEBUG);
-
     print "${$h}{line}\n";
+
     foreach ( @{ ${ $qt->get_seen_hash }{$k} } ) {
-        #DBG print "**** ${$_}{num}" if ($DEBUG);
         print "**** ";
         print "${$_}{num}; " if ($emit_line_numbers);
-
-        #DBG print "${$_}{qid}; " if ($DEBUG);
-        #DBG print "${$_}{match}:\n" if ($DEBUG);
         print "${$_}{line}\n";
     }
 }
@@ -202,12 +185,15 @@ The outer loop dereferences the hash ref,
   selects the keys (which are qid's),
   sorts the list by qid,
   then iterates over its block using each qid as the index value.
+  The first entry is extracted from the HoAoH & printed.
 
 The inner loop takes the qid as a key for the %_seen hash,
   gets the hash value for that key (which is a ref to an array),
   dereferences the array,
   iterates over every member of that array,
-  and prints each line found in that array.
+  dereferences the value, which is a hash,
+  extracts the values for line number and line,
+  and prints those two values.
 
 =cut
 

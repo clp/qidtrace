@@ -69,8 +69,9 @@ sub add_match {
     #TBD: Verify i/p is OK.
     # If not, print error & exit or return.
     #
-    # Add the line to save to the _seen hash.
-    # Store array of refs to lines for each key=qid.
+    # Add the line to save to the _seen hash,
+    # using qid as key.
+    # Store a ref to that hash in an array.
     my $key   = "$mo->{qid}";
     my $value = $mo;
     push @{ $self->{_seen}{$key} }, $value;
@@ -80,10 +81,9 @@ sub drain_queue {
     my ($self)              = shift;
     my $output_start_column = shift;
     my $output_length       = shift;    # default to the whole line
-    my $er                  = shift;
-    my @emitted             = @$er;
+    my $eref                = shift;
+    my @emitted             = @$eref;
 
-    #TBR my @emitted;  # Store line numbers of matching lines.
     my %lh;
     my $ltdref;
     my @lines_to_drain;
@@ -96,8 +96,6 @@ sub drain_queue {
         # Check for desired email addr in the current line.
         if ( $ln =~ m/$self->{match}/ ) {
 
-            ##TBD: if (defined $ln && ($ln =~ /$match_qid/) && ($ln ne $ltd) ) { #}
-            ##
             ## Add line from buffer w/ matching email addr to the "seen" hash.
             my ( $match_email, $match_qid )
                 = Sendmail::QidTrace::match_line( $self->{match}, $ln );
@@ -122,14 +120,14 @@ sub drain_queue {
                 my $ln_from_buf   = $lh{line};
                 my $lnum_from_buf = $lh{num};
 
+                ## The third clause eliminates dupes of $match_email;
+                ## The fourth clause eliminates dupes that match $match_qid:
                 if (   defined $ln_from_buf
                     && ( $ln_from_buf =~ /$match_qid/ )
                     && ( $ln_from_buf ne $ln )
                     && ( ! grep (/$lnum_from_buf/, @emitted ) ))
                 {
 
-                    ##TBD: The last clause eliminates dupes of $match_email;
-                    ##  but it does not eliminate dupes that only match $match_qid.
                     my ( $match_email, $match_qid )
                         = Sendmail::QidTrace::match_line( $self->{match},
                         $ln_from_buf );
@@ -160,14 +158,13 @@ sub drain_queue {
                         }
                     );
                     push @emitted, $lnum_from_buf;
-
-                    #TBD: Delete line from buffer.
                 }
-            }        # End foreach $ltd_from_buf.
-            next;    # TBR?
+            } # End inner loop: check for qid's in buffer.
+
+            next;
         }
-    }    # End foreach $ltdref.
-}    # End sub drain_queue_rev1037().
+    } # End outer loop: check for matches in buffer.
+} # End sub drain_queue.
 
 #
 # Accessors to get & set the queue.
