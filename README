@@ -1,4 +1,4 @@
-qidtrace  version 0.33
+qidtrace  version 0.34
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -72,6 +72,14 @@ Handle the '-n' cmd line option, to display line numbers.
 Prevent duplicate o/p lines made by the program.  Some i/p 
 lines are duplicated in the i/p file, and those are displayed
 if the email address or qid matches the desired values.
+
+
+Version 0.34, Tue2011_0927
+
+Add new tool, bin/most_frequent, to count email addrs
+and queue IDs in the i/p file and print the ten most frequent
+values found.
+
 
 
 
