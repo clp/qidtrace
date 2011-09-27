@@ -11,7 +11,7 @@ my $DEBUG = 1;    # Set to 1 to enable debug stmts.
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 
-die usage() if ( ! @ARGV );
+die usage() if ( !@ARGV );
 
 my $total_line_count;
 my %uid;
@@ -23,6 +23,7 @@ while (<>) {
     chomp;
     $total_line_count++;
     my $line = $_;
+
     #DBG print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
     #DBG print "DBG.while: \$line: ,$line,\n" if ($DEBUG);
 
@@ -31,29 +32,31 @@ while (<>) {
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ) {
         $qid{$1}++;
     }
-    #
-    # Chk for empty email before non-empty & go to next i/p line if match found here.
+    ##
+    ## Chk for empty email before non-empty & go to next i/p line if match found here.
     if ( $line =~ m/(<>)/ ) {
+
         #DBG print "DBG.empty.email_hash: \$1: ,<>,\n" if ($DEBUG);
         $uid{'<>'}++;
         next;
     }
+
     #
     # Chk for non-empty email last to avoid counting empty lines twice.
     if ( $line =~ m/(<.*?\@.*?>)/ ) {
+
         #DBG print "DBG.email_hash: \$1: ,$1,\n" if ($DEBUG);
         $uid{$1}++;
     }
 
 }    # End of while loop.
 
-    # Sort the hash by values.
-    @frequent_uids = sort { $uid{$b} <=> $uid{$a} } keys %uid;
-    @frequent_qids = sort { $qid{$b} <=> $qid{$a} } keys %qid;
+# Sort the hash by values.
+@frequent_uids = sort { $uid{$b} <=> $uid{$a} } keys %uid;
+@frequent_qids = sort { $qid{$b} <=> $qid{$a} } keys %qid;
 
-    print "$frequent_uids[$_]: $uid{$frequent_uids[$_]}\n" foreach (0 .. 9);
-    print "$frequent_qids[$_]: $qid{$frequent_qids[$_]}\n" foreach (0 .. 9);
-
+print "$frequent_uids[$_]: $uid{$frequent_uids[$_]}\n" foreach ( 0 .. 9 );
+print "$frequent_qids[$_]: $qid{$frequent_qids[$_]}\n" foreach ( 0 .. 9 );
 
 exit;
 
