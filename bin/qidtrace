@@ -9,7 +9,7 @@ use Data::Dumper;
 
 use Sendmail::QidTrace qw/match_line/;
 
-our $VERSION = '0.33';
+our $VERSION = '0.34';
 
 my $DEBUG = 0;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
