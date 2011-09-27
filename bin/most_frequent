@@ -3,13 +3,7 @@
 use strict;
 use warnings;
 
-use Getopt::Long;
-
-use Data::Dumper;
-
-#TBR use Sendmail::QidTrace qw/match_line/;
-
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my $DEBUG = 1;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
@@ -17,45 +11,8 @@ my $DEBUG = 1;    # Set to 1 to enable debug stmts.
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
 
-#TBR my $window_size = 1400; #use 1400 (or 2800?) to get all matches;
-#TBR $window_size = 40 if ($DEBUG);
+die usage() if ( ! @ARGV );
 
-#TMP $window_size = 40;
-
-my $email_address;
-my $emit_line_numbers   = 0;
-my $output_start_column = 0;
-my $output_length       = 0;    # default to the whole line
-
-unless (
-    GetOptions(
-
-        # input matching
-        #TBR 'window-size=i'   => \$window_size,
-        #TBR 'match-pattern=s' => \$email_address,
-
-        # output formatting
-        'number-output' => \$emit_line_numbers,
-
-        # control what part of the match line we emit by calls to substr
-        'start-column=i'  => \$output_start_column,
-        'output-length=i' => \$output_length
-    )
-    )
-{
-    die usage();
-}
-#TBR unless ($email_address) {
-    #TBR die "no email address found on command line\n\n", usage();
-#TBR }
-
-#TBR my $qt = new Sendmail::QidTrace::Queue(
-    #TBR {   match        => $email_address,
-        #TBR window_size  => $window_size,
-        #TBR line_numbers => $emit_line_numbers
-    #TBR }
-#TBR );
-#TBR my @emitted;    # Store line numbers of matching lines.
 my $total_line_count;
 my %uid;
 my %qid;
@@ -69,14 +26,13 @@ while (<>) {
     #DBG print "DBG.while: \$.: ,$.,\n" if ($DEBUG);
     #DBG print "DBG.while: \$line: ,$line,\n" if ($DEBUG);
 
-    my $email = "<.*\@.*>";
     #
     # Chk for qid first.
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ) {
         $qid{$1}++;
     }
     #
-    # Chk for empty email before non-empty & skip to next if empty match found.
+    # Chk for empty email before non-empty & go to next i/p line if match found here.
     if ( $line =~ m/(<>)/ ) {
         #DBG print "DBG.empty.email_hash: \$1: ,<>,\n" if ($DEBUG);
         $uid{'<>'}++;
@@ -103,29 +59,13 @@ exit;
 
 sub usage {
     return <<"eousage";
-usage $prog: [options] <log_files>
+Usage:
+  $prog <log_files>
 
 $prog is a filter for sendmail log files.
 It counts each email address and queue id string,
 and prints the most frequent ones found.
 
-Options to control the matching
-
--match-pattern string    log lines are matched against this literal (not regex) pattern.
-                         typical usage is an email address, or a virus name.
-                         Required.
-
--window-size   int       a window of log lines both in front of, and behind the current line
-                         is kept.  Matches will be found in this buffer.
-                         Default: 100
-
-Output options
-
--number-output  flag     emit the line number of the matching line on output
-
--start-column   int      Control what portion of the matching line is displayed.
-                         start-column gives the first column of the output line displayed.
--output-length  int      Length of the output line before line numbering, if any.
 eousage
 }
 
