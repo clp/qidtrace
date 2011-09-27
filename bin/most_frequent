@@ -43,7 +43,7 @@ while (<>) {
     if ( $line =~ m/(<.*?\@.*?>)/ ) {
         #DBG print "DBG.email_hash: \$1: ,$1,\n" if ($DEBUG);
         $uid{$1}++;
-    } 
+    }
 
 }    # End of while loop.
 
@@ -60,7 +60,7 @@ exit;
 sub usage {
     return <<"eousage";
 Usage:
-  $prog <log_files>
+  $prog <log_file>
 
 $prog is a filter for sendmail log files.
 It counts each email address and queue id string,
