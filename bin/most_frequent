@@ -32,8 +32,9 @@ while (<>) {
     if ( $line =~ m/.*:? ([a-zA-Z\d]{14}).? ?.*/ ) {
         $qid{$1}++;
     }
-    
-    # Chk for empty email before non-empty & go to next i/p line if match found here.
+
+    # Chk for empty email before non-empty
+    # & read next i/p line if match found here.
     if ( $line =~ m/(<>)/ ) {
 
         #DBG print "DBG.empty.email_hash: \$1: ,<>,\n" if ($DEBUG);
