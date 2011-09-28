@@ -94,14 +94,15 @@ sub drain_queue {
         my $lnum = $lh{num};
 
         # Check for desired email addr in the current line.
-        if ( $ln =~ m/$self->{match}/ ) {
+        if ( $ln =~ m/<$self->{match}>/ ) {
 
-            ## Add line from buffer w/ matching email addr to the "seen" hash.
+            # Get email & qid from current line.
             my ( $match_email, $match_qid )
                 = Sendmail::QidTrace::match_line( $self->{match}, $ln );
 
             #DBG print "DBG.drain__email_match_found: \$lnum: ,$lnum,\n"
             #DBG if ($DEBUG);
+            ## Add line from buffer w/ matching email addr to the "seen" hash.
             $self->add_match(
                 {   match => $match_email,
                     qid   => $match_qid,
@@ -160,11 +161,11 @@ sub drain_queue {
                     );
                     push @emitted, $lnum_from_buf;
                 }
-            }    # End inner loop: check for qid's in buffer.
+            }    # End inner loop: check for matching qid's in buffer.
 
             next;
         }
-    }    # End outer loop: check for matches in buffer.
+    }    # End outer loop: check for email addr matches in buffer.
 }    # End sub drain_queue.
 
 #
