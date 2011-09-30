@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# Note: This test assumes that $window_size=100 in qidtrace.
+
 use Test::More tests => 1;
 
 my $project_dir = "~/p/qidtrace/";
@@ -16,5 +18,5 @@ print { $outfile } $test_out;
 # Compare two files on disk: reference o/p to program under test o/p.
 my $ref_out = "refout/$test_output_filename";
 my $diff_out = `diff -s  "$outdir/$test_output_filename" $ref_out`;
-like( $diff_out, qr{Files.*are.identical.*}, "Matching lines found by drain_queue().");
+like( $diff_out, qr{Files.*are.identical.*}, "Matching lines w/ addr found by main loop and qid found by drain_queue().");
 
