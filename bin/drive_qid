@@ -1,0 +1,165 @@
+#! /usr/bin/env perl
+#
+# drive_qid  clpoda  2011_0930
+  # batbug:/home/clpoda/p/qidtrace/bin
+  # Time-stamp: <Fri 2011 Sep 30 01:33:11 PMPM clpoda> 
+#vi modeline vim: nu 
+
+
+# ######################################### 
+#
+# Execute the qidtrace program and store data 
+# about each run in a file in CSV format.
+#
+#
+# Ref: Perl Testing, A Developer''s Notebook, p. 167:
+#   Testing Programs using IPC::Run.
+# 
+# ######################################### 
+
+# Note, Thu2011_0929_23:19
+#TBD: Build this test into a tool that runs the PUT & analyzes
+  # the o/p & builds an o/p data file.
+  # It should append test results to the o/p file, for easy
+  # comparison of various runs of the Program Under Test.
+  #
+  # Status: 
+  # Done: Run the program using IPC.
+  # Done: Save its o/p to a file.
+  # Done: Implement command line args to set some values.
+  #
+
+use warnings;
+use strict;
+
+use IPC::Run 'run';
+
+use Getopt::Long;
+
+# Specify Program Under Test, put.
+my $putdir = "bin/";
+my $put = "qidtrace";
+my $putfile = $putdir . $put;
+
+my $email_address = "u13\@h2.net";
+my $window_size;
+
+my $indir = "data/";
+my $datafile;
+$datafile = "9999-lines.mx";
+$datafile = "11-lines.mx";
+
+#TBD: Make this program a wrapper around different implementations of qidtrace.
+#  Use minimal editing of the wrapped code.
+#TBD?: Use chdir to set the current dir before a test run.
+
+my $infile = $indir . $datafile;
+my $outdir = "out";
+my $time_stamp = build_tss();
+my $out_suffix = "$time_stamp.out";
+my $outfile = "$outdir/qt.drive_qid." . $out_suffix;
+my $sum_outfile = "$outdir/qid_test_summary";
+my $sum_out_header_file = "$outdir/qid_summary_header";
+my ($out, $err);
+
+
+unless (
+    GetOptions(
+
+        # input matching
+        'window-size=i'   => \$window_size,
+        'match-pattern=s' => \$email_address,
+
+        # Program Under Test
+        'putfile=s' => \$putfile,
+
+        # Input data file
+        'infile=s' => \$infile,
+    )
+    )
+{
+    die usage();
+}
+
+($out, $err) = runqid( '-I', 'lib',  $putfile, '-m',  $email_address, '-w', $window_size, $infile );
+
+
+
+# Analyze o/p to get summary data: run time, o/p line count, TBD.
+my $line_count = 0;
+foreach ( split /\n/, $out ) {
+    $line_count++;
+}
+
+my $duration = "TBD-duration";
+if ( $err =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x ) {
+    $duration = $1;
+}
+
+#TBD: Read time stamp of PUT & add it to summary o/p.
+#TBD: ?Read version of PUT & add it to summary o/p?
+
+# Write header line to a separate o/p file.
+my $sum_out_header = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
+open OUT, '>', $sum_out_header_file  or die "Cannot open $sum_out_header_file: [$!]\n";
+print OUT $sum_out_header;
+close OUT;
+
+# Append summary data to summary o/p file.
+my $sum_out = "$time_stamp, $putfile, $email_address, $infile, $window_size, $line_count, $duration\n";
+open OUT, '>>', $sum_outfile  or die "Cannot open $sum_outfile: [$!]\n";
+print OUT $sum_out;
+close OUT;
+
+print $sum_out_header;
+print "\n";
+print $sum_out;
+
+
+# Write $out to o/p file
+open OUT, '>', $outfile  or die "Cannot open $outfile: [$!]\n";
+print OUT $out;
+close OUT;
+
+
+#DBG print "DBG: \$out: ,$out, \n";
+
+
+sub runqid
+{
+  run( [ "/usr/bin/time", $^X, @_ ], \my( $in, $out, $err ) );
+  return ($out, $err);
+}
+
+sub t_runqid
+{
+  my @times = times;
+  run( [ "/usr/bin/time", $^X, @_ ], \my( $in, $out, $err ) );
+  return ($out, $err, \@times);
+}
+
+
+sub build_tss {
+    #########################################################
+    # Usage      : TBD
+    # Purpose    : Build time stamp string $tss, w/ leading zeros
+    # Returns    : $tss, a string like YYYYMMDD_HHMM
+    # Parameters : none; uses current time.
+    # Throws     : no exceptions
+    # Comments   : none
+    # Status     : Working.
+    # See Also   : n/a
+    #########################################################
+    #
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+      localtime(time);
+    $year += 1900;
+    $mon  += 1;
+    my $i; 
+    for $i ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) {
+        $i = "0" . $i if $i <= 9;
+    }
+    my $tss = "$year$mon$mday" . "_" . "$hour:$min";
+    return $tss;
+}
+
