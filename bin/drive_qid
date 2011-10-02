@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Fri 2011 Sep 30 04:19:49 PMPM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 11:19:09 AMAM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -35,18 +35,28 @@ use IPC::Run 'run';
 
 use Getopt::Long;
 
+my $DEBUG = 0;    # Set to 1 to enable debug stmts.
+                  # Set to 0 to run tests & for normal operation.
+
+my $prog = $0;
+$prog =~ s{\A.*/}{};    # strip leading path, if any
+
 # Specify Program Under Test, put.
 my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
+my @put = qw{ qidtrace };
 
 my $email_address = "u13\@h2.net";
-my $window_size;
+my @uid = qw{ u13\@h2.net u13@h362.com u7510@h656.net };
+my $window_size = 100;
+my @win = qw{ 100 1400 };
 
 my $indir = "data/";
 my $datafile;
 $datafile = "9999-lines.mx";
 $datafile = "11-lines.mx";
+my @infile = qw{ 11-lines.mx 99-lines.mx };
 
 #TBD: Make this program a wrapper around different implementations of qidtrace.
 #  Use minimal editing of the wrapped code.
@@ -79,11 +89,13 @@ unless (
     die usage();
 }
 
-( $out, $err )
-    = runqid( '-I', 'lib', $putfile, '-m', $email_address, '-w', $window_size,
-    $infile );
+# Run the PUT
 
-# Analyze o/p to get summary data: run time, o/p line count, TBD.
+( $out, $err )
+    = runqid( qw{-I lib}, $putfile, '-m', $email_address, '-w', $window_size,
+        $infile );
+
+# Analyze o/p to get summary data: o/p line count, run time, TBD.
 my $line_count = 0;
 foreach ( split /\n/, $out ) {
     $line_count++;
@@ -123,16 +135,25 @@ close OUT;
 
 #DBG print "DBG: \$out: ,$out, \n";
 
+
+exit;
+
+
 sub runqid {
     run( [ "/usr/bin/time", $^X, @_ ], \my ( $in, $out, $err ) );
+    #DBG print "DBG-runqid:  /usr/bin/time, $^X, @_ \n";
+    #DBG print "DBG-runqid:  \$out: ,,$out,,\n";
+    #DBG print "DBG-runqid:  \$err: ,,$err,,\n";
     return ( $out, $err );
 }
+
 
 sub t_runqid {
     my @times = times;
     run( [ "/usr/bin/time", $^X, @_ ], \my ( $in, $out, $err ) );
     return ( $out, $err, \@times );
 }
+
 
 sub build_tss {
     #########################################################
@@ -154,7 +175,29 @@ sub build_tss {
     for $i ( $sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst ) {
         $i = "0" . $i if $i <= 9;
     }
-    my $tss = "$year$mon$mday" . "_" . "$hour:$min";
+    my $tss = $year ."_". $mon . $mday . "_" . "$hour:$min";
     return $tss;
+}
+
+
+sub usage {
+    return <<"eousage";
+Usage:
+  $prog: [options] -m match_string <log_files>
+
+$prog is a driver to run qidtrace.
+It can specify one or more sets of input parameters, and collects the o/p.
+
+Options to control the matching
+
+-match-pattern string    log lines are matched against this literal (not regex) pattern.
+                         typical usage is an email address, or a virus name.
+                         Required.
+
+-window-size   int       a window of log lines both in front of, and behind the current line
+                         is kept.  Matches will be found in this buffer.
+                         Default: 100
+
+eousage
 }
 
