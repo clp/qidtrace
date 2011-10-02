@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 02:43:34 PMPM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 03:07:32 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -95,11 +95,7 @@ foreach my $p ( @puts ) {
       foreach my $u ( @uids ) {
 
 my ( $out, $err );
-( $out, $err )
-    #OK = runqid( qw{-I lib}, $putfile, '-m', $email_address, '-w', $window_size,
-        #OK $infile );
-    = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w,
-        $i );
+( $out, $err ) = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w, $i );
 
 # Analyze o/p to get summary data: o/p line count, run time, TBD.
 my $line_count = 0;
