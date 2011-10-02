@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 12:02:55 PMPM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 02:43:34 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -45,24 +45,29 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
-my @put = qw{ bin/qidtrace };
+my @puts = qw{ bin/qidtrace };
 
 my $email_address = "u13\@h2.net";
-my @uid = qw{ u13\@h2.net u13@h362.com u7510@h656.net };
+my @uids = qw{ u13\@h2.net u13@h362.com u7510@h656.net };
+#TST my @uids = qw{ u13\@h2.net u7510@h656.net };
+
 my $window_size = 101;
-my @win = qw{ 100 1400 };
+my @wins = qw{ 100 1400 };
 
 my $indir = "data/";
 my $datafile;
-$datafile = "9999-lines.mx";
-$datafile = "11-lines.mx";
-my @infile = qw{ 11-lines.mx 99-lines.mx };
+my @infiles;
+my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
+foreach my $f ( @datafiles ) {
+    push @infiles , $indir . $f;
+}
 
 #TBD: Make this program a wrapper around different implementations of qidtrace.
 #  Use minimal editing of the wrapped code.
 #TBD?: Use chdir to set the current dir before a test run.
 
-my $infile              = $indir . $datafile;
+#TBR? my $infile              = $indir . $datafile;
+my $infile;
 
 unless (
     GetOptions(
@@ -84,15 +89,17 @@ unless (
 
 # Run the PUT
 
-foreach my $p ( @put ) {
-  foreach my $w ( @win ) {
+foreach my $p ( @puts ) {
+  foreach my $w ( @wins ) {
+    foreach my $i ( @infiles ) {
+      foreach my $u ( @uids ) {
 
 my ( $out, $err );
 ( $out, $err )
     #OK = runqid( qw{-I lib}, $putfile, '-m', $email_address, '-w', $window_size,
         #OK $infile );
-    = runqid( qw{-I lib}, $p, '-m', $email_address, '-w', $w,
-        $infile );
+    = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w,
+        $i );
 
 # Analyze o/p to get summary data: o/p line count, run time, TBD.
 my $line_count = 0;
@@ -114,7 +121,8 @@ sleep 1;  # To avoid overwriting o/p files when small data sets are used.
 my $time_stamp          = build_tss();
 my $out_suffix          = "$time_stamp.out";
 my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
-my $sum_outfile         = "$outdir/qid_test_summary";
+#ORG my $sum_outfile         = "$outdir/qid_test_summary";
+my $sum_outfile         = "$outdir/drive_qid_summary";
 my $sum_out_header_file = "$outdir/qid_summary_header";
 my $sum_out_header
     = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
@@ -126,14 +134,14 @@ close OUT;
 # Append summary data to summary o/p file.
 my $sum_out
     #OK = "$time_stamp, $putfile, $email_address, $infile, $window_size, $line_count, $duration\n";
-    = "$time_stamp, $putfile, $email_address, $infile, $w, $line_count, $duration\n";
+    = "$time_stamp, $p, $u, $i, $w, $line_count, $duration\n";
 open OUT, '>>', $sum_outfile or die "Cannot open $sum_outfile: [$!]\n";
 print OUT $sum_out;
 close OUT;
 
 print $sum_out_header;
-print "\n";
 print $sum_out;
+print "\n";
 
 # Write $out to o/p file
 open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
@@ -142,6 +150,8 @@ close OUT;
 
 #DBG print "DBG: \$out: ,$out, \n";
 
+      }
+    }
   }
 }  # End foreach @put
 
