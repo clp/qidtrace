@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 03:07:32 PMPM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 04:09:21 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -48,16 +48,17 @@ my $putfile = $putdir . $put;
 my @puts = qw{ bin/qidtrace };
 
 my $email_address = "u13\@h2.net";
-my @uids = qw{ u13\@h2.net u13@h362.com u7510@h656.net };
-#TST my @uids = qw{ u13\@h2.net u7510@h656.net };
+#TST my @uids = qw{ u13@h2.net u13@h362.com u7510@h656.net u7539@h573.com };
+my @uids = qw{ u13@h2.net u7510@h656.net };
 
 my $window_size = 101;
-my @wins = qw{ 100 1400 };
+my @wins = qw{ 100 1400 4000 8000 };
 
 my $indir = "data/";
 my $datafile;
 my @infiles;
-my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
+#TST my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
+my @datafiles = qw{ 9999-lines.mx 4500k-lines.mx };
 foreach my $f ( @datafiles ) {
     push @infiles , $indir . $f;
 }
@@ -94,58 +95,54 @@ foreach my $p ( @puts ) {
     foreach my $i ( @infiles ) {
       foreach my $u ( @uids ) {
 
-my ( $out, $err );
-( $out, $err ) = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w, $i );
-
-# Analyze o/p to get summary data: o/p line count, run time, TBD.
-my $line_count = 0;
-foreach ( split /\n/, $out ) {
-    $line_count++;
-}
-
-my $duration = "TBD-duration";
-if ( $err =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x ) {
-    $duration = $1;
-}
-
-#TBD: Read time stamp of PUT & add it to summary o/p.
-#TBD: ?Read version of PUT & add it to summary o/p?
-
-# Write header line to a separate o/p file.
-my $outdir              = "out";
-sleep 1;  # To avoid overwriting o/p files when small data sets are used.
-my $time_stamp          = build_tss();
-my $out_suffix          = "$time_stamp.out";
-my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
-#ORG my $sum_outfile         = "$outdir/qid_test_summary";
-my $sum_outfile         = "$outdir/drive_qid_summary";
-my $sum_out_header_file = "$outdir/qid_summary_header";
-my $sum_out_header
-    = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
-open OUT, '>', $sum_out_header_file
-    or die "Cannot open $sum_out_header_file: [$!]\n";
-print OUT $sum_out_header;
-close OUT;
-
-# Append summary data to summary o/p file.
-my $sum_out
-    #OK = "$time_stamp, $putfile, $email_address, $infile, $window_size, $line_count, $duration\n";
-    = "$time_stamp, $p, $u, $i, $w, $line_count, $duration\n";
-open OUT, '>>', $sum_outfile or die "Cannot open $sum_outfile: [$!]\n";
-print OUT $sum_out;
-close OUT;
-
-print $sum_out_header;
-print $sum_out;
-print "\n";
-
-# Write $out to o/p file
-open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
-print OUT $out;
-close OUT;
-
-#DBG print "DBG: \$out: ,$out, \n";
-
+          my ( $out, $err );
+          ( $out, $err ) = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w, $i );
+          
+          # Analyze o/p to get summary data: o/p line count, run time, TBD.
+          my $line_count = 0;
+          foreach ( split /\n/, $out ) {
+              $line_count++;
+          }
+          
+          my $duration = "TBD-duration";
+          if ( $err =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x ) {
+              $duration = $1;
+          }
+          
+          #TBD: Read time stamp of PUT & add it to summary o/p.
+          #TBD: ?Read version of PUT & add it to summary o/p?
+          
+          # Write header line to a separate o/p file.
+          my $outdir              = "out";
+          sleep 1;  # To avoid overwriting o/p files when small data sets are used.
+          my $time_stamp          = build_tss();
+          my $out_suffix          = "$time_stamp.out";
+          my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
+          my $sum_outfile         = "$outdir/drive_qid_summary";
+          my $sum_out_header_file = "$outdir/qid_summary_header";
+          my $sum_out_header
+              = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
+          open OUT, '>', $sum_out_header_file
+              or die "Cannot open $sum_out_header_file: [$!]\n";
+          print OUT $sum_out_header;
+          close OUT;
+          
+          # Append summary data to summary o/p file.
+          my $sum_out = "$time_stamp, $p, $u, $i, $w, $line_count, $duration\n";
+          open OUT, '>>', $sum_outfile or die "Cannot open $sum_outfile: [$!]\n";
+          print OUT $sum_out;
+          close OUT;
+          
+          print $sum_out_header;
+          print $sum_out;
+          print "\n";
+          
+          # Write $out to o/p file
+          open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
+          print OUT $out;
+          close OUT;
+          
+          #DBG print "DBG: \$out: ,$out, \n";
       }
     }
   }
