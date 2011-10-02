@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 11:19:09 AMAM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 12:02:55 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -45,11 +45,11 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
-my @put = qw{ qidtrace };
+my @put = qw{ bin/qidtrace };
 
 my $email_address = "u13\@h2.net";
 my @uid = qw{ u13\@h2.net u13@h362.com u7510@h656.net };
-my $window_size = 100;
+my $window_size = 101;
 my @win = qw{ 100 1400 };
 
 my $indir = "data/";
@@ -63,13 +63,6 @@ my @infile = qw{ 11-lines.mx 99-lines.mx };
 #TBD?: Use chdir to set the current dir before a test run.
 
 my $infile              = $indir . $datafile;
-my $outdir              = "out";
-my $time_stamp          = build_tss();
-my $out_suffix          = "$time_stamp.out";
-my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
-my $sum_outfile         = "$outdir/qid_test_summary";
-my $sum_out_header_file = "$outdir/qid_summary_header";
-my ( $out, $err );
 
 unless (
     GetOptions(
@@ -91,8 +84,14 @@ unless (
 
 # Run the PUT
 
+foreach my $p ( @put ) {
+  foreach my $w ( @win ) {
+
+my ( $out, $err );
 ( $out, $err )
-    = runqid( qw{-I lib}, $putfile, '-m', $email_address, '-w', $window_size,
+    #OK = runqid( qw{-I lib}, $putfile, '-m', $email_address, '-w', $window_size,
+        #OK $infile );
+    = runqid( qw{-I lib}, $p, '-m', $email_address, '-w', $w,
         $infile );
 
 # Analyze o/p to get summary data: o/p line count, run time, TBD.
@@ -110,6 +109,13 @@ if ( $err =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x ) {
 #TBD: ?Read version of PUT & add it to summary o/p?
 
 # Write header line to a separate o/p file.
+my $outdir              = "out";
+sleep 1;  # To avoid overwriting o/p files when small data sets are used.
+my $time_stamp          = build_tss();
+my $out_suffix          = "$time_stamp.out";
+my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
+my $sum_outfile         = "$outdir/qid_test_summary";
+my $sum_out_header_file = "$outdir/qid_summary_header";
 my $sum_out_header
     = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
 open OUT, '>', $sum_out_header_file
@@ -119,7 +125,8 @@ close OUT;
 
 # Append summary data to summary o/p file.
 my $sum_out
-    = "$time_stamp, $putfile, $email_address, $infile, $window_size, $line_count, $duration\n";
+    #OK = "$time_stamp, $putfile, $email_address, $infile, $window_size, $line_count, $duration\n";
+    = "$time_stamp, $putfile, $email_address, $infile, $w, $line_count, $duration\n";
 open OUT, '>>', $sum_outfile or die "Cannot open $sum_outfile: [$!]\n";
 print OUT $sum_out;
 close OUT;
@@ -134,6 +141,9 @@ print OUT $out;
 close OUT;
 
 #DBG print "DBG: \$out: ,$out, \n";
+
+  }
+}  # End foreach @put
 
 
 exit;
@@ -175,7 +185,7 @@ sub build_tss {
     for $i ( $sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst ) {
         $i = "0" . $i if $i <= 9;
     }
-    my $tss = $year ."_". $mon . $mday . "_" . "$hour:$min";
+    my $tss = $year ."_". $mon . $mday . "_" . "$hour:$min:$sec";
     return $tss;
 }
 
