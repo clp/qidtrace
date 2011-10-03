@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
     ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 04:09:21 PMPM clpoda>
+    ## Time-stamp: <Sun 2011 Oct 02 09:45:39 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -45,20 +45,26 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
-my @puts = qw{ bin/qidtrace };
+#TST my @puts = qw{ bin/qidtrace };
+my @puts = qw{ bin/two_buffer_pg_rev2.pl  
+    bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace 
+};
 
 my $email_address = "u13\@h2.net";
-#TST my @uids = qw{ u13@h2.net u13@h362.com u7510@h656.net u7539@h573.com };
-my @uids = qw{ u13@h2.net u7510@h656.net };
+my @uids = qw{ u13@h2.net u13@h362.com u3792@h1250.com u15069@h2.net
+    u18287@h1056.net u1669@h2.net u364428@h567.net u4076@h1250.com
+    u7510@h656.net u7539@h573.com 
+};
+#TST my @uids = qw{ u13@h2.net u13@h362.com };
 
 my $window_size = 101;
-my @wins = qw{ 100 1400 4000 8000 };
+my @wins = qw{ 100 1400 2600 4000 };
 
 my $indir = "data/";
 my $datafile;
 my @infiles;
 #TST my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
-my @datafiles = qw{ 9999-lines.mx 4500k-lines.mx };
+my @datafiles = qw{ 4500k-lines.mx };
 foreach my $f ( @datafiles ) {
     push @infiles , $indir . $f;
 }
@@ -137,7 +143,7 @@ foreach my $p ( @puts ) {
           print $sum_out;
           print "\n";
           
-          # Write $out to o/p file
+          # Write each $out to unique o/p file
           open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
           print OUT $out;
           close OUT;
