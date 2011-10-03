@@ -1,8 +1,8 @@
 #! /usr/bin/env perl
 #
 # drive_qid  clpoda  2011_0930
-    ## batbug:/home/clpoda/p/qidtrace/bin
-    ## Time-stamp: <Sun 2011 Oct 02 10:00:54 PMPM clpoda>
+## batbug:/home/clpoda/p/qidtrace/bin
+## Time-stamp: <Mon 2011 Oct 03 09:01:29 AMAM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -45,28 +45,36 @@ $prog =~ s{\A.*/}{};    # strip leading path, if any
 my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
-#TST my @puts = qw{ bin/qidtrace };
-my @puts = qw{ bin/two_buffer_pg_rev2.pl  
-    bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace 
-};
+
+my @puts = qw{ bin/qidtrace };
+
+#TST my @puts = qw{ bin/two_buffer_pg_rev2.pl
+#TST bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
+#TST };
 
 my $email_address = "u13\@h2.net";
-my @uids = qw{ u13@h2.net u13@h362.com u3792@h1250.com u15069@h2.net
-    u18287@h1056.net u1669@h2.net u364428@h567.net u4076@h1250.com
-    u7510@h656.net u7539@h573.com 
-};
-#TST my @uids = qw{ u13@h2.net u13@h362.com };
+
+#TST my @uids          = qw{ u13@h2.net u13@h362.com u3792@h1250.com u15069@h2.net
+#TST u18287@h1056.net u1669@h2.net u364428@h567.net u4076@h1250.com
+#TST u7510@h656.net u7539@h573.com
+#TST };
+
+my @uids = qw{ u13@h2.net u13@h362.com };
 
 my $window_size = 101;
-my @wins = qw{ 100 1400 2600 4000 };
+
+#TST my @wins        = qw{ 100 1400 2600 4000 };
+my @wins = qw{ 100 };
 
 my $indir = "data/";
 my $datafile;
 my @infiles;
-#TST my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
-my @datafiles = qw{ 4500k-lines.mx };
-foreach my $f ( @datafiles ) {
-    push @infiles , $indir . $f;
+
+my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
+
+#TST my @datafiles = qw{ 4500k-lines.mx };
+foreach my $f (@datafiles) {
+    push @infiles, $indir . $f;
 }
 
 #TBD: Make this program a wrapper around different implementations of qidtrace.
@@ -96,83 +104,81 @@ unless (
 
 # Run the PUT
 
-foreach my $p ( @puts ) {
-  foreach my $w ( @wins ) {
-    foreach my $i ( @infiles ) {
-      foreach my $u ( @uids ) {
+foreach my $p (@puts) {
+    foreach my $w (@wins) {
+        foreach my $i (@infiles) {
+            foreach my $u (@uids) {
 
-          my ( $out, $err );
-          ( $out, $err ) = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w, $i );
-          
-          # Analyze o/p to get summary data: o/p line count, run time, TBD.
-          my $line_count = 0;
-          foreach ( split /\n/, $out ) {
-              $line_count++;
-          }
-          
-          my $duration = "TBD-duration";
-          if ( $err =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x ) {
-              $duration = $1;
-          }
-          
-          #TBD: Read time stamp of PUT & add it to summary o/p.
-          #TBD: ?Read version of PUT & add it to summary o/p?
-          
-          # Write header line to a separate o/p file.
-          my $outdir              = "out";
-          sleep 1;  # To avoid overwriting o/p files when small data sets are used.
-          my $time_stamp          = build_tss();
-          my $out_suffix          = "$time_stamp.out";
-          my $outfile             = "$outdir/qt.drive_qid." . $out_suffix;
-          my $sum_outfile         = "$outdir/drive_qid_summary";
-          my $sum_out_header_file = "$outdir/qid_summary_header";
-          my $sum_out_header
-              = "Date&Time of test, program, email_address, i/p file, window_size, o/p line_count, prog run time\n";
-          open OUT, '>', $sum_out_header_file
-              or die "Cannot open $sum_out_header_file: [$!]\n";
-          print OUT $sum_out_header;
-          close OUT;
-          
-          # Append summary data to summary o/p file.
-          my $sum_out = "$time_stamp, $p, $u, $i, $w, $line_count, $duration\n";
-          open OUT, '>>', $sum_outfile or die "Cannot open $sum_outfile: [$!]\n";
-          print OUT $sum_out;
-          close OUT;
-          
-          print $sum_out_header;
-          print $sum_out;
-          print "\n";
-          
-          # Write each $out to unique o/p file
-          open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
-          print OUT $out;
-          close OUT;
-          
-          #DBG print "DBG: \$out: ,$out, \n";
-      }
+                my ( $out, $err );
+                ( $out, $err )
+                    = runqid( qw{-I lib}, $p, '-m', $u, '-w', $w, $i );
+
+             # Analyze o/p to get summary data: o/p line count, run time, TBD.
+                my $line_count = 0;
+                foreach ( split /\n/, $out ) {
+                    $line_count++;
+                }
+
+                my $duration = "TBD-duration";
+                if ( $err
+                    =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x )
+                {
+                    $duration = $1;
+                }
+
+                #TBD: Read time stamp of PUT & add it to summary o/p.
+                #TBD: ?Read version of PUT & add it to summary o/p?
+
+                # Write header line to a separate o/p file.
+                my $outdir = "out";
+                sleep 1
+                    ; # To avoid overwriting o/p files when small data sets are used.
+                my $time_stamp  = build_tss();
+                my $out_suffix  = "$time_stamp.out";
+                my $outfile     = "$outdir/qt.drive_qid." . $out_suffix;
+                my $sum_outfile = "$outdir/drive_qid_summary";
+                my $sum_out_header_file = "$outdir/qid_summary_header";
+                my $sum_out_header
+                    = "Date&Time of test, program, email_address, i/p file,"
+                    . " window_size, o/p line_count, prog run time\n";
+                open OUT, '>', $sum_out_header_file
+                    or die "Cannot open $sum_out_header_file: [$!]\n";
+                print OUT $sum_out_header;
+                close OUT;
+
+                # Append summary data to summary o/p file.
+                my $sum_out
+                    = "$time_stamp, $p, $u, $i, $w, $line_count, $duration\n";
+                open OUT, '>>', $sum_outfile
+                    or die "Cannot open $sum_outfile: [$!]\n";
+                print OUT $sum_out;
+                close OUT;
+
+                print $sum_out_header;
+                print $sum_out;
+                print "\n";
+
+                # Write each $out to unique o/p file
+                open OUT, '>', $outfile or die "Cannot open $outfile: [$!]\n";
+                print OUT $out;
+                close OUT;
+
+                #DBG print "DBG: \$out: ,$out, \n";
+            }
+        }
     }
-  }
-}  # End foreach @put
-
+}    # End foreach @put
 
 exit;
 
-
 sub runqid {
     run( [ "/usr/bin/time", $^X, @_ ], \my ( $in, $out, $err ) );
+
     #DBG print "DBG-runqid:  /usr/bin/time, $^X, @_ \n";
     #DBG print "DBG-runqid:  \$out: ,,$out,,\n";
     #DBG print "DBG-runqid:  \$err: ,,$err,,\n";
     return ( $out, $err );
 }
-
-
-sub t_runqid {
-    my @times = times;
-    run( [ "/usr/bin/time", $^X, @_ ], \my ( $in, $out, $err ) );
-    return ( $out, $err, \@times );
-}
-
 
 sub build_tss {
     #########################################################
@@ -194,10 +200,9 @@ sub build_tss {
     for $i ( $sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst ) {
         $i = "0" . $i if $i <= 9;
     }
-    my $tss = $year ."_". $mon . $mday . "_" . "$hour:$min:$sec";
+    my $tss = $year . "_" . $mon . $mday . "_" . "$hour:$min:$sec";
     return $tss;
 }
-
 
 sub usage {
     return <<"eousage";
@@ -209,12 +214,14 @@ It can specify one or more sets of input parameters, and collects the o/p.
 
 Options to control the matching
 
--match-pattern string    log lines are matched against this literal (not regex) pattern.
-                         typical usage is an email address, or a virus name.
+-match-pattern string    log lines are matched against this literal 
+                         (not regex) pattern.  typical usage is an email
+                         address, or a virus name.
                          Required.
 
--window-size   int       a window of log lines both in front of, and behind the current line
-                         is kept.  Matches will be found in this buffer.
+-window-size   int       a window of log lines both in front of, and 
+                         behind the current line is kept.  Matches will be
+                         found in this buffer.
                          Default: 100
 
 eousage
