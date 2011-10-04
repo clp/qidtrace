@@ -2,13 +2,14 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Mon 2011 Oct 03 11:27:48 PMPM clpoda>
+## Time-stamp: <Mon 2011 Oct 03 11:39:10 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
 #
-# Execute the qidtrace program and store data
-# about each run in a file in CSV format.
+# Execute the qidtrace and similar programs;
+# and store data about each run in a file 
+# in CSV format, and in a table data structure.
 #
 #
 # Ref: Perl Testing, A Developer''s Notebook, p. 167:
@@ -316,59 +317,4 @@ Options to control the matching
 
 eousage
 }
-
-
-
-
-###
-
-=begin table
-
-my $count = 0;
-
-### define
-my  $oTable000  = [];
-my  $oRow       = {
-    'typeof'            =>  'production',
-    'platform'          =>  'windows',
-    'foohost'           =>  'hostname',
-    'footarget'         =>  'targetname1',
-    'total_capacity'    =>   0,
-    'free_capacity'     =>   0,
-    };
-
-### populate (with fake data)
-for (0 .. 12){
-    $oRow->{platform}   = ${[qw(windows unix database)]}[int(rand(3))];
-    $oRow->{typeof}     = ${[qw(production development)]}[int(rand(2))];
-    my %hCurrent        = %{$oRow};
-    $oTable000->[$_]    = \%hCurrent;
-};
-
-### filter (do whatever querying or grouping you want here)
-@{$oTable000} =
-    ### SORT BY
-    sort { $a->{platform} cmp  $b->{platform}}
-    ### WHERE typeof = 'development'
-    #ORG grep { $_->{typeof} eq 'development';}
-    grep { $_->{typeof} eq 'production';}
-
-    @{$oTable000};
-
-### process 
-### (send it off to your template engine, number crunch, whatever)
-foreach my $oRec (@{$oTable000}){
-  # DoStuff($oRec);
-    $count++;
-    print ("$count  oRec platform: $oRec->{platform}");
-    print ("  typeof: $oRec->{typeof}\n");
-};
-
-=end table
-
-=cut
-
-
-
-
 
