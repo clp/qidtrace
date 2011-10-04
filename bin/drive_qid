@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Mon 2011 Oct 03 09:01:29 AMAM clpoda>
+## Time-stamp: <Mon 2011 Oct 03 11:27:48 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -46,33 +46,47 @@ my $putdir  = "bin/";
 my $put     = "qidtrace";
 my $putfile = $putdir . $put;
 
-my @puts = qw{ bin/qidtrace };
+#TST my @puts = qw{ bin/qidtrace };
 
-#TST my @puts = qw{ bin/two_buffer_pg_rev2.pl
-#TST bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
-#TST };
+my @puts = qw{ bin/two_buffer_pg_rev2.pl
+    bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
+};
+
+=begin bypass
+=end bypass
+
+=cut
 
 my $email_address = "u13\@h2.net";
 
-#TST my @uids          = qw{ u13@h2.net u13@h362.com u3792@h1250.com u15069@h2.net
-#TST u18287@h1056.net u1669@h2.net u364428@h567.net u4076@h1250.com
-#TST u7510@h656.net u7539@h573.com
-#TST };
+my @uids          = qw{ u13@h2.net u13@h362.com u3792@h1250.com 
+    u3815@h1250.com u3814@h1250.com u15069@h2.net u207@h208.com
+    u18287@h1056.net u1669@h2.net u364428@h567.net u364428@h567.NET 
+    u4076@h1250.com
+    u7510@h656.net u7539@h573.com
+};
 
-my @uids = qw{ u13@h2.net u13@h362.com };
+
+=begin bypass
+=end bypass
+
+=cut
+
+
+#TST my @uids = qw{ u13@h2.net u13@h362.com };
 
 my $window_size = 101;
 
-#TST my @wins        = qw{ 100 1400 2600 4000 };
-my @wins = qw{ 100 };
+my @wins        = qw{ 1400 2600 4000 };
+#TST my @wins = qw{ 1400 };
 
 my $indir = "data/";
 my $datafile;
 my @infiles;
 
-my @datafiles = qw{ 11-lines.mx 9999-lines.mx };
+#TST my @datafiles = qw{ 11-lines.mx 99-lines.mx };
 
-#TST my @datafiles = qw{ 4500k-lines.mx };
+my @datafiles = qw{ 4500k-lines.mx };
 foreach my $f (@datafiles) {
     push @infiles, $indir . $f;
 }
@@ -102,6 +116,21 @@ unless (
     die usage();
 }
 
+
+my $row_num = 0;
+
+# Define table to hold settings & o/p data.
+my  $oTable000  = [];
+my  $oRow       = {
+    'put'        =>  'qidtrace',
+    'win'        =>  1400,
+    'infile'     =>  'data/4500k-lines.mx',
+    'uid'        =>  'u13@h2.net',
+    'line_count' =>   0,
+    'run_time'   =>   0,
+    };
+
+
 # Run the PUT
 
 foreach my $p (@puts) {
@@ -125,6 +154,19 @@ foreach my $p (@puts) {
                 {
                     $duration = $1;
                 }
+
+                # Populate table with data from each run.
+                    $oRow->{put}        = $p;
+                    $oRow->{win}        = $w;
+                    $oRow->{infile}     = $i;
+                    $oRow->{uid}        = $u;
+                    $oRow->{line_count} = $line_count;
+                    $oRow->{run_time}   = $duration;
+                    #TBR $oRow->{typeof}     = ${[qw(production development)]}[int(rand(2))];
+                    my %hCurrent        = %{$oRow};
+                    $oTable000->[$row_num] = \%hCurrent;
+                    $row_num++;
+
 
                 #TBD: Read time stamp of PUT & add it to summary o/p.
                 #TBD: ?Read version of PUT & add it to summary o/p?
@@ -168,6 +210,54 @@ foreach my $p (@puts) {
         }
     }
 }    # End foreach @put
+
+
+# Print the raw table structure to a file for later use.
+use Data::Dumper;
+my $dump_data = Dumper( $oTable000 );
+my $dump_file = "/home/clpoda/p/qidtrace/out/dump_drive_qid.out";
+open OUT, '>', $dump_file  or die "Cannot open $dump_file: $!\n";
+print OUT $dump_data;
+close OUT;
+
+
+=begin filter
+
+# Filter the table data (do whatever querying or grouping you want here).
+#TBD: Group together line count & run time for each set of uid & win i/p
+# settings, for put1, put2, and put3; so that a row can be printed out
+# w/ data from 3 different put's on one line.
+@{$oTable000} =
+    ### SORT BY
+    sort { $a->{put} cmp  $b->{put}}
+    ### WHERE typeof = 'development'
+    #ORG grep { $_->{typeof} eq 'development';}
+    grep { $_->{win} eq 1400;}
+
+    @{$oTable000};
+
+=end filter
+
+=cut
+
+
+# Process the table data.
+print ("\nOutput from table data structure.\n");
+print ("  i/p file is 4500k lines.\n");
+print ("  put1,2,3: PG's two-buffer, PG's two-pass, CP's qidtrace.\n");
+#TBD printf ("%15s %6s %10s %10s", "uid", "win", "put1"  put1, put2  put2, put3  put3\n");
+print (" " x 12, "uid   win     put1       put1\n");
+#TBD printf ("%21s %10s %10s", "", "lines",  "time", lines time, lines time\n");
+print (" " x 26, "lines      time\n");
+foreach my $oRec (@{$oTable000}){
+    printf ("%15s", $oRec->{uid});
+    printf ("%6s",  $oRec->{win});
+    printf ("%10s", $oRec->{line_count});
+    printf ("%10s", $oRec->{run_time});
+    print "\n";
+};
+
+
 
 exit;
 
@@ -226,4 +316,59 @@ Options to control the matching
 
 eousage
 }
+
+
+
+
+###
+
+=begin table
+
+my $count = 0;
+
+### define
+my  $oTable000  = [];
+my  $oRow       = {
+    'typeof'            =>  'production',
+    'platform'          =>  'windows',
+    'foohost'           =>  'hostname',
+    'footarget'         =>  'targetname1',
+    'total_capacity'    =>   0,
+    'free_capacity'     =>   0,
+    };
+
+### populate (with fake data)
+for (0 .. 12){
+    $oRow->{platform}   = ${[qw(windows unix database)]}[int(rand(3))];
+    $oRow->{typeof}     = ${[qw(production development)]}[int(rand(2))];
+    my %hCurrent        = %{$oRow};
+    $oTable000->[$_]    = \%hCurrent;
+};
+
+### filter (do whatever querying or grouping you want here)
+@{$oTable000} =
+    ### SORT BY
+    sort { $a->{platform} cmp  $b->{platform}}
+    ### WHERE typeof = 'development'
+    #ORG grep { $_->{typeof} eq 'development';}
+    grep { $_->{typeof} eq 'production';}
+
+    @{$oTable000};
+
+### process 
+### (send it off to your template engine, number crunch, whatever)
+foreach my $oRec (@{$oTable000}){
+  # DoStuff($oRec);
+    $count++;
+    print ("$count  oRec platform: $oRec->{platform}");
+    print ("  typeof: $oRec->{typeof}\n");
+};
+
+=end table
+
+=cut
+
+
+
+
 
