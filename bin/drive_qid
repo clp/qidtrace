@@ -2,13 +2,13 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Tue 2011 Oct 04 12:18:39 PMPM clpoda>
+## Time-stamp: <Tue 2011 Oct 04 12:33:31 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
 #
 # Execute the qidtrace and similar programs;
-# and store data about each run in a file 
+# and store data about each run in a file
 # in CSV format, and in a table data structure.
 #
 #
@@ -39,10 +39,10 @@ use Getopt::Long;
 my $DEBUG = 0;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
 
-my $TST = 1;    # TBD: Not yet coded: Set to 0 to disable testing & run all data.
-                # Set to 1 to run quickly, w/ minimal settings.
-                # TBD: Not yet coded: Set to 2 to run more values for each parameter.
-                # Set to 9 to run the most values for each parameter.
+my $TST = 1; # TBD: Not coded: Set to 0 to disable testing & run all data.
+             # Set to 1 to run quickly, w/ minimal settings.
+             # TBD: Not coded: Set to 2 to run more values for each parameter.
+             # Set to 9 to run the most values for each parameter.
 
 my $prog = $0;
 $prog =~ s{\A.*/}{};    # strip leading path, if any
@@ -53,29 +53,30 @@ my $put     = "qidtrace";
 my $putfile = $putdir . $put;
 
 my @puts;
-@puts = qw{ bin/qidtrace } if ($TST==1);
+@puts = qw{ bin/two_buffer_pg_rev2.pl} if ( $TST == 1 );
+@puts = qw{ bin/qidtrace }             if ( $TST == 1 );
 @puts = qw{ bin/two_buffer_pg_rev2.pl
     bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
-} if ($TST==9);
+    } if ( $TST == 9 );
 
 my @uids;
-@uids = qw{ u13@h2.net u13@h362.com } if ($TST == 1);
-@uids          = qw{ u13@h2.net u13@h362.com u3792@h1250.com 
+@uids = qw{ u13@h2.net u13@h362.com } if ( $TST == 1 );
+@uids = qw{ u13@h2.net u13@h362.com u3792@h1250.com
     u3815@h1250.com u3814@h1250.com u15069@h2.net u207@h208.com
-    u18287@h1056.net u1669@h2.net u364428@h567.net u364428@h567.NET 
+    u18287@h1056.net u1669@h2.net u364428@h567.net u364428@h567.NET
     u4076@h1250.com
     u7510@h656.net u7539@h573.com
-} if ($TST == 9);
+    } if ( $TST == 9 );
 
 my @wins;
-@wins = qw{ 1400 }                  if ($TST == 1);
-@wins        = qw{ 1400 2600 4000 } if ($TST == 9);
+@wins = qw{ 1400 }           if ( $TST == 1 );
+@wins = qw{ 1400 2600 4000 } if ( $TST == 9 );
 
 my $indir = "data/";
 my @infiles;
 my @datafiles;
-@datafiles = qw{ 11-lines.mx 99-lines.mx } if ($TST == 1);
-@datafiles = qw{ 4500k-lines.mx }          if ($TST == 9);
+@datafiles = qw{ 11-lines.mx 99-lines.mx } if ( $TST == 1 );
+@datafiles = qw{ 4500k-lines.mx }          if ( $TST == 9 );
 foreach my $f (@datafiles) {
     push @infiles, $indir . $f;
 }
@@ -87,16 +88,15 @@ foreach my $f (@datafiles) {
 my $row_num = 0;
 
 # Define table (AoH refs) to hold settings & o/p data.
-my  $oTable000  = [];
-my  $oRow       = {
-    'put'        =>  'qidtrace',
-    'win'        =>  1400,
-    'infile'     =>  '4500k-lines.mx',
-    'uid'        =>  'u13@h2.net',
-    'line_count' =>   0,
-    'duration'   =>   0,
-    };
-
+my $oTable000 = [];
+my $oRow      = {
+    'put'        => 'qidtrace',
+    'win'        => 1400,
+    'infile'     => '4500k-lines.mx',
+    'uid'        => 'u13@h2.net',
+    'line_count' => 0,
+    'duration'   => 0,
+};
 
 # Run the PUT
 
@@ -123,17 +123,15 @@ foreach my $p (@puts) {
                 }
 
                 # Populate table with data from each run.
-                    $oRow->{put}        = $p;
-                    $oRow->{win}        = $w;
-                    $oRow->{infile}     = $i;
-                    $oRow->{uid}        = $u;
-                    $oRow->{line_count} = $line_count;
-                    $oRow->{duration}   = $duration;
-                    #TBR $oRow->{typeof}     = ${[qw(production development)]}[int(rand(2))];
-                    my %hCurrent        = %{$oRow};
-                    $oTable000->[$row_num] = \%hCurrent;
-                    $row_num++;
-
+                $oRow->{put}        = $p;
+                $oRow->{win}        = $w;
+                $oRow->{infile}     = $i;
+                $oRow->{uid}        = $u;
+                $oRow->{line_count} = $line_count;
+                $oRow->{duration}   = $duration;
+                my %hCurrent = %{$oRow};
+                $oTable000->[$row_num] = \%hCurrent;
+                $row_num++;
 
                 #TBD: Read time stamp of PUT & add it to summary o/p.
                 #TBD: ?Read version of PUT & add it to summary o/p?
@@ -178,17 +176,15 @@ foreach my $p (@puts) {
     }
 }    # End foreach @put
 
-
 # Print the raw table structure to a file for later use.
 use Data::Dumper;
-my $dump_data = Dumper( $oTable000 );
-my $now = build_tss();
-my $dump_suffix  = "$now.out";
+my $dump_data   = Dumper($oTable000);
+my $now         = build_tss();
+my $dump_suffix = "$now.out";
 my $dump_file = "/home/clpoda/p/qidtrace/out/dump_drive_qid_" . $dump_suffix;
-open OUT, '>', $dump_file  or die "Cannot open $dump_file: $!\n";
+open OUT, '>', $dump_file or die "Cannot open $dump_file: $!\n";
 print OUT $dump_data;
 close OUT;
-
 
 =begin filter
 
@@ -209,24 +205,23 @@ close OUT;
 
 =cut
 
-
 # Process the table data.
-print ("\nOutput from table data structure.\n");
-print ("  i/p file is 4500k lines.\n");
-print ("  put1,2,3: PG's two-buffer, PG's two-pass, CP's qidtrace.\n");
+print("\nOutput from table data structure.\n");
+print("  i/p file is 4500k lines.\n");
+print("  put1,2,3: PG's two-buffer, PG's two-pass, CP's qidtrace.\n");
+
 #TBD printf ("%15s %6s %10s %10s", "uid", "win", "put1"  put1, put2  put2, put3  put3\n");
-print (" " x 15, "uid   win     put1       put1\n");
+print( " " x 15, "uid   win     put1       put1\n" );
+
 #TBD printf ("%21s %10s %10s", "", "lines",  "time", lines time, lines time\n");
-print (" " x 29, "lines      time\n");
-foreach my $oRec (@{$oTable000}){
-    printf ("%18s", $oRec->{uid});
-    printf ("%6s",  $oRec->{win});
-    printf ("%10s", $oRec->{line_count});
-    printf ("%10s", $oRec->{duration});
+print( " " x 29, "lines      time\n" );
+foreach my $oRec ( @{$oTable000} ) {
+    printf( "%18s", $oRec->{uid} );
+    printf( "%6s",  $oRec->{win} );
+    printf( "%10s", $oRec->{line_count} );
+    printf( "%10s", $oRec->{duration} );
     print "\n";
-};
-
-
+}
 
 exit;
 
