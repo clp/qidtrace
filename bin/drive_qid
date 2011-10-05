@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Tue 2011 Oct 04 12:33:31 PMPM clpoda>
+## Time-stamp: <Tue 2011 Oct 04 10:41:09 PMPM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -39,7 +39,7 @@ use Getopt::Long;
 my $DEBUG = 0;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
 
-my $TST = 1; # TBD: Not coded: Set to 0 to disable testing & run all data.
+my $TST = 9; # TBD: Not coded: Set to 0 to disable testing & run all data.
              # Set to 1 to run quickly, w/ minimal settings.
              # TBD: Not coded: Set to 2 to run more values for each parameter.
              # Set to 9 to run the most values for each parameter.
@@ -53,8 +53,8 @@ my $put     = "qidtrace";
 my $putfile = $putdir . $put;
 
 my @puts;
-@puts = qw{ bin/two_buffer_pg_rev2.pl} if ( $TST == 1 );
 @puts = qw{ bin/qidtrace }             if ( $TST == 1 );
+@puts = qw{ bin/two_buffer_pg_rev2.pl} if ( $TST == 1 );
 @puts = qw{ bin/two_buffer_pg_rev2.pl
     bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
     } if ( $TST == 9 );
@@ -70,7 +70,7 @@ my @uids;
 
 my @wins;
 @wins = qw{ 1400 }           if ( $TST == 1 );
-@wins = qw{ 1400 2600 4000 } if ( $TST == 9 );
+@wins = qw{ 1400 2600 4000 5000 } if ( $TST == 9 );
 
 my $indir = "data/";
 my @infiles;
@@ -117,7 +117,7 @@ foreach my $p (@puts) {
 
                 my $duration = "TBD-duration";
                 if ( $err
-                    =~ /^.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x )
+                    =~ /.*? user \s+ .*? system \s+ (.*?) elapsed \s+/x )
                 {
                     $duration = $1;
                 }
