@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Tue 2011 Oct 04 10:41:09 PMPM clpoda>
+## Time-stamp: <Thu 2011 Oct 06 09:22:01 AMAM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -39,7 +39,7 @@ use Getopt::Long;
 my $DEBUG = 0;    # Set to 1 to enable debug stmts.
                   # Set to 0 to run tests & for normal operation.
 
-my $TST = 9; # TBD: Not coded: Set to 0 to disable testing & run all data.
+my $TST = 5; # TBD: Not coded: Set to 0 to disable testing & run all data.
              # Set to 1 to run quickly, w/ minimal settings.
              # TBD: Not coded: Set to 2 to run more values for each parameter.
              # Set to 9 to run the most values for each parameter.
@@ -53,14 +53,19 @@ my $put     = "qidtrace";
 my $putfile = $putdir . $put;
 
 my @puts;
+#TMP @puts = qw{ bin/two_buffer_pg_rev2.pl} if ( $TST == 1 );
 @puts = qw{ bin/qidtrace }             if ( $TST == 1 );
-@puts = qw{ bin/two_buffer_pg_rev2.pl} if ( $TST == 1 );
 @puts = qw{ bin/two_buffer_pg_rev2.pl
-    bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
-    } if ( $TST == 9 );
+            bin/two_pass_tracer_debug_pg_rev2.pl  bin/qidtrace
+    } if ( $TST >= 5 );
+    #TMP } if ( $TST == 1 );
 
 my @uids;
+#TMP: @uids = qw{ u3815@h1250.com u13@h2.net } if ( $TST == 1 );
 @uids = qw{ u13@h2.net u13@h362.com } if ( $TST == 1 );
+@uids = qw{  
+    u207@h208.com
+    } if ( $TST == 5 );
 @uids = qw{ u13@h2.net u13@h362.com u3792@h1250.com
     u3815@h1250.com u3814@h1250.com u15069@h2.net u207@h208.com
     u18287@h1056.net u1669@h2.net u364428@h567.net u364428@h567.NET
@@ -70,13 +75,16 @@ my @uids;
 
 my @wins;
 @wins = qw{ 1400 }           if ( $TST == 1 );
-@wins = qw{ 1400 2600 4000 5000 } if ( $TST == 9 );
+#TST9: @wins = qw{ 1400 2600 5000 6000 } if ( $TST == 9 );
+@wins = qw{ 3000 7000 8000 } if ( $TST == 5 );
+@wins = qw{ 7000 } if ( $TST == 9 );
 
 my $indir = "data/";
 my @infiles;
 my @datafiles;
+#TMP: @datafiles = qw{ 999-lines.mx } if ( $TST == 1 );
 @datafiles = qw{ 11-lines.mx 99-lines.mx } if ( $TST == 1 );
-@datafiles = qw{ 4500k-lines.mx }          if ( $TST == 9 );
+@datafiles = qw{ 4500k-lines.mx }          if ( $TST >= 5 );
 foreach my $f (@datafiles) {
     push @infiles, $indir . $f;
 }
@@ -223,7 +231,41 @@ foreach my $oRec ( @{$oTable000} ) {
     print "\n";
 }
 
+
+print("\nComparison matrix from table data structure.\n");
+print("  i/p file is TBD or 4500k lines.\n");
+print("  put1,2,3: PG's two-buffer, PG's two-pass, CP's qidtrace.\n");
+
+print( "uid", " " x 15, "win        --- put1 ---           --- put2 ---           --- put3 ---\n" );
+
+#TBD printf ("%21s %10s %10s", "", "lines",  "time", lines time, lines time\n");
+print( " " x 27, "lines      time        lines      time        lines      time\n" );
+print_comparison_matrix ($oTable000);
+
 exit;
+
+
+sub print_comparison_matrix {
+    my $r_table = shift;
+    #TBD
+    foreach my $u (@uids) {
+        foreach my $w (@wins) {
+            printf( "%-17s %-6s", $u, $w);
+            foreach my $p (@puts) {
+                foreach my $r_rec ( @{$r_table} ) {
+                  if ( $r_rec->{uid} eq $u && $r_rec->{win} == $w && $r_rec->{put} eq $p ) {
+                    printf( "%8d", $r_rec->{line_count} );
+                    print " | ";
+                    printf( "%8s", $r_rec->{duration} );
+                    print " || ";
+                  }
+                }
+            }
+            print "\n";
+        }
+    }
+}
+
 
 sub runqid {
     run( [ "/usr/bin/time", $^X, @_ ], \my ( $in, $out, $err ) );
