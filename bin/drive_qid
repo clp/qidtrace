@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Thu 2011 Oct 06 09:22:01 AMAM clpoda>
+## Time-stamp: <Thu 2011 Oct 06 09:30:36 AMAM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -239,7 +239,7 @@ print("  put1,2,3: PG's two-buffer, PG's two-pass, CP's qidtrace.\n");
 print( "uid", " " x 15, "win        --- put1 ---           --- put2 ---           --- put3 ---\n" );
 
 #TBD printf ("%21s %10s %10s", "", "lines",  "time", lines time, lines time\n");
-print( " " x 27, "lines      time        lines      time        lines      time\n" );
+print( " " x 27, "lines |    time  ||    lines |    time  ||    lines |    time  ||\n" );
 print_comparison_matrix ($oTable000);
 
 exit;
