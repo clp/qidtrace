@@ -1,4 +1,4 @@
-qidtrace  version 0.40
+qidtrace  version 0.35
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -88,8 +88,6 @@ w/ a specific set of values;
 and to run multiple PUTs with the same set of values;
 and to save and display their behavior in a table for 
 easy comparison.
-
-
 
 
 
