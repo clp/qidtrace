@@ -2,7 +2,7 @@
 #
 # drive_qid  clpoda  2011_0930
 ## batbug:/home/clpoda/p/qidtrace/bin
-## Time-stamp: <Thu 2011 Oct 06 09:30:36 AMAM clpoda>
+## Time-stamp: <Fri 2011 Oct 07 11:29:49 AMAM clpoda>
 #vi modeline vim: nu
 
 # #########################################
@@ -76,7 +76,7 @@ my @uids;
 my @wins;
 @wins = qw{ 1400 }           if ( $TST == 1 );
 #TST9: @wins = qw{ 1400 2600 5000 6000 } if ( $TST == 9 );
-@wins = qw{ 3000 7000 8000 } if ( $TST == 5 );
+@wins = qw{ 1400 2600 } if ( $TST == 5 );
 @wins = qw{ 7000 } if ( $TST == 9 );
 
 my $indir = "data/";

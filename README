@@ -1,4 +1,4 @@
-qidtrace  version 0.34
+qidtrace  version 0.40
 ===============================
 
 qidtrace is a filter for sendmail log files.
@@ -79,6 +79,15 @@ Version 0.34, Tue2011_0927
 Add new tool, bin/most_frequent, to count email addrs
 and queue IDs in the i/p file and print the ten most frequent
 values found.
+
+
+Version 0.35, Mon2011_1010
+
+Add new tool, bin/drive_qid, to run a program under test (PUT)
+w/ a specific set of values;
+and to run multiple PUTs with the same set of values;
+and to save and display their behavior in a table for 
+easy comparison.
 
 
 
